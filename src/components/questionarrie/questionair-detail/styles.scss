@@ -1,0 +1,30 @@
+.profile-details-card {
+    .ant-card-body {
+      padding: 0;
+    }
+  
+    .title {
+      padding: 15px 20px;
+      border-bottom: 2px solid #f5f6fa;
+      margin-bottom: 0;
+    }
+  
+    .body {
+      .data-row {
+        border-bottom: 2px solid #f5f6fa;
+  
+        .label {
+          border-right: 2px solid #f5f6fa;
+          color: #484848;
+          font-weight: 500;
+          padding: 15px 20px;
+        }
+  
+        .value {
+          color: #484848;
+          font-weight: 500;
+          padding: 15px 40px;
+        }
+      }
+    }
+  }

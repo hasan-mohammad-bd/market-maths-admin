@@ -1,0 +1,44 @@
+.common-card-header {
+  color: #37474f;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+
+  .prefix-icon-container {
+    font-size: 14pt;
+    margin-right: 10px;
+  }
+
+  .heading-container {
+    font-weight: 400;
+    font-size: 14pt;
+    width: 100%;
+    text-align: left;
+  }
+
+  .actions-container {
+    display: flex;
+
+    .left-icon {
+      padding: 12px;
+      border-left: 1px solid #d8d8d8;
+      border-right: 1px solid #d8d8d8;
+      cursor: pointer;
+
+      &:hover {
+        color: #000;
+      }
+    }
+
+    .right-icon {
+      padding: 12px;
+      cursor: pointer;
+
+      &:hover {
+        color: #000;
+      }
+    }
+  }
+}

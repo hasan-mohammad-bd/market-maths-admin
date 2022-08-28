@@ -1,0 +1,79 @@
+.login-right-section {
+  background: #F3F3F5;
+  padding: 10%;
+  height: 100vh;
+
+  img {
+    width: 100%;
+    height: 265px;
+    object-fit: contain;
+    opacity: 1;
+    margin-bottom: 55px;
+  }
+
+  .main-tagline {
+    font-size: 30px;
+    text-align: center;
+    font-weight: 600;
+    color: rgb(70, 70, 70);
+    margin-bottom: 20px;
+  }
+
+  .sub-tagline {
+    font-size: 16px;
+    text-align: center;
+    font-weight: 400;
+    color: rgb(70, 70, 70);
+  }
+}
+
+.login-left-section {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+
+  .login-card {
+    width: 380px;
+    -webkit-box-shadow: 1px 1px 19px -2px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 1px 1px 19px -2px rgba(0, 0, 0, 0.25);
+    box-shadow: 1px 1px 19px -2px rgba(0, 0, 0, 0.25);
+    position: relative;
+
+    .login-title {
+      font-weight: bolder;
+      font-size: 24px;
+      margin-bottom: 30px;
+    }
+
+    .logo-container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 30px;
+      margin-top: 20px;
+
+      .logo {
+        width: 250px;
+      }
+    }
+
+    .password-field {
+      margin-bottom: 5px;
+    }
+
+    .forgot-password-btn-container {
+      display: flex;
+      justify-content: flex-end;
+      margin: 0;
+
+      .ant-btn-link {
+        color: #2e404f;
+        font-weight: 500;
+      }
+    }
+
+    .ant-btn-lg {
+      padding: 4px 30px !important;
+    }
+  }
+}

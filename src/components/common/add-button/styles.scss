@@ -1,0 +1,14 @@
+.add-new-btn {
+  display: flex;
+  align-items: center;
+
+  .ant-space-item {
+    display: flex;
+
+    img {
+      width: 14px;
+      height: 14px;
+      object-fit: contain;
+    }
+  }
+}

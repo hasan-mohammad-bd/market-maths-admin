@@ -1,0 +1,13 @@
+.search-field {
+  height: 100%;
+  display: flex;
+  align-items: center;
+
+  .anticon {
+    color: #333333;
+  }
+
+  .ant-input-affix-wrapper {
+    height: 32px;
+  }
+}
