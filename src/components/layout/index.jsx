@@ -15,6 +15,7 @@ import { setUserData } from "../../utils/redux/actions";
 
 import "./styles.scss";
 
+
 const WebsiteSettings = React.lazy(() => import("../website-settings"));
 const ServiceList = React.lazy(() => import("../services"));
 const AddService = React.lazy(() => import("../services/add-services"));
@@ -54,6 +55,12 @@ const WebsiteList = React.lazy(() => import("../website"));
 const AddWebsite = React.lazy(() => import("../website/add-website"));
 const ClientList = React.lazy(() => import("../clients"));
 const AddClient = React.lazy(() => import("../clients/add-client"));
+
+const BlogCategoryList = React.lazy(() => import("../blog-category"));
+const AddCategory = React.lazy(() => import("../blog-category/add-category"));
+
+const Speciality = React.lazy(() => import("../speciality"));
+const AddSpeciality = React.lazy(() => import("../speciality/add-speciality"));
 
 const { Header, Content } = Layout;
 
@@ -181,6 +188,18 @@ const FadoLayout = () => {
               <Route path="/client" element={<ClientList />} />
               <Route path="/add-client" element={<AddClient />} />
               <Route path="/edit-client/:id" element={<AddClient />} />
+
+              {/* new */}
+
+              <Route path="/category" element={<BlogCategoryList/>} />
+              <Route path="/add-category" element={<AddCategory />} />
+              <Route path="/edit-category/:id" element={<AddCategory />} />
+
+
+              <Route path="/speciality" element={<Speciality/>} />
+              <Route path="/add-speciality" element={<AddSpeciality/>} />
+              <Route path="/edit-speciality/:id" element={<AddSpeciality />} />
+
             </Routes>
           </Suspense>
         </Content>

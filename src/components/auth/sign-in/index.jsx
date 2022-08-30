@@ -37,18 +37,19 @@ const Login = () => {
 
   const onLogin = (payload) => {
     getDataManager(auth?.loginUser, setLoading, payload).then((x) => {
+      console.log(x)
       if (x?.status) {
-        if (x?.data?.admin) {
-          if (x?.data?.token) {
+        if (x?.data?.user_name) {
+          if (x?.data?.access_token) {
             message.success({
               content: "You have successfully logged in",
               duration: 3,
             });
             localStorage.setItem(
               "fado-admin-panel-user-data",
-              JSON.stringify({ ...x?.data?.admin, token: x?.data?.token })
+              JSON.stringify({ ...x?.data?.user_name, token: x?.data?.access_token })
             );
-            dispatch(setUserData({ ...x?.data?.admin, token: x?.data?.token }));
+            dispatch(setUserData({ ...x?.user_name?.admin, token: x?.data?.access_token }));
             // navigate("/dashboard");
             handleRefresh();
           }

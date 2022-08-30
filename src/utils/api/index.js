@@ -15,7 +15,9 @@ import Questionnaire from "./Questionnaire";
 import University from "./University";
 import Clients from "./Clients";
 import Offers from "./Offers"
-import Directory from "./Directory"
+import Directory from "./Directory";
+import Category from "./Category";
+import Speciality from "./Speciality";
 
 const API = {
   Auth,
@@ -35,7 +37,10 @@ const API = {
   University,
   Clients,
   Offers,
-  Directory
+  Directory,
+  // new
+  Category,
+  Speciality
 };
 
 export default API;

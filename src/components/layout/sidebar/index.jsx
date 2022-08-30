@@ -15,6 +15,7 @@ import {
   FileDoneOutlined,
   NotificationOutlined,
   FileOutlined,
+  RadarChartOutlined,
 } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 
@@ -31,7 +32,21 @@ const SiderBar = ({ toggle, collapsed }) => {
       <div className="tajira-logo">
         <img src={collapsed ? Logo : TajiraLogo} alt="" />
       </div>
-      <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
+      <Menu theme="dark" defaultSelectedKeys={["15"]} mode="inline">
+        <Menu.Item
+          icon={<AppstoreOutlined />}
+          onClick={() => navigate("/category")}
+          key="15"
+        >
+          Category
+        </Menu.Item>
+        <Menu.Item
+          icon={<RadarChartOutlined />}
+          onClick={() => navigate("/speciality")}
+          key="16"
+        >
+          Specialty
+        </Menu.Item>
         <Menu.Item
           icon={<AppstoreOutlined />}
           onClick={() => navigate("/services")}

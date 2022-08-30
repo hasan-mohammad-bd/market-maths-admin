@@ -48,9 +48,9 @@ const App = () => {
           content: error || "Error ocurred",
           duration: 3,
         });
-        localStorage.removeItem("fado-admin-panel-user-data");
+/*         localStorage.removeItem("fado-admin-panel-user-data");
         dispatch(setUserData({}));
-        navigate("/login");
+        navigate("/login"); */
       }
     });
   };

@@ -3,7 +3,7 @@ import { API_URL, ACCESS_TOKEN, Language } from "../constants";
 
 export default class Auth {
   loginUser = (payload) => {
-    const url = `${API_URL}api/v1/auth/login`;
+    const url = `https://mmm.techtsy.tech/api/admin/auth/login`;
     return axios
       .post(
         url,
