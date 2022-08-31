@@ -3,7 +3,7 @@ import { API_URL, ACCESS_TOKEN } from "../constants";
 
 export default class Category {
 
-    // 
+    // done
   getPlanList = (payload = {}) => {
     const url = `${API_URL}plan?limit=${
       payload?.limit || 50
@@ -30,9 +30,9 @@ export default class Category {
       });
   };
 
-
-  getCategoryDetails = (id) => {
-    const url = `${API_URL}blog/category/${id}`;
+//done
+  getPlanDetails = (id) => {
+    const url = `${API_URL}plan/${id}`;
     return axios
       .get(url, {
         headers: {
@@ -57,8 +57,8 @@ export default class Category {
 
 
 
-  addCategory = (payload) => {
-    const url = `${API_URL}blog/category`;
+  addPlan = (payload) => {
+    const url = `${API_URL}plan`;
     return axios({
       url,
       method: "POST",
@@ -83,8 +83,8 @@ export default class Category {
       });
   };
 
-  editCategory = (payload, id) => {
-    const url = `${API_URL}blog/category/${id}`;
+  editPlan = (payload, id) => {
+    const url = `${API_URL}plan/${id}`;
     return axios({
       url,
       method: "PUT",
@@ -109,7 +109,7 @@ export default class Category {
       });
   };
 
-
+//done
   deletePlan = (id) => {
     const url = `${API_URL}plan/${id}`;
     return axios

@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
-import { Form, message, Button, Input, Typography, Select } from "antd";
+import { Form, message, Button, Input, Typography, Select, Radio } from "antd";
 import { useParams, useNavigate } from "react-router-dom";
 
 import TajiraCard from "../../common/tajira-card";
@@ -128,11 +128,11 @@ const AddTag = () => {
             },
           ]}
         >
-          <Select placeholder="Select service type">
-            <Option value="true">Active</Option>
-            <Option value="false">Deactivate</Option>
+                            <Radio.Group>
+      <Radio value={true}>Active</Radio>
+      <Radio value={false}>Deactivate</Radio>
 
-          </Select>
+    </Radio.Group>
         </Form.Item>
         <Form.Item>
           <Button type="primary" htmlType="submit">

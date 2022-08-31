@@ -117,21 +117,23 @@ const TagsList = () => {
     },
 
     {
+        title: "Support",
+        dataIndex: "support",
+        key: "support",
+    },
+
+    {
         title: "Plan Type",
         dataIndex: `plan_type`,
         key: "plan_type",
         render: (text, record) => (
           <span>
-              {`${record?.plan_type}`}
+              {record?.plan_type === 1 ? <CheckOutlined /> : <CloseOutlined />}
           </span>
         )
       },
 
-    {
-        title: "Support",
-        dataIndex: "support",
-        key: "support",
-    },
+
 
     {
         title: "Price Type",
@@ -139,7 +141,7 @@ const TagsList = () => {
         key: "price_type",
         render: (text, record) => (
           <span>
-              {`${record?.price_type} USD`}
+              {record?.price_type === 1 ? <CheckOutlined /> : <CloseOutlined />}
           </span>
         )
       },
