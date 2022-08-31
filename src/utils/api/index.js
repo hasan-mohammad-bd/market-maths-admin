@@ -18,6 +18,7 @@ import Offers from "./Offers"
 import Directory from "./Directory";
 import Category from "./Category";
 import Speciality from "./Speciality";
+import Plan from "./Plan";
 
 const API = {
   Auth,
@@ -40,7 +41,8 @@ const API = {
   Directory,
   // new
   Category,
-  Speciality
+  Speciality,
+  Plan
 };
 
 export default API;

@@ -16,6 +16,7 @@ import {
   NotificationOutlined,
   FileOutlined,
   RadarChartOutlined,
+  CodepenOutlined,
 } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 
@@ -46,6 +47,13 @@ const SiderBar = ({ toggle, collapsed }) => {
           key="16"
         >
           Specialty
+        </Menu.Item>
+        <Menu.Item
+          icon={<CodepenOutlined />}
+          onClick={() => navigate("/plan")}
+          key="17"
+        >
+          Plan
         </Menu.Item>
         <Menu.Item
           icon={<AppstoreOutlined />}

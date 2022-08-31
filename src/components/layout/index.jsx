@@ -62,6 +62,9 @@ const AddCategory = React.lazy(() => import("../blog-category/add-category"));
 const Speciality = React.lazy(() => import("../speciality"));
 const AddSpeciality = React.lazy(() => import("../speciality/add-speciality"));
 
+const Plan = React.lazy(() => import("../plan"));
+const AddPlan = React.lazy(() => import("../plan/add-plan"));
+
 const { Header, Content } = Layout;
 
 const FadoLayout = () => {
@@ -199,6 +202,10 @@ const FadoLayout = () => {
               <Route path="/speciality" element={<Speciality/>} />
               <Route path="/add-speciality" element={<AddSpeciality/>} />
               <Route path="/edit-speciality/:id" element={<AddSpeciality />} />
+
+              <Route path="/plan" element={<Plan/>} />
+              <Route path="/add-plan" element={<AddPlan/>} />
+              <Route path="/edit-plan/:id" element={<AddPlan />} />
 
             </Routes>
           </Suspense>

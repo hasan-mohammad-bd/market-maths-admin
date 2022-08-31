@@ -49,7 +49,7 @@ const SpecialityList = () => {
     return getDataManager(services?.getSpecialityList, setLoading, payload).then(
       (x) => {
         if (x?.status) {
-            console.log(x);
+
           const organizedData = getOrganizedData(x?.data);
           setPagination({
             ...pagination,
@@ -136,12 +136,12 @@ const SpecialityList = () => {
   ];
 
   return (
-    <TajiraCard heading="Services" actions={<AddNewButton onAdd={handleAdd} />}>
+    <TajiraCard heading="Specialty" actions={<AddNewButton onAdd={handleAdd} />}>
       <TajiraTable
         fetchData={fetchSpecialityList}
         dataSource={servicesList}
         columns={columns}
-        title="All Services"
+        title="All Specialty"
         loading={loading}
         pagination={pagination}
         hideSearch={true}
