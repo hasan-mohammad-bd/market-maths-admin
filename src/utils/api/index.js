@@ -19,6 +19,9 @@ import Directory from "./Directory";
 import Category from "./Category";
 import Speciality from "./Speciality";
 import Plan from "./Plan";
+import Staff from "./Staff";
+import SubscriberList from "./SubscriberList";
+import MessageList from "./MessageList";
 
 const API = {
   Auth,
@@ -42,7 +45,10 @@ const API = {
   // new
   Category,
   Speciality,
-  Plan
+  Plan,
+  Staff,
+  SubscriberList,
+  MessageList
 };
 
 export default API;

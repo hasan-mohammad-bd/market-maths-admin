@@ -10,9 +10,10 @@ import AddNewButton from "../common/add-button";
 
 import API from "../../utils/api";
 import { getDataManager, getErrorMessage } from "../../utils/helper.functions";
+import moment from "moment";
 
 const TagsList = () => {
-  const tag = new API.Plan();
+  const tag = new API.SubscriberList();
 
   const navigate = useNavigate();
 
@@ -42,9 +43,11 @@ const TagsList = () => {
   };
 
   const fetchCategoryList = async (payload) => {
-    return getDataManager(tag?.getPlanList, setLoading).then((x) => {
+    return getDataManager(tag?.getSubscriberList, setLoading).then((x) => {
+        
       if (x?.status) {
         const organizedData = getOrganizedData(x?.data);
+
         setPagination({
           ...pagination,
           current: payload?.current || pagination?.current,
@@ -85,11 +88,11 @@ const TagsList = () => {
   };
 
   const handleDelete = (id) => {
-    getDataManager(tag?.deletePlan, setLoading, id).then((x) => {
+    getDataManager(tag?.deleteSubscriber, setLoading, id).then((x) => {
       if (x.status) {
         fetchCategoryList();
         message.success({
-          content: "Tag deleted successfully",
+          content: "Subscriber deleted successfully",
           duration: 2,
         });
       } else {
@@ -100,122 +103,32 @@ const TagsList = () => {
 
   const columns = [
     {
-      title: "Name",
-      dataIndex: "name",
-      key: "name",
+      title: "Email",
+      dataIndex: "email",
+      key: "email",
     },
+
     {
-      title: "Price",
-      dataIndex: `price`,
-      key: "price",
-      render: (text, record) => (
+        title: "Created Date",
+        dataIndex: "createdAt",
+        key: "createdAt",
+        render: (text, record) => 
         <span>
-            {`${record?.price} USD`}
+          {moment(record?.createdAt).format("MMMM Do YYYY")}
         </span>
-      )
-    },
-
-    {
-        title: "Support",
-        dataIndex: "support",
-        key: "support",
-    },
-
-    {
-        title: "Plan Type",
-        dataIndex: `plan_type`,
-        key: "plan_type",
-        render: (text, record) => (
-          <span>
-              {record?.plan_type === 1 ? <CheckOutlined /> : <CloseOutlined />}
-          </span>
-        )
+  
       },
-
-
-
-    {
-        title: "Price Type",
-        dataIndex: `price_type`,
-        key: "price_type",
-        render: (text, record) => (
-          <span>
-              {record?.price_type === 1 ? <CheckOutlined /> : <CloseOutlined />}
-          </span>
-        )
-      },
-
-    {
-      title: "Dashboard Status",
-      dataIndex: "dashboard_status",
-      key: "dashboard_status",
-      render: (text, record) => (
-        <span>
-          {record?.dashboard_status === true ? <CheckOutlined /> : <CloseOutlined />}
-        </span>
-      ),
-    },
-    {
-      title: "Email Status",
-      dataIndex: "email_status",
-      key: "email_status",
-      render: (text, record) => (
-        <span>
-          {record?.email_status === true ? <CheckOutlined /> : <CloseOutlined />}
-        </span>
-      ),
-    },
-    {
-      title: "SMS Status",
-      dataIndex: "sms_status",
-      key: "sms_status",
-      render: (text, record) => (
-        <span>
-          {record?.sms_status === true ? <CheckOutlined /> : <CloseOutlined />}
-        </span>
-      ),
-    },
-    {
-      title: "Telegram Status",
-      dataIndex: "telegram_status",
-      key: "telegram_status",
-      render: (text, record) => (
-        <span>
-          {record?.telegram_status === true ? <CheckOutlined /> : <CloseOutlined />}
-        </span>
-      ),
-    },
-    {
-      title: "Status",
-      dataIndex: "status",
-      key: "status",
-      render: (text, record) => (
-        <span>
-          {record?.status === true ? <CheckOutlined /> : <CloseOutlined />}
-        </span>
-      ),
-    },
-
-    {
-        title: "Duration",
-        dataIndex: `duration`,
-        key: "duration",
-        render: (text, record) => (
-          <span>
-              {`${record?.duration} Days`}
-          </span>
-        )
-      },
+    
     {
       title: "Action",
       dataIndex: "action",
       key: "action",
       render: (text, record) => (
         <Space>
-          <FormOutlined
+{/*           <FormOutlined
             className="edit-icon"
             onClick={() => handleEdit(record?._id)}
-          />
+          /> */}
           <Popconfirm
             title="Are you sure to delete?"
             onConfirm={() => handleDelete(record?._id)}
@@ -228,12 +141,12 @@ const TagsList = () => {
   ];
 
   return (
-    <TajiraCard heading="Blog Category" actions={<AddNewButton onAdd={handleAdd} />}>
+    <TajiraCard heading="Subscriber List" >
       <TajiraTable
         fetchData={fetchCategoryList}
         dataSource={categoryList}
         columns={columns}
-        title="All Category"
+        title="All Subscribers"
         loading={loading}
         pagination={pagination}
         hideSearch={true}

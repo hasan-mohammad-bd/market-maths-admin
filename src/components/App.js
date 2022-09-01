@@ -41,7 +41,7 @@ const App = () => {
     }).then((x) => {
       if (x?.status) {
         dispatch(setUserData(savedUserData));
-        navigate("/services");
+        navigate("/category");
       } else {
         const error = x?.message || getErrorMessage(x?.errors);
         message.error({

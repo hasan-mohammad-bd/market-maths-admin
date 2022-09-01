@@ -1,9 +1,9 @@
 import axios from "axios";
 import { API_URL, ACCESS_TOKEN } from "../constants";
 
-export default class Testimonials {
-  getTestimonialsList = (payload = {}) => {
-    const url = `${API_URL}website/testimonial?limit=${
+export default class Staff {
+  getStaffList = (payload = {}) => {
+    const url = `${API_URL}staff?limit=${
       payload?.limit || 50
     }&name=${payload?.name || ""}&offset=${payload?.offset || 0}`;
     return axios
@@ -28,8 +28,8 @@ export default class Testimonials {
       });
   };
 
-  getTestimonialDetails = (id) => {
-    const url = `${API_URL}website/testimonial/${id}`;
+  getStaffDetails = (id) => {
+    const url = `${API_URL}staff/${id}`;
     return axios
       .get(url, {
         headers: {
@@ -52,15 +52,14 @@ export default class Testimonials {
       });
   };
 
-  addTestimonial = (payload) => {
-    const url = `${API_URL}website/testimonial`;
+  addStaff = (payload) => {
+    const url = `${API_URL}staff`;
     return axios({
       url,
       method: "POST",
       data: payload,
       headers: {
         Authorization: `Token ${ACCESS_TOKEN}`,
-        "Content-Type": "multipart/form-data",
       },
     })
       .then(function (response) {
@@ -79,15 +78,14 @@ export default class Testimonials {
       });
   };
 
-  editTestimonial = (payload, id) => {
-    const url = `${API_URL}website/testimonial/${id}`;
+  editStaff = (payload, id) => {
+    const url = `${API_URL}staff/${id}`;
     return axios({
       url,
       method: "PUT",
       data: payload,
       headers: {
         Authorization: `Token ${ACCESS_TOKEN}`,
-        "Content-Type": "multipart/form-data",
       },
     })
       .then(function (response) {
@@ -106,8 +104,8 @@ export default class Testimonials {
       });
   };
 
-  deleteTestimonial = (id) => {
-    const url = `${API_URL}website/testimonial/${id}`;
+  deleteTeam = (id) => {
+    const url = `${API_URL}api/v1/team/delete/${id}/`;
     return axios
       .delete(url, {
         headers: {

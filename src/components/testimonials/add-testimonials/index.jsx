@@ -28,7 +28,8 @@ const AddTestimonial = () => {
 
   const [loading, setLoading] = useState(false);
   const [testimonialsDetails, setTestimonialDetails] = useState({});
-  const [speech, setSpeech] = useState("");
+
+  const [messages, setMessages] = useState("");
   const [imageList, setImageList] = useState([]);
 
   useEffect(() => {
@@ -57,7 +58,7 @@ const AddTestimonial = () => {
             },
           ]);
           setTestimonialDetails(x?.data);
-          setSpeech(res?.speech);
+          setMessages(res?.message);
         } else {
           const error = getErrorMessage(x?.errors) || x?.message;
           message.error({
@@ -113,9 +114,10 @@ const AddTestimonial = () => {
     const imageFileChanged = values.image !== testimonialsDetails?.image;
 
     var payload = new FormData();
+ 
     payload.append("name", values.name);
-    payload.append("designation", values.designation);
-    payload.append("speech", values.speech);
+    payload.append("position", values.position);
+    payload.append("message", values.message);
     !!values?.image &&
       imageFileChanged &&
       payload.append("image", values?.image?.file?.originFileObj);
@@ -150,8 +152,8 @@ const AddTestimonial = () => {
           <Input placeholder="Enter name" />
         </Form.Item>
         <Form.Item
-          label="Designation"
-          name="designation"
+          label="Position"
+          name="position"
           rules={[
             {
               required: true,
@@ -162,15 +164,15 @@ const AddTestimonial = () => {
           <Input placeholder="Enter Designation" />
         </Form.Item>
         <Form.Item
-          label="Speech"
-          name="speech"
-          rules={[{ required: true, message: "Please add speech" }]}
+          label="Message"
+          name="message"
+          rules={[{ required: true, message: "Please add message" }]}
         >
           <Editor
-            content={speech}
+            content={messages}
             handleContent={(content) => {
-              form.setFieldsValue({ speech: content });
-              setSpeech(content);
+              form.setFieldsValue({ message: content });
+              setMessages(content);
             }}
           />
         </Form.Item>

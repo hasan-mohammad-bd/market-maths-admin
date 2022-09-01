@@ -45,7 +45,7 @@ const TestimonialList = () => {
           pageSize: payload?.pageSize || pagination?.pageSize,
           total: x?.data?.count,
         });
-        setServicesList(x?.data?.testimonials);
+        setServicesList(x?.data);
       } else {
         const error = getErrorMessage(x?.errors) || x?.message;
         message.error({
@@ -91,15 +91,15 @@ const TestimonialList = () => {
       key: "name",
     },
     {
-      title: "Designation",
-      dataIndex: "designation",
-      key: "designation",
+      title: "Position",
+      dataIndex: "position",
+      key: "position",
     },
     {
-      title: "Speech",
-      dataIndex: "speech",
-      key: "speech",
-      render: (_, record) => parse(record?.speech || ""),
+      title: "Message",
+      dataIndex: "message",
+      key: "message",
+      render: (_, record) => parse(record?.message || ""),
     },
     {
       title: "Action",

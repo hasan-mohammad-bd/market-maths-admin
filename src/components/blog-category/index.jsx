@@ -46,7 +46,6 @@ const TagsList = () => {
       if (x?.status) {
 
         const organizedData = getOrganizedData(x?.data);
-        console.log(organizedData);
 
 /*         setPagination({
           ...pagination,

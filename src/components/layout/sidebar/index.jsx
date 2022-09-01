@@ -17,6 +17,9 @@ import {
   FileOutlined,
   RadarChartOutlined,
   CodepenOutlined,
+  TeamOutlined,
+  UsergroupAddOutlined,
+  MessageOutlined,
 } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 
@@ -54,6 +57,35 @@ const SiderBar = ({ toggle, collapsed }) => {
           key="17"
         >
           Plan
+        </Menu.Item>
+        <Menu.Item
+          icon={<TeamOutlined />}
+          onClick={() => navigate("/staff")}
+          key="18"
+        >
+          Staff
+        </Menu.Item>
+        <Menu.Item
+          icon={<UsergroupAddOutlined />}
+          onClick={() => navigate("/subscriber-list")}
+          key="19"
+        >
+          Subscriber List
+        </Menu.Item>
+        <Menu.Item
+          icon={<MessageOutlined />}
+          onClick={() => navigate("/message-list")}
+          key="20"
+        >
+          Message List
+        </Menu.Item>
+
+        <Menu.Item
+          icon={<BookOutlined />}
+          onClick={() => navigate("/testimonials")}
+          key="21"
+        >
+          Testimonials
         </Menu.Item>
         <Menu.Item
           icon={<AppstoreOutlined />}
@@ -118,13 +150,7 @@ const SiderBar = ({ toggle, collapsed }) => {
         >
           Tags
         </Menu.Item>
-        <Menu.Item
-          icon={<BookOutlined />}
-          onClick={() => navigate("/testimonials")}
-          key="10"
-        >
-          Testimonials
-        </Menu.Item>
+
         <Menu.Item
           icon={<QuestionCircleOutlined />}
           onClick={() => navigate("/faq")}

@@ -65,6 +65,15 @@ const AddSpeciality = React.lazy(() => import("../speciality/add-speciality"));
 const Plan = React.lazy(() => import("../plan"));
 const AddPlan = React.lazy(() => import("../plan/add-plan"));
 
+const Staff = React.lazy(() => import("../staff"));
+const AddStaff = React.lazy(() => import("../staff/add-staff"));
+
+const SubscriberList = React.lazy(() => import("../subscriber-list"));
+const AddSubScriberList = React.lazy(() => import("../subscriber-list/add-subscriber-list"));
+
+const MessageList = React.lazy(() => import("../message-list"));
+const AddMessageList = React.lazy(() => import("../message-list/add-message-list"));
+
 const { Header, Content } = Layout;
 
 const FadoLayout = () => {
@@ -206,6 +215,18 @@ const FadoLayout = () => {
               <Route path="/plan" element={<Plan/>} />
               <Route path="/add-plan" element={<AddPlan/>} />
               <Route path="/edit-plan/:id" element={<AddPlan />} />
+
+              <Route path="/staff" element={<Staff/>} />
+              <Route path="/add-staff" element={<AddStaff/>} />
+              <Route path="/edit-staff/:id" element={<AddStaff />} />
+
+              <Route path="/subscriber-list" element={<SubscriberList/>} />
+              <Route path="/add-subscriber-list" element={<AddSubScriberList/>} />
+              <Route path="/edit-subscriber-list/:id" element={<AddSubScriberList />} />
+
+              <Route path="/message-list" element={<MessageList/>} />
+              <Route path="/add-message-list" element={<AddMessageList/>} />
+              <Route path="/edit-message-list/:id" element={<AddMessageList />} />
 
             </Routes>
           </Suspense>
