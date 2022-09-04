@@ -3,7 +3,7 @@ import { API_URL, ACCESS_TOKEN } from "../constants";
 
 export default class Blog {
   getBlogList = (payload = {}) => {
-    const url = `${API_URL}api/v1/blog/list?limit=${
+    const url = `${API_URL}blog?limit=${
       payload?.limit || 50
     }&offset=${payload?.offset || 0}`;
     return axios
@@ -29,7 +29,7 @@ export default class Blog {
   };
 
   getBlogDetails = (id) => {
-    const url = `${API_URL}api/v1/blog/details/${id}/`;
+    const url = `${API_URL}blog/${id}`;
     return axios
       .get(url, {
         headers: {
@@ -52,12 +52,12 @@ export default class Blog {
       });
   };
 
-  addBlog = (formData) => {
-    const url = `${API_URL}api/v1/blog/add`;
+  addBlog = (payload) => {
+    const url = `${API_URL}blog`;
     return axios({
       url,
       method: "POST",
-      data: formData,
+      data: JSON.stringify(payload) ,
       headers: {
         Authorization: `Token ${ACCESS_TOKEN}`,
         "Content-Type": "multipart/form-data",
@@ -80,7 +80,7 @@ export default class Blog {
   };
 
   editBlog = (formData, id) => {
-    const url = `${API_URL}api/v1/blog/update/${id}`;
+    const url = `${API_URL}/blog/${id}`;
     return axios({
       url,
       method: "PUT",
@@ -107,7 +107,7 @@ export default class Blog {
   };
 
   deleteBlog = (id) => {
-    const url = `${API_URL}api/v1/blog/delete/${id}`;
+    const url = `${API_URL}blog/${id}`;
     return axios
       .delete(url, {
         headers: {
@@ -131,7 +131,7 @@ export default class Blog {
   };
 
   deleteComment = (id) => {
-    const url = `${API_URL}api/v1/blog/comment/${id}`;
+    const url = `${API_URL}blog/comment/${id}`;
     return axios
       .delete(url, {
         headers: {

@@ -31,6 +31,7 @@ const AddBlog = () => {
 
   const blog = new API.Blog();
   const tag = new API.Tags();
+  const category = new API.Category();
 
   const navigate = useNavigate();
   const params = useParams();
@@ -40,21 +41,51 @@ const AddBlog = () => {
   const [loading, setLoading] = useState(false);
   const [blogDetails, setBlogDetails] = useState({});
   const [description, setDescription] = useState("");
-  const [tags, setTags] = useState([]);
+  // const [tags, setTags] = useState([]);
+  const [categories, setCategory] = useState([])
   const [imageList, setImageList] = useState([]);
   const [comments, setComments] = useState([]);
+
+
+  //demo 
+  const tags = [
+    {_id:1, name:"finance", },
+    {_id:2, name:"math", },
+    {_id:3, name:"market", },
+    {_id:4, name:"economy", },
+    {_id:5, name:"freelance", },
+    {_id:6, name:"income", },
+  ]
 
   useEffect(() => {
     if (id) {
       fetchBlogDetails();
     }
-    fetchTagsList();
+    // fetchTagsList();
+    fetchCategoryList()
   }, [id]);
+
+  const fetchCategoryList = async () => {
+    return getDataManager(category?.getCategoryList, setLoading).then((x) => {
+      if (x?.status) {
+        setCategory(x?.data)
+
+      } else {
+        const error = getErrorMessage(x?.errors) || x?.message;
+        message.error({
+          content: error || "Error ocurred",
+          duration: 3,
+        });
+      }
+    });
+  };
+
+  
 
   const fetchTagsList = () => {
     getDataManager(tag?.getTagsList, setLoading, id).then((x) => {
       if (x?.status) {
-        setTags(x?.data?.tags);
+        /* setTags(x?.data?.tags); */
       } else {
         const error = getErrorMessage(x?.errors) || x?.message;
         message.error({
@@ -66,16 +97,17 @@ const AddBlog = () => {
   };
 
   const fetchBlogDetails = () => {
+
     getDataManager(blog?.getBlogDetails, setLoading, id).then((x) => {
+
       if (x?.status) {
-        const res = x?.data?.blog;
+        const res = x?.data;
         form.setFieldsValue({
           title: res.title,
           description: res.description,
           tags: (res.tags || []).map((t) => t?._id),
-          is_published: res.is_published,
+          status: res.status,
           image: res.image,
-          introduction: res.introduction,
         });
         setImageList([
           {
@@ -100,6 +132,7 @@ const AddBlog = () => {
 
   const addBlog = (payload) => {
     getDataManager(blog?.addBlog, setLoading, payload).then((x) => {
+      console.log(x);
       if (x?.status) {
         message.success({
           content: "Information saved",
@@ -135,23 +168,27 @@ const AddBlog = () => {
   };
 
   const onFinish = (values) => {
-    const imageFileChanged = values.image !== blogDetails?.image;
+
+    console.log(values);
+/*     const imageFileChanged = values.image !== blogDetails?.image;
 
     var payload = new FormData();
     payload.append("title", values.title);
     payload.append("description", values.description);
     payload.append("introduction", values.introduction);
-    payload.append("is_published", values.is_published);
-    values?.tags.forEach((tag) => payload.append("tags[]", tag));
+    payload.append("featured", values.featured);
+    values.tags.map((tag) => payload.append("tags", JSON.stringify(tag.name)));
+    payload.append("category", values.category)
 
     !!values?.image &&
       imageFileChanged &&
-      payload.append("image", values?.image?.file?.originFileObj);
+      payload.append("image", values?.image?.file?.originFileObj); */
 
     if (isEdit) {
-      editBlog(payload);
+      editBlog(values);
     } else {
-      addBlog(payload);
+      addBlog(values);
+
     }
   };
 
@@ -216,9 +253,9 @@ const AddBlog = () => {
         >
           <Input placeholder="Enter title" />
         </Form.Item>
-        <Form.Item label="Introduction" name="introduction">
+{/*         <Form.Item label="Introduction" name="introduction">
           <Input placeholder="Enter introduction" />
-        </Form.Item>
+        </Form.Item> */}
         <Form.Item
           label="Description"
           name="description"
@@ -239,6 +276,19 @@ const AddBlog = () => {
         >
           <Select mode="multiple" placeholder="Select tags">
             {tags?.map((t) => (
+              <Option key={t?._id} value={(t?.name)}>
+                {t?.name}
+              </Option>
+            ))}
+          </Select>
+        </Form.Item>
+        <Form.Item
+          label="Category"
+          name="category"
+          rules={[{ required: true, message: "Please select category" }]}
+        >
+          <Select placeholder="Select category">
+            {categories?.map((t) => (
               <Option key={t?._id} value={t?._id}>
                 {t?.name}
               </Option>
@@ -246,8 +296,8 @@ const AddBlog = () => {
           </Select>
         </Form.Item>
         <Form.Item
-          label="Is published"
-          name="is_published"
+          label="Publish"
+          name="featured"
           rules={[{ required: true, message: "Please select publish status" }]}
         >
           <Select placeholder="Select Publish Status">

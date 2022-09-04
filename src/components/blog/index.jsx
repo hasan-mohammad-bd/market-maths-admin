@@ -33,6 +33,7 @@ const BlogList = () => {
 
   const fetchBlogList = async (payload) => {
     return getDataManager(blog?.getBlogList, setLoading, payload).then((x) => {
+      console.log(x);
       if (x?.status) {
         setPagination({
           ...pagination,
@@ -40,7 +41,7 @@ const BlogList = () => {
           pageSize: payload?.pageSize || pagination?.pageSize,
           total: x?.data?.count,
         });
-        setBlogList(x?.data?.blogs);
+        setBlogList(x?.data);
       } else {
         const error = getErrorMessage(x?.errors) || x?.message;
         message.error({
@@ -90,16 +91,16 @@ const BlogList = () => {
       key: "title",
     },
     {
-      title: "Introduction",
-      dataIndex: "introduction",
-      key: "introduction",
+      title: "Description",
+      dataIndex: "description",
+      key: "description",
     },
     {
-      title: "Published",
-      dataIndex: "is_published",
-      key: "is_published",
+      title: "Status",
+      dataIndex: "status",
+      key: "status",
       render: (_, record) =>
-        record?.is_published ? (
+        record?.status ? (
           <Tag color="green">Published</Tag>
         ) : (
           <Tag color="red">Not Published</Tag>

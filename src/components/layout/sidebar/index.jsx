@@ -31,6 +31,14 @@ const { Sider } = Layout;
 const SiderBar = ({ toggle, collapsed }) => {
   const navigate = useNavigate();
 
+  function getItem(label, key, icon, children) {
+    return {
+      key,
+      icon,
+      children,
+      label,
+    };
+  }
   return (
     <Sider collapsible collapsed={collapsed} onCollapse={toggle}>
       <div className="tajira-logo">
@@ -87,7 +95,24 @@ const SiderBar = ({ toggle, collapsed }) => {
         >
           Testimonials
         </Menu.Item>
+
         <Menu.Item
+          icon={<ProjectOutlined />}
+          onClick={() => navigate("/blog")}
+          key="22"
+        >
+          Blog
+        </Menu.Item>
+
+        <Menu.SubMenu key="23" icon={<NotificationOutlined />} title="Signal">
+        <Menu.Item
+          onClick={() => navigate("/assets")}
+          key="24"
+        >
+          Assets
+        </Menu.Item>
+        </Menu.SubMenu>
+{/*         <Menu.Item
           icon={<AppstoreOutlined />}
           onClick={() => navigate("/services")}
           key="1"
@@ -129,13 +154,7 @@ const SiderBar = ({ toggle, collapsed }) => {
         >
           Immigration Websites
         </Menu.Item>
-        <Menu.Item
-          icon={<ProjectOutlined />}
-          onClick={() => navigate("/blog")}
-          key="7"
-        >
-          Blog
-        </Menu.Item>
+
         <Menu.Item
           icon={<FileOutlined />}
           onClick={() => navigate("/directory")}
@@ -178,7 +197,7 @@ const SiderBar = ({ toggle, collapsed }) => {
           onClick={() => navigate("/settings/website-settings")}
         >
           Website Settings
-        </Menu.Item>
+        </Menu.Item> */}
       </Menu>
     </Sider>
   );
