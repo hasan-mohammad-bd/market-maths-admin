@@ -1,7 +1,7 @@
 import axios from "axios";
 import { API_URL, ACCESS_TOKEN } from "../constants";
 
-export default class Category {
+export default class MessageList {
 
     // done
   getMessageList = (payload = {}) => {

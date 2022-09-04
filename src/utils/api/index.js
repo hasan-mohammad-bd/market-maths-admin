@@ -22,6 +22,8 @@ import Plan from "./Plan";
 import Staff from "./Staff";
 import SubscriberList from "./SubscriberList";
 import MessageList from "./MessageList";
+import Assets from "./Assets";
+import Symbol from "./Symbol";
 
 const API = {
   Auth,
@@ -48,7 +50,9 @@ const API = {
   Plan,
   Staff,
   SubscriberList,
-  MessageList
+  MessageList,
+  Assets,
+  Symbol
 };
 
 export default API;

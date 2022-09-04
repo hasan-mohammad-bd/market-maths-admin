@@ -1,38 +1,13 @@
 import axios from "axios";
 import { API_URL, ACCESS_TOKEN } from "../constants";
 
-export default class Plan {
+export default class Symbol {
 
     // done
-  getPlanList = (payload = {}) => {
-    const url = `${API_URL}plan?limit=${
-      payload?.limit || 50
-    }&offset=${payload?.offset || 0}`;
-    return axios
-      .get(url, {
-        headers: {
-          Authorization: `Token ${ACCESS_TOKEN}`,
-        },
-      })
-      .then(function (response) {
-        if (response.status === 200 || response.status === 201) {
-          return response.data;
-        } else {
-          return {
-            data: {
-              results: [],
-            },
-          };
-        }
-      })
-      .catch(function (error) {
-        return error.response?.data;
-      });
-  };
-
-//done
-  getPlanDetails = (id) => {
-    const url = `${API_URL}plan/${id}`;
+  getSymbolList = (payload = {}) => {
+    const url = `${API_URL}signal/symbol?${
+      payload?.limit || 20
+    }&page=${payload?.offset || 1}`;
     return axios
       .get(url, {
         headers: {
@@ -56,9 +31,34 @@ export default class Plan {
   };
 
 
+  getSymbolDetails = (id) => {
+    const url = `${API_URL}signal/symbol/${id}`;
+    return axios
+      .get(url, {
+        headers: {
+          Authorization: `Token ${ACCESS_TOKEN}`,
+        },
+      })
+      .then(function (response) {
+        if (response.status === 200 || response.status === 201) {
+          return response.data;
+        } else {
+          return {
+            data: {
+              results: [],
+            },
+          };
+        }
+      })
+      .catch(function (error) {
+        return error.response?.data;
+      });
+  };
 
-  addPlan = (payload) => {
-    const url = `${API_URL}plan`;
+
+
+  addSymbol = (payload) => {
+    const url = `${API_URL}signal/symbol`;
     return axios({
       url,
       method: "POST",
@@ -83,8 +83,8 @@ export default class Plan {
       });
   };
 
-  editPlan = (payload, id) => {
-    const url = `${API_URL}plan/${id}`;
+  editSymbol = (payload, id) => {
+    const url = `${API_URL}signal/symbol/${id}`;
     return axios({
       url,
       method: "PUT",
@@ -109,9 +109,9 @@ export default class Plan {
       });
   };
 
-//done
-  deletePlan = (id) => {
-    const url = `${API_URL}plan/${id}`;
+
+  deleteSymbol = (id) => {
+    const url = `${API_URL}signal/symbol/${id}`;
     return axios
       .delete(url, {
         headers: {

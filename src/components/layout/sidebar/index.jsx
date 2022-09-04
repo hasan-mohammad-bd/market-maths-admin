@@ -111,6 +111,12 @@ const SiderBar = ({ toggle, collapsed }) => {
         >
           Assets
         </Menu.Item>
+        <Menu.Item
+          onClick={() => navigate("/symbol")}
+          key="25"
+        >
+          Symbol
+        </Menu.Item>
         </Menu.SubMenu>
 {/*         <Menu.Item
           icon={<AppstoreOutlined />}

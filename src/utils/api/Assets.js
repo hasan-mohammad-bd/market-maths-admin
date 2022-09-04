@@ -1,11 +1,11 @@
 import axios from "axios";
 import { API_URL, ACCESS_TOKEN } from "../constants";
 
-export default class Plan {
+export default class Assets {
 
     // done
-  getPlanList = (payload = {}) => {
-    const url = `${API_URL}plan?limit=${
+  getAssetsList = (payload = {}) => {
+    const url = `${API_URL}signal/asset?limit=${
       payload?.limit || 50
     }&offset=${payload?.offset || 0}`;
     return axios
@@ -31,8 +31,8 @@ export default class Plan {
   };
 
 //done
-  getPlanDetails = (id) => {
-    const url = `${API_URL}plan/${id}`;
+  getAssetsDetails = (id) => {
+    const url = `${API_URL}signal/asset/${id}`;
     return axios
       .get(url, {
         headers: {
@@ -57,8 +57,8 @@ export default class Plan {
 
 
 
-  addPlan = (payload) => {
-    const url = `${API_URL}plan`;
+  addAssets = (payload) => {
+    const url = `${API_URL}signal/asset/`;
     return axios({
       url,
       method: "POST",
@@ -83,8 +83,8 @@ export default class Plan {
       });
   };
 
-  editPlan = (payload, id) => {
-    const url = `${API_URL}plan/${id}`;
+  editAssets = (payload, id) => {
+    const url = `${API_URL}signal/asset/${id}`;
     return axios({
       url,
       method: "PUT",
@@ -110,8 +110,8 @@ export default class Plan {
   };
 
 //done
-  deletePlan = (id) => {
-    const url = `${API_URL}plan/${id}`;
+  deleteAssets = (id) => {
+    const url = `${API_URL}signal/asset/${id}`;
     return axios
       .delete(url, {
         headers: {

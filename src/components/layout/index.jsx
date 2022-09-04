@@ -74,6 +74,12 @@ const AddSubScriberList = React.lazy(() => import("../subscriber-list/add-subscr
 const MessageList = React.lazy(() => import("../message-list"));
 const AddMessageList = React.lazy(() => import("../message-list/add-message-list"));
 
+const Assets = React.lazy(() => import("../assets"));
+const AddAssets = React.lazy(() => import("../assets/add-assets"));
+
+const Symbol = React.lazy(() => import("../symbol"));
+const AddSymbol = React.lazy(() => import("../symbol/add-symbol"));
+
 const { Header, Content } = Layout;
 
 const FadoLayout = () => {
@@ -227,6 +233,14 @@ const FadoLayout = () => {
               <Route path="/message-list" element={<MessageList/>} />
               <Route path="/add-message-list" element={<AddMessageList/>} />
               <Route path="/edit-message-list/:id" element={<AddMessageList />} />
+
+              <Route path="/assets" element={<Assets/>} />
+              <Route path="/add-assets" element={<AddAssets/>} />
+              <Route path="/edit-assets/:id" element={<AddAssets />} />
+
+              <Route path="/symbol" element={<Symbol/>} />
+              <Route path="/add-symbol" element={<AddSymbol/>} />
+              <Route path="/edit-symbol/:id" element={<AddSymbol />} />
 
             </Routes>
           </Suspense>
