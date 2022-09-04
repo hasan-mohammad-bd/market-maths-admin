@@ -1,11 +1,11 @@
 import axios from "axios";
 import { API_URL, ACCESS_TOKEN } from "../constants";
 
-export default class Type {
+export default class Symbol {
 
     // done
-  getTypeList = (payload = {}) => {
-    const url = `${API_URL}signal/type?${
+  getFrameList = (payload = {}) => {
+    const url = `${API_URL}signal/frame?${
       payload?.limit || 20
     }&page=${payload?.offset || 1}`;
     return axios
@@ -31,8 +31,8 @@ export default class Type {
   };
 
 
-  getTypeDetails = (id) => {
-    const url = `${API_URL}signal/type/${id}`;
+  getFrameDetails = (id) => {
+    const url = `${API_URL}signal/frame/${id}`;
     return axios
       .get(url, {
         headers: {
@@ -57,8 +57,8 @@ export default class Type {
 
 
 
-  addType = (payload) => {
-    const url = `${API_URL}signal/type`;
+  addFrame = (payload) => {
+    const url = `${API_URL}signal/frame`;
     return axios({
       url,
       method: "POST",
@@ -83,8 +83,8 @@ export default class Type {
       });
   };
 
-  editType = (payload, id) => {
-    const url = `${API_URL}signal/type/${id}`;
+  editFrame = (payload, id) => {
+    const url = `${API_URL}signal/frame/${id}`;
     return axios({
       url,
       method: "PUT",
@@ -110,8 +110,8 @@ export default class Type {
   };
 
 
-  deleteType = (id) => {
-    const url = `${API_URL}signal/type/${id}`;
+  deleteFrame = (id) => {
+    const url = `${API_URL}signal/frame/${id}`;
     return axios
       .delete(url, {
         headers: {

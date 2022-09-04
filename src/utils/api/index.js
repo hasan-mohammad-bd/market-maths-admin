@@ -24,6 +24,8 @@ import SubscriberList from "./SubscriberList";
 import MessageList from "./MessageList";
 import Assets from "./Assets";
 import Symbol from "./Symbol";
+import Type from "./Type";
+import Frame from "./Frame";
 
 const API = {
   Auth,
@@ -52,7 +54,9 @@ const API = {
   SubscriberList,
   MessageList,
   Assets,
-  Symbol
+  Symbol,
+  Type,
+  Frame
 };
 
 export default API;
