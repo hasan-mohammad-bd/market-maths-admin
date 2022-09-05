@@ -106,6 +106,12 @@ const SiderBar = ({ toggle, collapsed }) => {
 
         <Menu.SubMenu key="23" icon={<NotificationOutlined />} title="Signal">
         <Menu.Item
+          onClick={() => navigate("/signal")}
+          key="29"
+        >
+          Assets
+        </Menu.Item>
+        <Menu.Item
           onClick={() => navigate("/assets")}
           key="24"
         >
@@ -128,6 +134,12 @@ const SiderBar = ({ toggle, collapsed }) => {
           key="27"
         >
           Frame
+        </Menu.Item>
+        <Menu.Item
+          onClick={() => navigate("/status")}
+          key="28"
+        >
+          Status
         </Menu.Item>
         </Menu.SubMenu>
 {/*         <Menu.Item

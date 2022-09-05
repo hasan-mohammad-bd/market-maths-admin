@@ -26,6 +26,7 @@ import Assets from "./Assets";
 import Symbol from "./Symbol";
 import Type from "./Type";
 import Frame from "./Frame";
+import Status from "./Status";
 
 const API = {
   Auth,
@@ -56,7 +57,8 @@ const API = {
   Assets,
   Symbol,
   Type,
-  Frame
+  Frame,
+  Status
 };
 
 export default API;
