@@ -48,7 +48,7 @@ const AddBlog = () => {
 
 
   //demo 
-  const tags = [
+  const tagsList = [
     {_id:1, name:"finance", },
     {_id:2, name:"math", },
     {_id:3, name:"market", },
@@ -108,6 +108,8 @@ const AddBlog = () => {
           tags: (res.tags || []).map((t) => t?._id),
           status: res.status,
           image: res.image,
+          category: res.category,
+          featured: res.featured
         });
         setImageList([
           {
@@ -170,24 +172,25 @@ const AddBlog = () => {
   const onFinish = (values) => {
 
     console.log(values);
-/*     const imageFileChanged = values.image !== blogDetails?.image;
+
+    const imageFileChanged = values.image !== blogDetails?.image;
 
     var payload = new FormData();
     payload.append("title", values.title);
     payload.append("description", values.description);
-    payload.append("introduction", values.introduction);
     payload.append("featured", values.featured);
-    values.tags.map((tag) => payload.append("tags", JSON.stringify(tag.name)));
+    payload.append("tags", JSON.stringify(values.tags));
+    // values?.tags.forEach((tag) => payload.append("tags", tag));
     payload.append("category", values.category)
 
     !!values?.image &&
       imageFileChanged &&
-      payload.append("image", values?.image?.file?.originFileObj); */
+      payload.append("image", values?.image?.file?.originFileObj);
 
     if (isEdit) {
-      editBlog(values);
+      editBlog(payload);
     } else {
-      addBlog(values);
+      addBlog(payload);
 
     }
   };
@@ -275,8 +278,8 @@ const AddBlog = () => {
           rules={[{ required: true, message: "Please select tags" }]}
         >
           <Select mode="multiple" placeholder="Select tags">
-            {tags?.map((t) => (
-              <Option key={t?._id} value={(t?.name)}>
+            {tagsList?.map((t) => (
+              <Option key={t?._id} value={t?._id}>
                 {t?.name}
               </Option>
             ))}

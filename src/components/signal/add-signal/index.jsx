@@ -10,6 +10,7 @@ import {
   Space,
   Table,
   Popconfirm,
+  InputNumber,
 } from "antd";
 import { FileAddFilled, DeleteOutlined } from "@ant-design/icons";
 import { useParams, useNavigate } from "react-router-dom";
@@ -29,9 +30,13 @@ const { Option } = Select;
 const AddBlog = () => {
   const [form] = Form.useForm();
 
-  const blog = new API.Blog();
-  const tag = new API.Tags();
-  const category = new API.Category();
+  const blog = new API.Signal();
+  const plan = new API.Plan();
+  const assets = new API.Assets();
+  const symbol = new API.Symbol();
+  const type = new API.Type();
+  const frame = new API.Frame();
+  const status = new API.Status();
 
   const navigate = useNavigate();
   const params = useParams();
@@ -41,10 +46,14 @@ const AddBlog = () => {
   const [loading, setLoading] = useState(false);
   const [blogDetails, setBlogDetails] = useState({});
   const [description, setDescription] = useState("");
-  // const [tags, setTags] = useState([]);
-  const [categories, setCategory] = useState([])
   const [imageList, setImageList] = useState([]);
   const [comments, setComments] = useState([]);
+  const [planList, setPlanList] = useState([]);
+  const [assetsList, setAssetsList] = useState([]);
+  const [symbolList, setSymbolList] = useState([]);
+  const [typeList, setTypeList] = useState([]);
+  const [frameList, setFrameList] = useState([]);
+  const [statusList, setStatusList] = useState([]);
 
 
   //demo 
@@ -62,13 +71,62 @@ const AddBlog = () => {
       fetchBlogDetails();
     }
     // fetchTagsList();
-    fetchCategoryList()
+    // fetchCategoryList();
+    fetchPlanList();
+    fetchAssetsList();
+    fetchSymbolList();
+    fetchTypeList();
+    fetchFrameList();
+    fetchStatusList();
   }, [id]);
 
-  const fetchCategoryList = async () => {
-    return getDataManager(category?.getCategoryList, setLoading).then((x) => {
+  const fetchStatusList = async (payload) => {
+    return getDataManager(status?.getStatusList, setLoading).then((x) => {
       if (x?.status) {
-        setCategory(x?.data)
+        setStatusList(x.data)
+      } else {
+        const error = getErrorMessage(x?.errors) || x?.message;
+        message.error({
+          content: error || "Error ocurred",
+          duration: 3,
+        });
+      }
+    });
+  };
+
+  const fetchFrameList = async (payload) => {
+    return getDataManager(frame?.getFrameList, setLoading).then((x) => {
+      if (x?.status) {
+        setFrameList(x.data)
+      } else {
+        const error = getErrorMessage(x?.errors) || x?.message;
+        message.error({
+          content: error || "Error ocurred",
+          duration: 3,
+        });
+      }
+    });
+  };
+
+
+  const fetchTypeList = async (payload) => {
+    return getDataManager(type?.getTypeList, setLoading).then((x) => {
+      if (x?.status) {
+        setTypeList(x.data)
+      } else {
+        const error = getErrorMessage(x?.errors) || x?.message;
+        message.error({
+          content: error || "Error ocurred",
+          duration: 3,
+        });
+      }
+    });
+  };
+
+  const fetchSymbolList = async (payload) => {
+    return getDataManager(symbol?.getSymbolList, setLoading).then((x) => {
+      if (x?.status) {
+        setSymbolList(x.data)
 
       } else {
         const error = getErrorMessage(x?.errors) || x?.message;
@@ -80,12 +138,10 @@ const AddBlog = () => {
     });
   };
 
-  
-
-  const fetchTagsList = () => {
-    getDataManager(tag?.getTagsList, setLoading, id).then((x) => {
+  const fetchPlanList = async (payload) => {
+    return getDataManager(plan?.getPlanList, setLoading).then((x) => {
       if (x?.status) {
-        /* setTags(x?.data?.tags); */
+        setPlanList(x.data)
       } else {
         const error = getErrorMessage(x?.errors) || x?.message;
         message.error({
@@ -95,19 +151,45 @@ const AddBlog = () => {
       }
     });
   };
+
+  const fetchAssetsList = async (payload) => {
+    return getDataManager(assets?.getAssetsList, setLoading).then((x) => {
+      if (x?.status) {
+
+        setAssetsList(x.data);
+      } else {
+        const error = getErrorMessage(x?.errors) || x?.message;
+        message.error({
+          content: error || "Error ocurred",
+          duration: 3,
+        });
+      }
+    });
+  };
+
+
+
 
   const fetchBlogDetails = () => {
 
-    getDataManager(blog?.getBlogDetails, setLoading, id).then((x) => {
+    getDataManager(blog?.getSignalDetails, setLoading, id).then((x) => {
 
       if (x?.status) {
         const res = x?.data;
         form.setFieldsValue({
           title: res.title,
           description: res.description,
-          tags: (res.tags || []).map((t) => t?._id),
-          status: res.status,
-          image: res.image,
+          plan: (res?.plan || []).map((t) => t?._id),
+          asset: res?.asset.name,
+          symbol: res?.symbol.name,
+          signal_type: res?.signal_type.name,
+          time_frame: res?.time_frame.name,
+          entry_price: res?.entry_price,
+          stop_loss: res?.stop_loss,
+          take_profit: res?.take_profit,
+          status: res?.status.name,
+          image: res?.image
+          
         });
         setImageList([
           {
@@ -131,14 +213,14 @@ const AddBlog = () => {
   };
 
   const addBlog = (payload) => {
-    getDataManager(blog?.addBlog, setLoading, payload).then((x) => {
+    getDataManager(blog?.addSignal, setLoading, payload).then((x) => {
       console.log(x);
       if (x?.status) {
         message.success({
           content: "Information saved",
           duration: 3,
         });
-        navigate("/blog");
+        navigate("/signal");
       } else {
         const error = getErrorMessage(x?.errors) || x?.message;
         message.error({
@@ -150,13 +232,13 @@ const AddBlog = () => {
   };
 
   const editBlog = (payload) => {
-    getDataManager(blog?.editBlog, setLoading, payload, id).then((x) => {
+    getDataManager(blog?.editSignal, setLoading, payload, id).then((x) => {
       if (x?.status) {
         message.success({
           content: "Information saved",
           duration: 3,
         });
-        navigate("/blog");
+        navigate("/signal");
       } else {
         const error = getErrorMessage(x?.errors) || x?.message;
         message.error({
@@ -170,24 +252,30 @@ const AddBlog = () => {
   const onFinish = (values) => {
 
     console.log(values);
-/*     const imageFileChanged = values.image !== blogDetails?.image;
+    const imageFileChanged = values.image !== blogDetails?.image;
 
     var payload = new FormData();
     payload.append("title", values.title);
     payload.append("description", values.description);
-    payload.append("introduction", values.introduction);
-    payload.append("featured", values.featured);
-    values.tags.map((tag) => payload.append("tags", JSON.stringify(tag.name)));
-    payload.append("category", values.category)
+    payload.append("entry_price", values.entry_price);
+    payload.append("stop_loss", values.stop_loss);
+    payload.append("take_profit", values.take_profit);
+    payload.append("plan", JSON.stringify(values.plan));
+    payload.append("asset", values.asset);
+    payload.append("symbol", values.symbol);
+    payload.append("signal_type", values.signal_type);
+    payload.append("time_frame", values.time_frame);
+    payload.append("status", values.status);
+    
 
     !!values?.image &&
       imageFileChanged &&
-      payload.append("image", values?.image?.file?.originFileObj); */
+      payload.append("image", values?.image?.file?.originFileObj);
 
     if (isEdit) {
-      editBlog(values);
+      editBlog(payload);
     } else {
-      addBlog(values);
+      addBlog(payload);
 
     }
   };
@@ -233,7 +321,7 @@ const AddBlog = () => {
   ];
 
   return (
-    <TajiraCard heading={isEdit ? "Edit Blog" : "Add Blog"}>
+    <TajiraCard heading={isEdit ? "Edit Signal" : "Add Signal"}>
       {loading && <Spinner />}
       <Form
         onFinish={onFinish}
@@ -270,25 +358,51 @@ const AddBlog = () => {
           />
         </Form.Item>
         <Form.Item
-          label="Tags"
-          name="tags"
-          rules={[{ required: true, message: "Please select tags" }]}
+          label="Entry Price / USD"
+          name="entry_price"
+          type="number"
+          rules={[
+            {
+              required: true,
+              message: "Please enter price in number",
+            },
+          ]}
         >
-          <Select mode="multiple" placeholder="Select tags">
-            {tags?.map((t) => (
-              <Option key={t?._id} value={(t?.name)}>
-                {t?.name}
-              </Option>
-            ))}
-          </Select>
+          <InputNumber placeholder="Enter Stop Loss" />
         </Form.Item>
         <Form.Item
-          label="Category"
-          name="category"
-          rules={[{ required: true, message: "Please select category" }]}
+          label="Stop Loss / USD"
+          name="stop_loss"
+          type="number"
+          rules={[
+            {
+              required: true,
+              message: "Please enter stop loss in number",
+            },
+          ]}
         >
-          <Select placeholder="Select category">
-            {categories?.map((t) => (
+          <InputNumber placeholder="Enter price" />
+        </Form.Item>
+        <Form.Item
+          label="Profit / USD"
+          name="take_profit"
+          type="number"
+          rules={[
+            {
+              required: true,
+              message: "Please enter stop loss in number",
+            },
+          ]}
+        >
+          <InputNumber placeholder="Enter price" />
+        </Form.Item>
+        <Form.Item
+          label="Plan"
+          name="plan"
+          rules={[{ required: true, message: "Please select plan" }]}
+        >
+          <Select mode="multiple" placeholder="Select Plan">
+            {planList?.map((t) => (
               <Option key={t?._id} value={t?._id}>
                 {t?.name}
               </Option>
@@ -296,13 +410,68 @@ const AddBlog = () => {
           </Select>
         </Form.Item>
         <Form.Item
-          label="Publish"
-          name="featured"
-          rules={[{ required: true, message: "Please select publish status" }]}
+          label="Asset"
+          name="asset"
+          rules={[{ required: true, message: "Please select asset" }]}
         >
-          <Select placeholder="Select Publish Status">
-            <Option value={true}>Yes</Option>
-            <Option value={false}>No</Option>
+          <Select placeholder="Select asset">
+            {assetsList?.map((t) => (
+              <Option key={t?._id} value={t?._id}>
+                {t?.name}
+              </Option>
+            ))}
+          </Select>
+        </Form.Item>
+        <Form.Item
+          label="Symbol"
+          name="symbol"
+          rules={[{ required: true, message: "Please select symbol" }]}
+        >
+          <Select placeholder="Select Symbol">
+            {symbolList?.map((t) => (
+              <Option key={t?._id} value={t?._id}>
+                {t?.name}
+              </Option>
+            ))}
+          </Select>
+        </Form.Item>
+        <Form.Item
+          label="Signal Type"
+          name="signal_type"
+          rules={[{ required: true, message: "Please select symbol type" }]}
+        >
+          <Select placeholder="Select Symbol type">
+            {typeList?.map((t) => (
+              <Option key={t?._id} value={t?._id}>
+                {t?.name}
+              </Option>
+            ))}
+          </Select>
+        </Form.Item>
+        <Form.Item
+          label="Time Frame"
+          name="time_frame"
+          rules={[{ required: true, message: "Please select symbol type" }]}
+        >
+          <Select placeholder="Select Symbol type">
+            {frameList?.map((t) => (
+              <Option key={t?._id} value={t?._id}>
+                {t?.name}
+              </Option>
+            ))}
+          </Select>
+        </Form.Item>
+        <Form.Item
+          label="Status"
+          name="status"
+          rules={[{ required: true, message: "Please select symbol type" }]}
+        >
+          <Select placeholder="Select Symbol type">
+            {statusList?.map((t) => (
+              <Option key={t?._id} value={t?._id}>
+                {t?.name}
+              </Option>
+            ))}
           </Select>
         </Form.Item>
         <Form.Item

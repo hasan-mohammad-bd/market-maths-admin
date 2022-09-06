@@ -1,9 +1,9 @@
 import axios from "axios";
 import { API_URL, ACCESS_TOKEN } from "../constants";
 
-export default class Blog {
-  getBlogList = (payload = {}) => {
-    const url = `${API_URL}blog?limit=${
+export default class Signal {
+  getSignalList = (payload = {}) => {
+    const url = `${API_URL}signal?limit=${
       payload?.limit || 50
     }&offset=${payload?.offset || 0}`;
     return axios
@@ -27,9 +27,8 @@ export default class Blog {
         return error.response?.data;
       });
   };
-
-  getBlogDetails = (id) => {
-    const url = `${API_URL}blog/${id}`;
+  getSignalComments = (id) => {
+    const url = `${API_URL}signal/comment/${id}`;
     return axios
       .get(url, {
         headers: {
@@ -52,16 +51,65 @@ export default class Blog {
       });
   };
 
-  addBlog = (payload) => {
-    const url = `${API_URL}blog`;
+
+  getSignalReview = (id) => {
+    const url = `${API_URL}signal/rating/${id}`;
+    return axios
+      .get(url, {
+        headers: {
+          Authorization: `Token ${ACCESS_TOKEN}`,
+        },
+      })
+      .then(function (response) {
+        if (response.status === 200 || response.status === 201) {
+          return response.data;
+        } else {
+          return {
+            data: {
+              results: [],
+            },
+          };
+        }
+      })
+      .catch(function (error) {
+        return error.response?.data;
+      });
+  };
+
+  getSignalDetails = (id) => {
+    const url = `${API_URL}signal/${id}`;
+    return axios
+      .get(url, {
+        headers: {
+          Authorization: `Token ${ACCESS_TOKEN}`,
+        },
+      })
+      .then(function (response) {
+        if (response.status === 200 || response.status === 201) {
+          return response.data;
+        } else {
+          return {
+            data: {
+              results: [],
+            },
+          };
+        }
+      })
+      .catch(function (error) {
+        return error.response?.data;
+      });
+  };
+
+  addSignal = (payload) => {
+    const url = `${API_URL}signal`;
     return axios({
       url,
       method: "POST",
-      data: JSON.stringify(payload) ,
+      data: payload ,
       headers: {
         Authorization: `Token ${ACCESS_TOKEN}`,
         "Content-Type": "multipart/form-data",
-      },
+      }, 
     })
       .then(function (response) {
         if (response.status === 200 || response.status === 201) {
@@ -79,8 +127,8 @@ export default class Blog {
       });
   };
 
-  editBlog = (formData, id) => {
-    const url = `${API_URL}/blog/${id}`;
+  editSignal = (formData, id) => {
+    const url = `${API_URL}/signal/${id}`;
     return axios({
       url,
       method: "PUT",
@@ -106,8 +154,8 @@ export default class Blog {
       });
   };
 
-  deleteBlog = (id) => {
-    const url = `${API_URL}blog/${id}`;
+  deleteSignal = (id) => {
+    const url = `${API_URL}signal/${id}`;
     return axios
       .delete(url, {
         headers: {

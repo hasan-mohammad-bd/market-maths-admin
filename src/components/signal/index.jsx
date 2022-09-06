@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { message, Space, Popconfirm, Image, Tag, Tooltip } from "antd";
-import { FormOutlined, DeleteOutlined, EyeOutlined } from "@ant-design/icons";
+import { FormOutlined, DeleteOutlined, EyeOutlined, CheckOutlined, CloseOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 
 import TajiraTable from "../common/table";
@@ -10,9 +10,10 @@ import AddNewButton from "../common/add-button";
 
 import API from "../../utils/api";
 import { getDataManager, getErrorMessage } from "../../utils/helper.functions";
+import moment from "moment";
 
 const BlogList = () => {
-  const blog = new API.Blog();
+  const blog = new API.Signal();
 
   const navigate = useNavigate();
 
@@ -32,7 +33,7 @@ const BlogList = () => {
   }, []);
 
   const fetchBlogList = async (payload) => {
-    return getDataManager(blog?.getBlogList, setLoading, payload).then((x) => {
+    return getDataManager(blog?.getSignalList, setLoading, payload).then((x) => {
       console.log(x);
       if (x?.status) {
         setPagination({
@@ -53,19 +54,19 @@ const BlogList = () => {
   };
 
   const handleAdd = () => {
-    navigate("/add-blog");
+    navigate("/add-signal");
   };
 
   const handleEdit = (id) => {
-    navigate(`/edit-blog/${id}`);
+    navigate(`/edit-signal/${id}`);
   };
 
   const handleDelete = (id) => {
-    getDataManager(blog?.deleteBlog, setLoading, id).then((x) => {
+    getDataManager(blog?.deleteSignal, setLoading, id).then((x) => {
       if (x.status) {
         fetchBlogList();
         message.success({
-          content: "blog deleted successfully",
+          content: "Signal deleted successfully",
           duration: 2,
         });
       } else {
@@ -75,36 +76,57 @@ const BlogList = () => {
   };
 
   const handleViewComments = (id) => {
-    navigate(`/comments/${id}`);
+    navigate(`/signal-comments/${id}`);
+  };
+  const handleViewReview = (id) => {
+    navigate(`/review/${id}`);
   };
 
   const columns = [
-    {
+/*     {
       title: "Image",
       dataIndex: "image",
       key: "image",
       render: (_, record) => <Image width={50} src={record?.image} />,
-    },
+    }, */
     {
       title: "Title",
       dataIndex: "title",
       key: "title",
     },
     {
-      title: "Description",
-      dataIndex: "description",
-      key: "description",
+      title: "Posted By",
+      dataIndex: "post_by",
+      key: "post_by",
+    },
+    {
+      title: "Created At",
+      dataIndex: "createdAt",
+      key: "createdAt",
+      render: (text, record) => 
+      <span>
+        {moment(record?.createdAt).format("MMMM Do YYYY")}
+      </span>
+    },
+    {
+      title: "Active",
+      dataIndex: "is_active",
+      key: "is_active",
+      render: (text, record) => (
+        <span>
+            {record?.is_active === true ? <CheckOutlined /> : <CloseOutlined />}
+        </span>
+      )
     },
     {
       title: "Status",
       dataIndex: "status",
       key: "status",
-      render: (_, record) =>
-        record?.status ? (
-          <Tag color="green">Published</Tag>
-        ) : (
-          <Tag color="red">Not Published</Tag>
-        ),
+      render: (text, record) => (
+        <span>
+            {record?.status === true ? <CheckOutlined /> : <CloseOutlined />}
+        </span>
+      )
     },
     {
       title: "Action",
@@ -116,6 +138,12 @@ const BlogList = () => {
             <EyeOutlined
               className="view-icon"
               onClick={() => handleViewComments(record?._id)}
+            />
+          </Tooltip>
+          <Tooltip title="View Review" placement="top">
+            <EyeOutlined
+              className="view-icon"
+              onClick={() => handleViewReview(record?._id)}
             />
           </Tooltip>
 
@@ -135,12 +163,12 @@ const BlogList = () => {
   ];
 
   return (
-    <TajiraCard heading="Blogs" actions={<AddNewButton onAdd={handleAdd} />}>
+    <TajiraCard heading="Signal" actions={<AddNewButton onAdd={handleAdd} />}>
       <TajiraTable
         fetchData={fetchBlogList}
         dataSource={blogList}
         columns={columns}
-        title="All Blog"
+        title="All Signal"
         loading={loading}
         pagination={pagination}
         hideSearch={true}

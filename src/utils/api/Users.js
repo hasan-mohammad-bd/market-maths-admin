@@ -1,13 +1,11 @@
 import axios from "axios";
 import { API_URL, ACCESS_TOKEN } from "../constants";
 
-export default class Status {
-
-    // done
-  getStatusList = (payload = {}) => {
-    const url = `${API_URL}signal/status?${
-      payload?.limit || 20
-    }&page=${payload?.offset || 1}`;
+export default class Staff {
+  getUserList = (payload = {}) => {
+    const url = `${API_URL}users?limit=${
+      payload?.limit || 50
+    }&name=${payload?.name || ""}`;
     return axios
       .get(url, {
         headers: {
@@ -30,9 +28,8 @@ export default class Status {
       });
   };
 
-
-  getStatusDetails = (id) => {
-    const url = `${API_URL}signal/status/${id}`;
+  getUsersDetails = (id) => {
+    const url = `${API_URL}users/${id}`;
     return axios
       .get(url, {
         headers: {
@@ -55,10 +52,8 @@ export default class Status {
       });
   };
 
-
-
-  addStatus = (payload) => {
-    const url = `${API_URL}signal/status`;
+  addUsers = (payload) => {
+    const url = `${API_URL}users`;
     return axios({
       url,
       method: "POST",
@@ -83,8 +78,8 @@ export default class Status {
       });
   };
 
-  editStatus = (payload, id) => {
-    const url = `${API_URL}signal/status/${id}`;
+  editUsers = (payload, id) => {
+    const url = `${API_URL}users/${id}`;
     return axios({
       url,
       method: "PUT",
@@ -109,9 +104,8 @@ export default class Status {
       });
   };
 
-
-  deleteStatus = (id) => {
-    const url = `${API_URL}signal/status/${id}`;
+  deleteUsers = (id) => {
+    const url = `${API_URL}users/${id}/`;
     return axios
       .delete(url, {
         headers: {
@@ -134,15 +128,37 @@ export default class Status {
       });
   };
 
-  activateTags = (id) => {
-    const url = `${API_URL}api/v1/tag/activate/${id}/`;
-    return axios({
-      url,
-      method: "PUT",
-      headers: {
-        Authorization: `Token ${ACCESS_TOKEN}`,
-      },
-    })
+  getUsersActivate = (id) => {
+    const url = `${API_URL}users/active/${id}`;
+    return axios
+      .get(url, {
+        headers: {
+          Authorization: `Token ${ACCESS_TOKEN}`,
+        },
+      })
+      .then(function (response) {
+        if (response.status === 200 || response.status === 201) {
+          return response.data;
+        } else {
+          return {
+            data: {
+              results: [],
+            },
+          };
+        }
+      })
+      .catch(function (error) {
+        return error.response?.data;
+      });
+  };
+  getUsersVerify = (id) => {
+    const url = `${API_URL}users/verify/${id}`;
+    return axios
+      .get(url, {
+        headers: {
+          Authorization: `Token ${ACCESS_TOKEN}`,
+        },
+      })
       .then(function (response) {
         if (response.status === 200 || response.status === 201) {
           return response.data;

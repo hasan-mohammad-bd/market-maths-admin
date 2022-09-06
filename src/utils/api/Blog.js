@@ -57,7 +57,7 @@ export default class Blog {
     return axios({
       url,
       method: "POST",
-      data: JSON.stringify(payload) ,
+      data: payload ,
       headers: {
         Authorization: `Token ${ACCESS_TOKEN}`,
         "Content-Type": "multipart/form-data",

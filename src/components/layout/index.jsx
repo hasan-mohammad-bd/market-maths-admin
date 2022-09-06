@@ -91,6 +91,12 @@ const AddStatus = React.lazy(() => import("../status/add-status"));
 
 const Signal = React.lazy(() => import("../signal"));
 const AddSignal = React.lazy(() => import("../signal/add-signal"));
+const SignalComments = React.lazy(() => import("../signal/comments"));
+const Review = React.lazy(() => import("../signal/review"));
+
+const Users = React.lazy(() => import("../users"));
+const AddUsers = React.lazy(() => import("../users/add-users"));
+
 
 const { Header, Content } = Layout;
 
@@ -269,6 +275,13 @@ const FadoLayout = () => {
               <Route path="/signal" element={<Signal/>} />
               <Route path="/add-signal" element={<AddSignal/>} />
               <Route path="/edit-signal/:id" element={<AddSignal />} />
+              <Route path="/signal-comments/:id" element={<SignalComments />} />
+              <Route path="/review/:id" element={<Review />} />
+
+              
+              <Route path="/users" element={<Users/>} />
+              <Route path="/add-users" element={<AddUsers/>} />
+              <Route path="/edit-users/:id" element={<AddUsers />} />
 
             </Routes>
           </Suspense>

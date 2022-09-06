@@ -27,6 +27,8 @@ import Symbol from "./Symbol";
 import Type from "./Type";
 import Frame from "./Frame";
 import Status from "./Status";
+import Signal from "./Signal";
+import Users from "./Users";
 
 const API = {
   Auth,
@@ -58,7 +60,9 @@ const API = {
   Symbol,
   Type,
   Frame,
-  Status
+  Status,
+  Signal,
+  Users
 };
 
 export default API;

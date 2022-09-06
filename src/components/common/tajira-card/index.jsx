@@ -8,7 +8,7 @@ import "./styles.scss";
 const TajiraCard = ({ heading, children, actions, forForm }) => {
   return (
     <div>
-      <CardHeader heading={heading} actions={actions} />
+      <CardHeader className="card-header" heading={heading} actions={actions} />
       <section className="main-component-container">
         {forForm ? children : <Card bordered={false}>{children}</Card>}
       </section>
