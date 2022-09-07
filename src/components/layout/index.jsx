@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, Suspense } from "react";
-import { Layout, Space, Avatar, Popover } from "antd";
+import { Layout, Space, Avatar, Popover, Slider } from "antd";
 import {
   AlignRightOutlined,
   AlignLeftOutlined,
@@ -114,6 +114,18 @@ const AddSocial = React.lazy(() => import("../social/add-social"));
 
 const Breadcrumb = React.lazy(() => import("../breadcrumb"));
 const AddBreadcrumb = React.lazy(() => import("../breadcrumb/add-breadcrumb"));
+
+const TheSlider = React.lazy(() => import("../slider"));
+const AddSlider = React.lazy(() => import("../slider/add-slider"));
+
+const Menu = React.lazy(() => import("../menu"));
+const AddMenu = React.lazy(() => import("../menu/add-manu"));
+
+const Team = React.lazy(() => import("../team"));
+const AddTeam = React.lazy(() => import("../team/add-team"));
+
+const Terms = React.lazy(() => import("../terms"));
+const AddTerms = React.lazy(() => import("../terms/add-terms"));
 
 
 const { Header, Content } = Layout;
@@ -324,6 +336,22 @@ const FadoLayout = () => {
               <Route path="/breadcrumb" element={<Breadcrumb/>} />
               <Route path="/add-breadcrumb" element={<AddBreadcrumb/>} />
               <Route path="/edit-breadcrumb" element={<AddBreadcrumb />} />
+
+              <Route path="/slider" element={<TheSlider/>} />
+              <Route path="/add-slider" element={<AddSlider/>} />
+              <Route path="/edit-slider/:id" element={<AddSlider />} />
+
+              <Route path="/menu" element={<Menu/>} />
+              <Route path="/add-menu" element={<AddMenu/>} />
+              <Route path="/edit-menu/:id" element={<AddMenu />} />
+
+              <Route path="/team" element={<Team/>} />
+              <Route path="/add-team" element={<AddTeam/>} />
+              <Route path="/edit-team/:id" element={<AddTeam />} />
+
+              <Route path="/terms" element={<Terms/>} />
+              <Route path="/add-terms" element={<AddTerms/>} />
+              <Route path="/edit-terms" element={<AddTerms />} />
 
             </Routes>
           </Suspense>

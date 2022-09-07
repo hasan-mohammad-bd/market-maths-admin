@@ -12,7 +12,7 @@ import API from "../../utils/api";
 import { getDataManager, getErrorMessage } from "../../utils/helper.functions";
 
 const BlogList = () => {
-  const slider = new API.Slider();
+  const team = new API.Team();
 
   const navigate = useNavigate();
 
@@ -32,8 +32,8 @@ const BlogList = () => {
   }, []);
 
   const fetchSliderList = async (payload) => {
-    return getDataManager(slider?.getSliderList, setLoading, payload).then((x) => {
-      console.log(x);
+    return getDataManager(team?.getTeamList, setLoading, payload).then((x) => {
+
       if (x?.status) {
         setPagination({
           ...pagination,
@@ -53,19 +53,19 @@ const BlogList = () => {
   };
 
   const handleAdd = () => {
-    navigate("/add-slider");
+    navigate("/add-team");
   };
 
   const handleEdit = (id) => {
-    navigate(`/edit-slider/${id}`);
+    navigate(`/edit-team/${id}`);
   };
 
   const handleDelete = (id) => {
-    getDataManager(slider?.deleteSlider, setLoading, id).then((x) => {
+    getDataManager(team?.deleteTeam, setLoading, id).then((x) => {
       if (x.status) {
         fetchSliderList();
         message.success({
-          content: "Slider deleted successfully",
+          content: "Team member deleted successfully",
           duration: 2,
         });
       } else {
@@ -86,25 +86,40 @@ const BlogList = () => {
     },
 
     {
-      title: "Main Title",
-      dataIndex: "main_title",
-      key: "main_title",
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
     },
     {
-      title: "Slider Text",
-      dataIndex: "slider_text",
-      key: "slider_text",
+      title: "Details",
+      dataIndex: "details",
+      key: "details",
     },
     {
-      title: "button Text",
-      dataIndex: "button_text",
-      key: "button_text",
+      title: "Position",
+      dataIndex: "position",
+      key: "position",
     },
 
     {
-      title: "Button Link",
-      dataIndex: "button_link",
-      key: "button_link",
+      title: "Facebook",
+      dataIndex: "facebook",
+      key: "facebook",
+    },
+    {
+      title: "Twitter",
+      dataIndex: "twitter",
+      key: "twitter",
+    },
+    {
+      title: "Linkedin",
+      dataIndex: "linkedin",
+      key: "linkedin",
+    },
+    {
+      title: "Instagram",
+      dataIndex: "instragram",
+      key: "instragram",
     },
 
     {
@@ -131,12 +146,12 @@ const BlogList = () => {
   ];
 
   return (
-    <TajiraCard heading="Social Network List" actions={<AddNewButton onAdd={handleAdd} />}>
+    <TajiraCard heading="Team Member" actions={<AddNewButton onAdd={handleAdd} />}>
       <TajiraTable
         fetchData={fetchSliderList}
         dataSource={blogList}
         columns={columns}
-        title="All Social Network List"
+        title="All Team Member"
         loading={loading}
         pagination={pagination}
         hideSearch={true}

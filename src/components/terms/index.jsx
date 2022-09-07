@@ -10,14 +10,15 @@ import AddNewButton from "../common/add-button";
 
 import API from "../../utils/api";
 import { getDataManager, getErrorMessage } from "../../utils/helper.functions";
+import About from "../../utils/api/About";
 
 const BlogList = () => {
-  const slider = new API.Slider();
+  const terms = new API.Terms();
 
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
-  const [blogList, setBlogList] = useState([]);
+  const [aboutList, setAboutList] = useState([]);
   const [pagination, setPagination] = useState({
     current: 1,
     defaultPageSize: 50,
@@ -28,12 +29,12 @@ const BlogList = () => {
   });
 
   useEffect(() => {
-    fetchSliderList();
+    fetchTerms();
   }, []);
 
-  const fetchSliderList = async (payload) => {
-    return getDataManager(slider?.getSliderList, setLoading, payload).then((x) => {
-      console.log(x);
+  const fetchTerms = async (payload) => {
+    return getDataManager(terms?.getTerms, setLoading, payload).then((x) => {
+
       if (x?.status) {
         setPagination({
           ...pagination,
@@ -41,7 +42,7 @@ const BlogList = () => {
           pageSize: payload?.pageSize || pagination?.pageSize,
           total: x?.data?.count,
         });
-        setBlogList(x?.data);
+        setAboutList([x?.data]);
       } else {
         const error = getErrorMessage(x?.errors) || x?.message;
         message.error({
@@ -52,91 +53,63 @@ const BlogList = () => {
     });
   };
 
-  const handleAdd = () => {
-    navigate("/add-slider");
+
+/*   const handleAdd = () => {
+    navigate("/add-logo");
+  };
+ */
+  const handleEdit = () => {
+    navigate(`/edit-terms`);
   };
 
-  const handleEdit = (id) => {
-    navigate(`/edit-slider/${id}`);
-  };
-
-  const handleDelete = (id) => {
-    getDataManager(slider?.deleteSlider, setLoading, id).then((x) => {
+/*   const handleDelete = (id) => {
+    getDataManager(blog?.deleteBlog, setLoading, id).then((x) => {
       if (x.status) {
-        fetchSliderList();
+        fetchBlogList();
         message.success({
-          content: "Slider deleted successfully",
+          content: "blog deleted successfully",
           duration: 2,
         });
       } else {
         message.error({ content: "Process failed", duration: 2 });
       }
     });
-  };
+  }; */
 
 
 
   const columns = [
 
-    {
-      title: "Image",
-      dataIndex: "image",
-      key: "image",
-      render: (_, record) => <Image width={50} src={record?.image} />,
-    },
 
     {
-      title: "Main Title",
-      dataIndex: "main_title",
-      key: "main_title",
+      title: "Terms & condition Text",
+      dataIndex: "terms",
+      key: "terms",
+
     },
     {
-      title: "Slider Text",
-      dataIndex: "slider_text",
-      key: "slider_text",
-    },
-    {
-      title: "button Text",
-      dataIndex: "button_text",
-      key: "button_text",
-    },
+        title: "Action",
+        dataIndex: "action",
+        key: "action",
+        render: (text, record) => (
+          <Space>
+            <FormOutlined
+              className="edit-icon"
+              onClick={() => handleEdit()}
+            />
+          </Space>
+        ),
+      },
 
-    {
-      title: "Button Link",
-      dataIndex: "button_link",
-      key: "button_link",
-    },
-
-    {
-      title: "Action",
-      dataIndex: "action",
-      key: "action",
-      render: (text, record) => (
-        <Space>
-
-
-          <FormOutlined
-            className="edit-icon"
-            onClick={() => handleEdit(record?._id)}
-          />
-          <Popconfirm
-            title="Are you sure to delete?"
-            onConfirm={() => handleDelete(record?._id)}
-          >
-            <DeleteOutlined className="delete-icon" />
-          </Popconfirm>
-        </Space>
-      ),
-    },
   ];
 
   return (
-    <TajiraCard heading="Social Network List" actions={<AddNewButton onAdd={handleAdd} />}>
+    <TajiraCard heading="Terms & Condition">
       <TajiraTable
-        fetchData={fetchSliderList}
-        dataSource={blogList}
+        fetchData={fetchTerms}
+        dataSource={aboutList}
         columns={columns}
-        title="All Social Network List"
+        title="Terms & Condition Text"
         loading={loading}
         pagination={pagination}
         hideSearch={true}

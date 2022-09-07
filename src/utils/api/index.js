@@ -4,7 +4,7 @@ import Services from "./Services";
 import Testimonials from "./Testimonials";
 import FAQ from "./Faq";
 import Blog from "./Blog";
-import Team from "./Team";
+
 import Banner from "./Banner";
 import Global from "./Global";
 import Tags from "./Tags";
@@ -35,6 +35,10 @@ import About from "./About";
 import Footer from "./Footer";
 import Social from "./Social";
 import Breadcrumb from "./Breadcrumb";
+import Slider from "./Slider";
+import Menu from "./Menu";
+import Team from "./Team";
+import Terms from "./Terms";
 
 const API = {
   Auth,
@@ -43,7 +47,6 @@ const API = {
   Testimonials,
   FAQ,
   Blog,
-  Team,
   Banner,
   Global,
   Tags,
@@ -74,7 +77,11 @@ const API = {
   About,
   Footer,
   Social,
-  Breadcrumb
+  Breadcrumb,
+  Slider,
+  Menu,
+  Team,
+  Terms
 };
 
 export default API;

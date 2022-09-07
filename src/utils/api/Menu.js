@@ -1,9 +1,9 @@
 import axios from "axios";
 import { API_URL, ACCESS_TOKEN } from "../constants";
 
-export default class Slider {
-  getTeamList = (payload = {}) => {
-    const url = `${API_URL}website/member?limit=${
+export default class Menu {
+  getMenuList = (payload = {}) => {
+    const url = `${API_URL}website/menu?limit=${
       payload?.limit || 50
     }&offset=${payload?.offset || 0}`;
     return axios
@@ -28,8 +28,8 @@ export default class Slider {
       });
   };
 
-  getTeamDetails = (id) => {
-    const url = `${API_URL}website/member/${id}`;
+  getMenuDetails = (id) => {
+    const url = `${API_URL}website/menu/${id}`;
     return axios
       .get(url, {
         headers: {
@@ -52,8 +52,8 @@ export default class Slider {
       });
   };
 
-  addTeam = (payload) => {
-    const url = `${API_URL}website/member`;
+  addMenu = (payload) => {
+    const url = `${API_URL}website/menu`;
     return axios({
       url,
       method: "POST",
@@ -79,8 +79,8 @@ export default class Slider {
       });
   };
 
-  editTeam = (formData, id) => {
-    const url = `${API_URL}website/member/${id}`;
+  editMenu = (formData, id) => {
+    const url = `${API_URL}website/menu/${id}`;
     return axios({
       url,
       method: "PUT",
@@ -106,8 +106,8 @@ export default class Slider {
       });
   };
 
-  deleteTeam = (id) => {
-    const url = `${API_URL}website/member/${id}`;
+  deleteMenu = (id) => {
+    const url = `${API_URL}website/menu/${id}`;
     return axios
       .delete(url, {
         headers: {

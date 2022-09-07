@@ -88,13 +88,7 @@ const SiderBar = ({ toggle, collapsed }) => {
           Message List
         </Menu.Item>
 
-        <Menu.Item
-          icon={<BookOutlined />}
-          onClick={() => navigate("/testimonials")}
-          key="21"
-        >
-          Testimonials
-        </Menu.Item>
+
 
         <Menu.Item
           icon={<ProjectOutlined />}
@@ -156,8 +150,10 @@ const SiderBar = ({ toggle, collapsed }) => {
         >
           Status
         </Menu.Item>
+
         </Menu.SubMenu>
         <Menu.SubMenu key="33" icon={<NotificationOutlined />} title="Manage Website">
+
         <Menu.Item
           onClick={() => navigate("/logo")}
           key="34"
@@ -187,6 +183,37 @@ const SiderBar = ({ toggle, collapsed }) => {
           key="38"
         >
           Breadcrumb
+        </Menu.Item>
+        <Menu.Item
+          onClick={() => navigate("/slider")}
+          key="39"
+        >
+          Slider
+        </Menu.Item>
+        <Menu.Item
+          onClick={() => navigate("/menu")}
+          key="40"
+        >
+          Menu
+        </Menu.Item>
+        <Menu.Item
+          onClick={() => navigate("/team")}
+          key="41"
+        >
+          Team
+        </Menu.Item>
+        
+        <Menu.Item
+          onClick={() => navigate("/testimonials")}
+          key="21"
+        >
+          Testimonials
+        </Menu.Item>
+        <Menu.Item
+          onClick={() => navigate("/terms")}
+          key="42"
+        >
+          Terms
         </Menu.Item>
         </Menu.SubMenu>
 {/*         <Menu.Item

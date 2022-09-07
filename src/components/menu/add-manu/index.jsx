@@ -30,7 +30,7 @@ const { Option } = Select;
 const AddBlog = () => {
   const [form] = Form.useForm();
 
-  const slider = new API.Slider();
+  const menu = new API.Menu();
 
 
   const navigate = useNavigate();
@@ -60,7 +60,7 @@ const AddBlog = () => {
 
 /*   const fetchSocialDetails = () => {
 
-    getDataManager(slider?.getSliderDetails, setLoading, id).then((x) => {
+    getDataManager(menu?.getMenuDetails, setLoading, id).then((x) => {
 
       if (x?.status) {
         const res = x?.data;
@@ -79,17 +79,17 @@ const AddBlog = () => {
         });
       }
     });
-  }; */
-
-  const addSlider = (payload) => {
-    getDataManager(slider?.addSlider, setLoading, payload).then((x) => {
+  };
+ */
+  const addMenu = (payload) => {
+    getDataManager(menu?.addMenu, setLoading, payload).then((x) => {
       console.log(x);
       if (x?.status) {
         message.success({
           content: "Information saved",
           duration: 3,
         });
-        navigate("/slider");
+        navigate("/menu");
       } else {
         const error = getErrorMessage(x?.errors) || x?.message;
         message.error({
@@ -100,14 +100,14 @@ const AddBlog = () => {
     });
   };
 
-  const editSlider= (payload) => {
-    getDataManager(slider?.editSlider, setLoading, payload, id).then((x) => {
+  const editMenu= (payload) => {
+    getDataManager(menu?.editMenu, setLoading, payload, id).then((x) => {
       if (x?.status) {
         message.success({
           content: "Information saved",
           duration: 3,
         });
-        navigate("/slider");
+        navigate("/menu");
       } else {
         const error = getErrorMessage(x?.errors) || x?.message;
         message.error({
@@ -119,27 +119,27 @@ const AddBlog = () => {
   };
 
   const onFinish = (values) => {
-
+/* 
     console.log(values);
 
     const imageFileChanged = values.image !== blogDetails?.image;
 
     var payload = new FormData();
-    payload.append("main_title", values.main_title);
-    payload.append("sub_title", values.sub_title);
-    payload.append("slider_text", values.slider_text);
-    payload.append("button_text", values.button_text);
-    payload.append("button_link", values.button_link);
-
+    payload.append("name", values.name);
+    payload.append("charge", values.charge);
+    payload.append("withdraw_min", values.withdraw_min);
+    payload.append("withdraw_max", values.withdraw_max);
+    payload.append("duration", values.duration);
+    payload.append("status", values.status);
 
     !!values?.image &&
       imageFileChanged &&
-      payload.append("image", values?.image?.file?.originFileObj);
+      payload.append("image", values?.image?.file?.originFileObj); */
 
     if (isEdit) {
-      editSlider(payload);
+      editMenu(values);
     } else {
-      addSlider(payload);
+      addMenu(values);
 
     }
   };
@@ -149,7 +149,7 @@ const AddBlog = () => {
 
 
   return (
-    <TajiraCard heading={isEdit ? "Edit Slider" : "Add Slider"}>
+    <TajiraCard heading={isEdit ? "Edit Social Network" : "Add Social Network"}>
       {loading && <Spinner />}
       <Form
         onFinish={onFinish}
@@ -158,96 +158,30 @@ const AddBlog = () => {
         scrollToFirstError
       >
         <Form.Item
-          label="Main Title"
-          name="main_title"
+          label="Name"
+          name="name"
           rules={[
             {
               required: true,
-              message: "Please enter title",
+              message: "Please enter Name",
             },
           ]}
         >
-          <Input placeholder="Enter title" />
+          <Input placeholder="Enter Name" />
         </Form.Item>
         <Form.Item
-          label="Sub Title"
-          name="sub_title"
+          label="Description"
+          name="description"
           rules={[
             {
               required: true,
-              message: "Please enter title",
+              message: "Please enter Name",
             },
           ]}
         >
-          <Input placeholder="Enter title" />
+          <Input placeholder="Enter Name" />
         </Form.Item>
-        <Form.Item
-          label="Slider Text"
-          name="slider_text"
-          rules={[
-            {
-              required: true,
-              message: "Please enter slider text",
-            },
-          ]}
-        >
-          <Input placeholder="Enter slider text" />
-        </Form.Item>
-        <Form.Item
-          label="Button Text"
-          name="button_text"
-          rules={[
-            {
-              required: true,
-              message: "Please enter button text",
-            },
-          ]}
-        >
-          <Input placeholder="Enter button text" />
-        </Form.Item>
-        <Form.Item
-          label="Button Link"
-          name="button_link"
-          rules={[
-            {
-              required: true,
-              message: "Please enter button link",
-            },
-          ]}
-        >
-          <Input placeholder="Enter Button Link" />
-        </Form.Item>
-        <Form.Item
-          label="image (845*563) "
-          name="image"
-          rules={[
-            {
-              required: true,
-              message: "Please attach image",
-            },
-          ]}
-        >
-          <Upload
-            multiple={false}
-            accept="image/*"
-            listType="picture-card"
-            action={null}
-            fileList={imageList}
-            maxCount={1}
-            onChange={({ fileList }) =>
-            setImageList(fileList.map((f) => ({ ...f, status: "done" })))
-            }
-            showUploadList={{
-              showPreviewIcon: false,
-              showDownloadIcon: false,
-              showRemoveIcon: false,
-            }}
-          >
-            <Space>
-              <FileAddFilled /> Upload
-            </Space>
-          </Upload>
-        </Form.Item>
+
 
         <Form.Item>
           <Button type="primary" htmlType="submit">

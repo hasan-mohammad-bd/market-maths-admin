@@ -12,7 +12,7 @@ import API from "../../utils/api";
 import { getDataManager, getErrorMessage } from "../../utils/helper.functions";
 
 const BlogList = () => {
-  const slider = new API.Slider();
+  const menu = new API.Menu();
 
   const navigate = useNavigate();
 
@@ -28,11 +28,11 @@ const BlogList = () => {
   });
 
   useEffect(() => {
-    fetchSliderList();
+    fetchMenuList();
   }, []);
 
-  const fetchSliderList = async (payload) => {
-    return getDataManager(slider?.getSliderList, setLoading, payload).then((x) => {
+  const fetchMenuList = async (payload) => {
+    return getDataManager(menu?.getMenuList, setLoading, payload).then((x) => {
       console.log(x);
       if (x?.status) {
         setPagination({
@@ -53,19 +53,19 @@ const BlogList = () => {
   };
 
   const handleAdd = () => {
-    navigate("/add-slider");
+    navigate("/add-menu");
   };
 
   const handleEdit = (id) => {
-    navigate(`/edit-slider/${id}`);
+    navigate(`/edit-menu/${id}`);
   };
 
   const handleDelete = (id) => {
-    getDataManager(slider?.deleteSlider, setLoading, id).then((x) => {
+    getDataManager(menu?.deleteMenu, setLoading, id).then((x) => {
       if (x.status) {
-        fetchSliderList();
+        fetchMenuList();
         message.success({
-          content: "Slider deleted successfully",
+          content: "Menu item deleted successfully",
           duration: 2,
         });
       } else {
@@ -79,32 +79,21 @@ const BlogList = () => {
   const columns = [
 
     {
-      title: "Image",
-      dataIndex: "image",
-      key: "image",
-      render: (_, record) => <Image width={50} src={record?.image} />,
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
     },
 
     {
-      title: "Main Title",
-      dataIndex: "main_title",
-      key: "main_title",
-    },
-    {
-      title: "Slider Text",
-      dataIndex: "slider_text",
-      key: "slider_text",
-    },
-    {
-      title: "button Text",
-      dataIndex: "button_text",
-      key: "button_text",
+      title: "Description",
+      dataIndex: "description",
+      key: "description",
     },
 
     {
-      title: "Button Link",
-      dataIndex: "button_link",
-      key: "button_link",
+      title: "Slug",
+      dataIndex: "slug",
+      key: "slug",
     },
 
     {
@@ -131,12 +120,12 @@ const BlogList = () => {
   ];
 
   return (
-    <TajiraCard heading="Social Network List" actions={<AddNewButton onAdd={handleAdd} />}>
+    <TajiraCard heading="Menu List" actions={<AddNewButton onAdd={handleAdd} />}>
       <TajiraTable
-        fetchData={fetchSliderList}
+        fetchData={fetchMenuList}
         dataSource={blogList}
         columns={columns}
-        title="All Social Network List"
+        title="All Menu Item"
         loading={loading}
         pagination={pagination}
         hideSearch={true}

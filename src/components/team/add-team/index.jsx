@@ -30,7 +30,7 @@ const { Option } = Select;
 const AddBlog = () => {
   const [form] = Form.useForm();
 
-  const slider = new API.Slider();
+  const team = new API.Team();
 
 
   const navigate = useNavigate();
@@ -81,15 +81,15 @@ const AddBlog = () => {
     });
   }; */
 
-  const addSlider = (payload) => {
-    getDataManager(slider?.addSlider, setLoading, payload).then((x) => {
+  const addTeam= (payload) => {
+    getDataManager(team?.addTeam, setLoading, payload).then((x) => {
       console.log(x);
       if (x?.status) {
         message.success({
           content: "Information saved",
           duration: 3,
         });
-        navigate("/slider");
+        navigate("/team");
       } else {
         const error = getErrorMessage(x?.errors) || x?.message;
         message.error({
@@ -100,14 +100,14 @@ const AddBlog = () => {
     });
   };
 
-  const editSlider= (payload) => {
-    getDataManager(slider?.editSlider, setLoading, payload, id).then((x) => {
+  const editTeam= (payload) => {
+    getDataManager(team?.editTeam, setLoading, payload, id).then((x) => {
       if (x?.status) {
         message.success({
           content: "Information saved",
           duration: 3,
         });
-        navigate("/slider");
+        navigate("/team");
       } else {
         const error = getErrorMessage(x?.errors) || x?.message;
         message.error({
@@ -120,16 +120,18 @@ const AddBlog = () => {
 
   const onFinish = (values) => {
 
-    console.log(values);
+
 
     const imageFileChanged = values.image !== blogDetails?.image;
 
     var payload = new FormData();
-    payload.append("main_title", values.main_title);
-    payload.append("sub_title", values.sub_title);
-    payload.append("slider_text", values.slider_text);
-    payload.append("button_text", values.button_text);
-    payload.append("button_link", values.button_link);
+    payload.append("name", values.name);
+    payload.append("details", values.details);
+    payload.append("position", values.position);
+    payload.append("facebook", values.facebook);
+    payload.append("twitter", values.twitter);
+    payload.append("linkedin", values.linkedin);
+    payload.append("instragram", values.instagram);
 
 
     !!values?.image &&
@@ -137,9 +139,9 @@ const AddBlog = () => {
       payload.append("image", values?.image?.file?.originFileObj);
 
     if (isEdit) {
-      editSlider(payload);
+      editTeam(payload);
     } else {
-      addSlider(payload);
+      addTeam(payload);
 
     }
   };
@@ -149,7 +151,7 @@ const AddBlog = () => {
 
 
   return (
-    <TajiraCard heading={isEdit ? "Edit Slider" : "Add Slider"}>
+    <TajiraCard heading={isEdit ? "Edit Team" : "Add Team Member"}>
       {loading && <Spinner />}
       <Form
         onFinish={onFinish}
@@ -158,64 +160,88 @@ const AddBlog = () => {
         scrollToFirstError
       >
         <Form.Item
-          label="Main Title"
-          name="main_title"
+          label="Name"
+          name="name"
           rules={[
             {
               required: true,
-              message: "Please enter title",
+              message: "Please enter name",
             },
           ]}
         >
-          <Input placeholder="Enter title" />
+          <Input placeholder="Enter Name" />
         </Form.Item>
         <Form.Item
-          label="Sub Title"
-          name="sub_title"
+          label="Details"
+          name="details"
           rules={[
             {
               required: true,
-              message: "Please enter title",
+              message: "Please enter details",
             },
           ]}
         >
-          <Input placeholder="Enter title" />
+          <Input placeholder="Enter details" />
         </Form.Item>
         <Form.Item
-          label="Slider Text"
-          name="slider_text"
+          label="Position"
+          name="position"
           rules={[
             {
               required: true,
-              message: "Please enter slider text",
+              message: "Please enter position",
             },
           ]}
         >
-          <Input placeholder="Enter slider text" />
+          <Input placeholder="Enter Position" />
         </Form.Item>
         <Form.Item
-          label="Button Text"
-          name="button_text"
+          label="Facebook"
+          name="facebook"
           rules={[
             {
               required: true,
-              message: "Please enter button text",
+              message: "Please enter facebook link",
             },
           ]}
         >
-          <Input placeholder="Enter button text" />
+          <Input placeholder="Enter facebook link" />
         </Form.Item>
         <Form.Item
-          label="Button Link"
-          name="button_link"
+          label="Twitter"
+          name="twitter"
           rules={[
             {
               required: true,
-              message: "Please enter button link",
+              message: "Please enter twitter link",
             },
           ]}
         >
-          <Input placeholder="Enter Button Link" />
+          <Input placeholder="Enter twitter Link" />
+        </Form.Item>
+        <Form.Item
+          label="Linkedin"
+          name="linkedin"
+          rules={[
+            {
+              required: true,
+              message: "Please enter linkedin link",
+            },
+          ]}
+        >
+          <Input placeholder="Enter Linkedin Link" />
+        </Form.Item>
+        <Form.Item
+          label="Instagram"
+          name="instragram"
+          rules={[
+            {
+              required: true,
+              message: "Please enter instagram link",
+            },
+          ]}
+        >
+          <Input placeholder="Enter Instagram Link" />
         </Form.Item>
         <Form.Item
           label="image (845*563) "
