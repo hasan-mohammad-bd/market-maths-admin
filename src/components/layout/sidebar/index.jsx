@@ -106,10 +106,18 @@ const SiderBar = ({ toggle, collapsed }) => {
         <Menu.Item
           icon={<ProjectOutlined />}
           onClick={() => navigate("/users")}
-          key="29"
+          key="30"
         >
           Users
         </Menu.Item>
+        <Menu.SubMenu key="31" icon={<NotificationOutlined />} title="Withdraw">
+        <Menu.Item
+          onClick={() => navigate("/withdraw")}
+          key="32"
+        >
+          Withdraw Method
+        </Menu.Item>
+        </Menu.SubMenu>
 
         <Menu.SubMenu key="23" icon={<NotificationOutlined />} title="Signal">
         <Menu.Item
@@ -147,6 +155,14 @@ const SiderBar = ({ toggle, collapsed }) => {
           key="28"
         >
           Status
+        </Menu.Item>
+        </Menu.SubMenu>
+        <Menu.SubMenu key="33" icon={<NotificationOutlined />} title="Manage Website">
+        <Menu.Item
+          onClick={() => navigate("/logo")}
+          key="34"
+        >
+          Logo
         </Menu.Item>
         </Menu.SubMenu>
 {/*         <Menu.Item

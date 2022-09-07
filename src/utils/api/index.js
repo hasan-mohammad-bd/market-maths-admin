@@ -29,6 +29,8 @@ import Frame from "./Frame";
 import Status from "./Status";
 import Signal from "./Signal";
 import Users from "./Users";
+import Withdraw from "./Withdraw";
+import TheLogo from "./Logo";
 
 const API = {
   Auth,
@@ -62,7 +64,9 @@ const API = {
   Frame,
   Status,
   Signal,
-  Users
+  Users,
+  Withdraw,
+  TheLogo
 };
 
 export default API;

@@ -97,6 +97,12 @@ const Review = React.lazy(() => import("../signal/review"));
 const Users = React.lazy(() => import("../users"));
 const AddUsers = React.lazy(() => import("../users/add-users"));
 
+const Withdraw = React.lazy(() => import("../withdraw"));
+const AddWithdraw = React.lazy(() => import("../withdraw/add-withdraw"));
+
+const Logo = React.lazy(() => import("../logo"));
+const AddLogo = React.lazy(() => import("../logo/add-logo"));
+
 
 const { Header, Content } = Layout;
 
@@ -282,6 +288,14 @@ const FadoLayout = () => {
               <Route path="/users" element={<Users/>} />
               <Route path="/add-users" element={<AddUsers/>} />
               <Route path="/edit-users/:id" element={<AddUsers />} />
+              
+              <Route path="/withdraw" element={<Withdraw/>} />
+              <Route path="/add-withdraw" element={<AddWithdraw/>} />
+              <Route path="/edit-withdraw/:id" element={<AddWithdraw />} />
+              
+              <Route path="/logo" element={<Logo/>} />
+              <Route path="/add-logo" element={<AddLogo/>} />
+              <Route path="/edit-logo" element={<AddLogo />} />
 
             </Routes>
           </Suspense>
