@@ -164,6 +164,24 @@ const SiderBar = ({ toggle, collapsed }) => {
         >
           Logo
         </Menu.Item>
+        <Menu.Item
+          onClick={() => navigate("/about")}
+          key="35"
+        >
+          About
+        </Menu.Item>
+        <Menu.Item
+          onClick={() => navigate("/footer")}
+          key="36"
+        >
+          Footer
+        </Menu.Item>
+        <Menu.Item
+          onClick={() => navigate("/social")}
+          key="37"
+        >
+          Social
+        </Menu.Item>
         </Menu.SubMenu>
 {/*         <Menu.Item
           icon={<AppstoreOutlined />}

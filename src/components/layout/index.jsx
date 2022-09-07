@@ -103,6 +103,15 @@ const AddWithdraw = React.lazy(() => import("../withdraw/add-withdraw"));
 const Logo = React.lazy(() => import("../logo"));
 const AddLogo = React.lazy(() => import("../logo/add-logo"));
 
+const About = React.lazy(() => import("../about"));
+const AddAbout = React.lazy(() => import("../about/add-about"));
+
+const Footer = React.lazy(() => import("../footer"));
+const AddFooter = React.lazy(() => import("../footer/add-footer"));
+
+const Social = React.lazy(() => import("../social"));
+const AddSocial = React.lazy(() => import("../social/add-social"));
+
 
 const { Header, Content } = Layout;
 
@@ -292,10 +301,22 @@ const FadoLayout = () => {
               <Route path="/withdraw" element={<Withdraw/>} />
               <Route path="/add-withdraw" element={<AddWithdraw/>} />
               <Route path="/edit-withdraw/:id" element={<AddWithdraw />} />
-              
+
               <Route path="/logo" element={<Logo/>} />
               <Route path="/add-logo" element={<AddLogo/>} />
               <Route path="/edit-logo" element={<AddLogo />} />
+              
+              <Route path="/about" element={<About/>} />
+              <Route path="/add-about" element={<AddAbout/>} />
+              <Route path="/edit-about" element={<AddAbout />} />
+              
+              <Route path="/footer" element={<Footer/>} />
+              <Route path="/add-footer" element={<AddFooter/>} />
+              <Route path="/edit-footer" element={<AddFooter />} />
+              
+              <Route path="/social" element={<Social/>} />
+              <Route path="/add-social" element={<AddSocial/>} />
+              <Route path="/edit-social" element={<AddSocial />} />
 
             </Routes>
           </Suspense>

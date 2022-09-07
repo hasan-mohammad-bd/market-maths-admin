@@ -31,6 +31,8 @@ import Signal from "./Signal";
 import Users from "./Users";
 import Withdraw from "./Withdraw";
 import TheLogo from "./Logo";
+import About from "./About";
+import Footer from "./Footer";
 
 const API = {
   Auth,
@@ -66,7 +68,9 @@ const API = {
   Signal,
   Users,
   Withdraw,
-  TheLogo
+  TheLogo,
+  About,
+  Footer
 };
 
 export default API;
