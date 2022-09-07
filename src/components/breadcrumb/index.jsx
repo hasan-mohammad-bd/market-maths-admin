@@ -10,14 +10,15 @@ import AddNewButton from "../common/add-button";
 
 import API from "../../utils/api";
 import { getDataManager, getErrorMessage } from "../../utils/helper.functions";
+import About from "../../utils/api/About";
 
 const BlogList = () => {
-  const social = new API.Social();
+  const breadcrumb = new API.Breadcrumb();
 
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
-  const [blogList, setBlogList] = useState([]);
+  const [aboutList, setAboutList] = useState([]);
   const [pagination, setPagination] = useState({
     current: 1,
     defaultPageSize: 50,
@@ -28,11 +29,11 @@ const BlogList = () => {
   });
 
   useEffect(() => {
-    fetchSocialList();
+    fetchBreadcrumbList();
   }, []);
 
-  const fetchSocialList = async (payload) => {
-    return getDataManager(social?.getSocialList, setLoading, payload).then((x) => {
+  const fetchBreadcrumbList = async (payload) => {
+    return getDataManager(breadcrumb?.getBreadcrumb, setLoading, payload).then((x) => {
       console.log(x);
       if (x?.status) {
         setPagination({
@@ -41,7 +42,7 @@ const BlogList = () => {
           pageSize: payload?.pageSize || pagination?.pageSize,
           total: x?.data?.count,
         });
-        setBlogList(x?.data);
+        setAboutList([x?.data]);
       } else {
         const error = getErrorMessage(x?.errors) || x?.message;
         message.error({
@@ -52,49 +53,40 @@ const BlogList = () => {
     });
   };
 
-  const handleAdd = () => {
-    navigate("/add-social");
+
+/*   const handleAdd = () => {
+    navigate("/add-logo");
+  };
+ */
+  const handleEdit = () => {
+    navigate(`/edit-breadcrumb`);
   };
 
-  const handleEdit = (id) => {
-    navigate(`/edit-social/${id}`);
-  };
-
-  const handleDelete = (id) => {
-    getDataManager(social?.deleteSocial, setLoading, id).then((x) => {
+/*   const handleDelete = (id) => {
+    getDataManager(blog?.deleteBlog, setLoading, id).then((x) => {
       if (x.status) {
-        fetchSocialList();
+        fetchBlogList();
         message.success({
-          content: "withdraw method deleted successfully",
+          content: "blog deleted successfully",
           duration: 2,
         });
       } else {
         message.error({ content: "Process failed", duration: 2 });
       }
     });
-  };
+  }; */
 
 
 
   const columns = [
 
     {
-      title: "Name",
-      dataIndex: "name",
-      key: "name",
-    },
+        title: "Image",
+        dataIndex: "breadcrumb",
+        key: "breadcrumb",
+        render: (_, record) => <Image width={50} src={record?.breadcrumb} />,
+      },
 
-    {
-      title: "Code",
-      dataIndex: "code",
-      key: "code",
-    },
-
-    {
-      title: "Link",
-      dataIndex: "link",
-      key: "link",
-    },
 
     {
       title: "Action",
@@ -102,30 +94,22 @@ const BlogList = () => {
       key: "action",
       render: (text, record) => (
         <Space>
-
-
           <FormOutlined
             className="edit-icon"
-            onClick={() => handleEdit(record?._id)}
+            onClick={() => handleEdit()}
           />
-          <Popconfirm
-            title="Are you sure to delete?"
-            onConfirm={() => handleDelete(record?._id)}
-          >
-            <DeleteOutlined className="delete-icon" />
-          </Popconfirm>
         </Space>
       ),
     },
   ];
 
   return (
-    <TajiraCard heading="Social Network List" actions={<AddNewButton onAdd={handleAdd} />}>
+    <TajiraCard heading="Breadcrumb">
       <TajiraTable
-        fetchData={fetchSocialList}
-        dataSource={blogList}
+        fetchData={fetchBreadcrumbList}
+        dataSource={aboutList}
         columns={columns}
-        title="All Social Network List"
+        title="All Breadcrumb Info"
         loading={loading}
         pagination={pagination}
         hideSearch={true}

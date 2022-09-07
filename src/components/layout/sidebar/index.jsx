@@ -182,6 +182,12 @@ const SiderBar = ({ toggle, collapsed }) => {
         >
           Social
         </Menu.Item>
+        <Menu.Item
+          onClick={() => navigate("/Breadcrumb")}
+          key="38"
+        >
+          Breadcrumb
+        </Menu.Item>
         </Menu.SubMenu>
 {/*         <Menu.Item
           icon={<AppstoreOutlined />}

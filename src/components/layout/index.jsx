@@ -112,6 +112,9 @@ const AddFooter = React.lazy(() => import("../footer/add-footer"));
 const Social = React.lazy(() => import("../social"));
 const AddSocial = React.lazy(() => import("../social/add-social"));
 
+const Breadcrumb = React.lazy(() => import("../breadcrumb"));
+const AddBreadcrumb = React.lazy(() => import("../breadcrumb/add-breadcrumb"));
+
 
 const { Header, Content } = Layout;
 
@@ -316,7 +319,11 @@ const FadoLayout = () => {
               
               <Route path="/social" element={<Social/>} />
               <Route path="/add-social" element={<AddSocial/>} />
-              <Route path="/edit-social" element={<AddSocial />} />
+              <Route path="/edit-social/:id" element={<AddSocial />} />
+
+              <Route path="/breadcrumb" element={<Breadcrumb/>} />
+              <Route path="/add-breadcrumb" element={<AddBreadcrumb/>} />
+              <Route path="/edit-breadcrumb" element={<AddBreadcrumb />} />
 
             </Routes>
           </Suspense>

@@ -33,6 +33,8 @@ import Withdraw from "./Withdraw";
 import TheLogo from "./Logo";
 import About from "./About";
 import Footer from "./Footer";
+import Social from "./Social";
+import Breadcrumb from "./Breadcrumb";
 
 const API = {
   Auth,
@@ -70,7 +72,9 @@ const API = {
   Withdraw,
   TheLogo,
   About,
-  Footer
+  Footer,
+  Social,
+  Breadcrumb
 };
 
 export default API;

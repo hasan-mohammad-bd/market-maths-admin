@@ -100,7 +100,6 @@ const BlogList = () => {
     },
 
 
-
     {
       title: "Action",
       dataIndex: "action",

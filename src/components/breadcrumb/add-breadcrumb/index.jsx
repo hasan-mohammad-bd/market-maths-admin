@@ -10,7 +10,6 @@ import {
   Space,
   Table,
   Popconfirm,
-  InputNumber,
 } from "antd";
 import { FileAddFilled, DeleteOutlined } from "@ant-design/icons";
 import { useParams, useNavigate } from "react-router-dom";
@@ -30,13 +29,14 @@ const { Option } = Select;
 const AddBlog = () => {
   const [form] = Form.useForm();
 
-  const social = new API.Social();
-
+  const breadcrumb = new API.Breadcrumb();
+/*   const tag = new API.Tags();
+  const category = new API.Category(); */
 
   const navigate = useNavigate();
   const params = useParams();
   const { id } = params;
-  const isEdit = !!id;
+  const isEdit = 1;
 
   const [loading, setLoading] = useState(false);
   const [blogDetails, setBlogDetails] = useState({});
@@ -44,6 +44,7 @@ const AddBlog = () => {
   // const [tags, setTags] = useState([]);
   const [categories, setCategory] = useState([])
   const [imageList, setImageList] = useState([]);
+  const [logo2List, setLogo2List] = useState([]);
   const [comments, setComments] = useState([]);
 
 
@@ -51,26 +52,42 @@ const AddBlog = () => {
 
   useEffect(() => {
     if (id) {
-    //   fetchSocialDetails();
+      // fetchBlogDetails();
     }
-
+    // fetchTagsList();
+    // fetchCategoryList()
   }, [id]);
 
 
+  
 
-  const fetchSocialDetails = () => {
 
-    getDataManager(social?.getSocialDetails, setLoading, id).then((x) => {
+/*   const fetchBlogDetails = () => {
+
+    getDataManager(blog?.getBlogDetails, setLoading, id).then((x) => {
 
       if (x?.status) {
         const res = x?.data;
         form.setFieldsValue({
-          name: res.name,
-          code: res.code,
-          link: res.link,
-          
+          title: res.title,
+          description: res.description,
+          tags: (res.tags || []).map((t) => t?._id),
+          status: res.status,
+          image: res.image,
+          category: res.category,
+          featured: res.featured
         });
-        
+        setImageList([
+          {
+            uid: "1",
+            name: "image.png",
+            status: "done",
+            url: res.image,
+          },
+        ]);
+        setComments(x?.data?.comments);
+        setDescription(res?.description);
+        setBlogDetails(res);
       } else {
         const error = getErrorMessage(x?.errors) || x?.message;
         message.error({
@@ -79,17 +96,17 @@ const AddBlog = () => {
         });
       }
     });
-  };
+  }; */
 
-  const addSocial = (payload) => {
-    getDataManager(social?.addSocial, setLoading, payload).then((x) => {
+/*   const addBlog = (payload) => {
+    getDataManager(blog?.addBlog, setLoading, payload).then((x) => {
       console.log(x);
       if (x?.status) {
         message.success({
           content: "Information saved",
           duration: 3,
         });
-        navigate("/social");
+        navigate("/blog");
       } else {
         const error = getErrorMessage(x?.errors) || x?.message;
         message.error({
@@ -99,15 +116,15 @@ const AddBlog = () => {
       }
     });
   };
-
-  const editSocial= (payload) => {
-    getDataManager(social?.editSocial, setLoading, payload, id).then((x) => {
+ */
+  const editBreadcrumb = (payload) => {
+    getDataManager(breadcrumb?.editBreadcrumb, setLoading, payload, id).then((x) => {
       if (x?.status) {
         message.success({
           content: "Information saved",
           duration: 3,
         });
-        navigate("/social");
+        navigate("/breadcrumb");
       } else {
         const error = getErrorMessage(x?.errors) || x?.message;
         message.error({
@@ -119,37 +136,29 @@ const AddBlog = () => {
   };
 
   const onFinish = (values) => {
-/* 
+
     console.log(values);
 
     const imageFileChanged = values.image !== blogDetails?.image;
 
     var payload = new FormData();
-    payload.append("name", values.name);
-    payload.append("charge", values.charge);
-    payload.append("withdraw_min", values.withdraw_min);
-    payload.append("withdraw_max", values.withdraw_max);
-    payload.append("duration", values.duration);
-    payload.append("status", values.status);
 
     !!values?.image &&
-      imageFileChanged &&
-      payload.append("image", values?.image?.file?.originFileObj); */
+    imageFileChanged &&
+      payload.append("image", values?.image?.file?.originFileObj);
 
     if (isEdit) {
-      editSocial(values);
+        editBreadcrumb(payload);
     } else {
-      addSocial(values);
+      // addBlog(payload);
 
     }
   };
 
 
 
-
-
   return (
-    <TajiraCard heading={isEdit ? "Edit Social Network" : "Add Social Network"}>
+    <TajiraCard heading={isEdit ? "Edit Breadcrumb" : "Add Breadcrumb"}>
       {loading && <Spinner />}
       <Form
         onFinish={onFinish}
@@ -157,41 +166,37 @@ const AddBlog = () => {
         form={form}
         scrollToFirstError
       >
+
         <Form.Item
-          label="Name"
-          name="name"
+          label="image (845*563) "
+          name="image"
           rules={[
             {
               required: true,
-              message: "Please enter Name",
+              message: "Please attach image",
             },
           ]}
         >
-          <Input placeholder="Enter Name" />
-        </Form.Item>
-        <Form.Item
-          label="Code"
-          name="code"
-          rules={[
-            {
-              required: true,
-              message: "Please enter Name",
-            },
-          ]}
-        >
-          <Input placeholder="Enter Name" />
-        </Form.Item>
-        <Form.Item
-          label="Link"
-          name="link"
-          rules={[
-            {
-              required: true,
-              message: "Please enter Name",
-            },
-          ]}
-        >
-          <Input placeholder="Enter Name" />
+          <Upload
+            multiple={false}
+            accept="image/*"
+            listType="picture-card"
+            action={null}
+            fileList={imageList}
+            maxCount={1}
+            onChange={({ fileList }) =>
+            setImageList(fileList.map((f) => ({ ...f, status: "done" })))
+            }
+            showUploadList={{
+              showPreviewIcon: false,
+              showDownloadIcon: false,
+              showRemoveIcon: false,
+            }}
+          >
+            <Space>
+              <FileAddFilled /> Upload
+            </Space>
+          </Upload>
         </Form.Item>
 
         <Form.Item>
