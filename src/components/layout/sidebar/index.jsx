@@ -247,6 +247,50 @@ const SiderBar = ({ toggle, collapsed }) => {
         >
           Recaptcha Setting
         </Menu.Item>
+        <Menu.Item
+          onClick={() => navigate("/telegram")}
+          key="49"
+        >
+          Telegram Setting
+        </Menu.Item>
+        <Menu.Item
+          onClick={() => navigate("/google-analytic")}
+          key="50"
+        >
+          Google Analytic
+        </Menu.Item>
+        </Menu.SubMenu>
+        <Menu.SubMenu key="51" icon={<NotificationOutlined />} title="Manage Section">
+        <Menu.Item
+          onClick={() => navigate("/speciality-section")}
+          key="51"
+        >
+          Specialty Section 
+        </Menu.Item>
+        <Menu.Item
+          onClick={() => navigate("/currency")}
+          key="52"
+        >
+          Currency Section 
+        </Menu.Item>
+        <Menu.Item
+          onClick={() => navigate("/trading")}
+          key="53"
+        >
+          Trading Section 
+        </Menu.Item>
+        <Menu.Item
+          onClick={() => navigate("/plan-section")}
+          key="54"
+        >
+          Plan Section
+        </Menu.Item>
+        <Menu.Item
+          onClick={() => navigate("/about-section")}
+          key="55"
+        >
+          About Section
+        </Menu.Item>
         </Menu.SubMenu>
 {/*         <Menu.Item
           icon={<AppstoreOutlined />}

@@ -139,6 +139,27 @@ const AddReferral = React.lazy(() => import("../referral/add-referral"));
 const Recaptcha = React.lazy(() => import("../recaptcha"));
 const AddRecaptcha = React.lazy(() => import("../recaptcha/add-recaptcha"));
 
+const Telegram = React.lazy(() => import("../telegram"));
+const AddTelegram = React.lazy(() => import("../telegram/add-telegram"));
+
+const GoogleAnalytic = React.lazy(() => import("../google-analytic"));
+const AddGoogleAnalytic = React.lazy(() => import("../google-analytic/add-google-analytic"));
+
+const SpecialitySection = React.lazy(() => import("../speciality-section"));
+const AddSpecialitySection = React.lazy(() => import("../speciality-section/add-speciality-section"));
+
+const Currency = React.lazy(() => import("../currency"));
+const AddCurrency = React.lazy(() => import("../currency/add-currency"));
+
+const Trading = React.lazy(() => import("../trading"));
+const AddTrading = React.lazy(() => import("../trading/add-trading"));
+
+const PlanSection = React.lazy(() => import("../plan-section"));
+const AddPlanSection = React.lazy(() => import("../plan-section/add-plan-section"));
+
+const AboutSection = React.lazy(() => import("../about-section"));
+const AddAboutSection = React.lazy(() => import("../about-section/add-about-section"));
+
 
 const { Header, Content } = Layout;
 
@@ -380,6 +401,34 @@ const FadoLayout = () => {
               <Route path="/recaptcha" element={<Recaptcha/>} />
               <Route path="/add-recaptcha" element={<AddRecaptcha/>} />
               <Route path="/edit-recaptcha" element={<AddRecaptcha />} />
+
+              <Route path="/telegram" element={<Telegram/>} />
+              <Route path="/add-telegram" element={<AddTelegram/>} />
+              <Route path="/edit-telegram" element={<AddTelegram />} />
+
+              <Route path="/google-analytic" element={<GoogleAnalytic/>} />
+              <Route path="/add-google-analytic" element={<AddGoogleAnalytic/>} />
+              <Route path="/edit-google-analytic" element={<AddGoogleAnalytic />} />
+
+              <Route path="/speciality-section" element={<SpecialitySection/>} />
+              <Route path="/add-speciality-section" element={<AddSpecialitySection/>} />
+              <Route path="/edit-speciality-section" element={<AddSpecialitySection />} />
+
+              <Route path="/currency" element={<Currency/>} />
+              <Route path="/add-currency" element={<AddCurrency/>} />
+              <Route path="/edit-currency" element={<AddCurrency />} />
+
+              <Route path="/trading" element={<Trading/>} />
+              <Route path="/add-trading" element={<AddTrading/>} />
+              <Route path="/edit-trading" element={<AddTrading />} />
+
+              <Route path="/plan-section" element={<PlanSection/>} />
+              <Route path="/add-plan-section" element={<AddPlanSection/>} />
+              <Route path="/edit-plan-section" element={<AddPlanSection />} />
+
+              <Route path="/about-section" element={<AboutSection/>} />
+              <Route path="/add-about-section" element={<AddAboutSection/>} />
+              <Route path="/edit-about-section" element={<AddAboutSection />} />
 
             </Routes>
           </Suspense>

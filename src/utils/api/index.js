@@ -43,6 +43,14 @@ import Privacy from "./Privacy";
 import BasicSetting from "./BasicSetting";
 import Referral from "./Referral";
 import Recaptcha from "./Recaptcha";
+import Telegram from "./Telegram";
+import GoogleAnalytic from "./GoogleAnalytic";
+import SpecialitySection from "./Speciality-section";
+import Currency from "./Currency";
+import Trading from "./Trading";
+import PlanSection from "./PlanSection";
+import AboutSection from "./AboutSection";
+
 
 const API = {
   Auth,
@@ -89,7 +97,15 @@ const API = {
   Privacy,
   BasicSetting,
   Referral,
-  Recaptcha
+  Recaptcha,
+  Telegram,
+  GoogleAnalytic,
+  SpecialitySection,
+  Currency,
+  Trading,
+  PlanSection,
+  AboutSection
+
 };
 
 export default API;
