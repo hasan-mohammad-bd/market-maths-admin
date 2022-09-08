@@ -13,7 +13,7 @@ import { getDataManager, getErrorMessage } from "../../utils/helper.functions";
 import About from "../../utils/api/About";
 
 const BlogList = () => {
-  const referral = new API.Referral();
+  const recaptcha = new API.Recaptcha();
 
   const navigate = useNavigate();
 
@@ -29,11 +29,11 @@ const BlogList = () => {
   });
 
   useEffect(() => {
-    fetchReferral();
+    fetchRecaptcha();
   }, []);
 
-  const fetchReferral = async (payload) => {
-    return getDataManager(referral?.getReferral, setLoading, payload).then((x) => {
+  const fetchRecaptcha= async (payload) => {
+    return getDataManager(recaptcha?.getRecaptcha, setLoading, payload).then((x) => {
 
       if (x?.status) {
         setPagination({
@@ -59,7 +59,7 @@ const BlogList = () => {
   };
  */
   const handleEdit = () => {
-    navigate(`/edit-referral`);
+    navigate(`/edit-recaptcha`);
   };
 
 /*   const handleDelete = (id) => {
@@ -82,20 +82,27 @@ const BlogList = () => {
 
 
     {
-      title: "Referral Commission Status",
-      dataIndex: "referral_commission_status",
-      key: "referral_commission_status",
+      title: "Captcha Status",
+      dataIndex: "captcha_status",
+      key: "captcha_status",
       render: (text, record) => (
         <span>
-          {record?.referral_commission_status === true ? <CheckOutlined /> : <CloseOutlined />}
+          {record?.captcha_status === true ? <CheckOutlined /> : <CloseOutlined />}
         </span>
       ),
 
     },
     {
-      title: "Referral Commission Percentage",
-      dataIndex: "referral_commission_percentage",
-      key: "referral_commission_percentage",
+      title: "Capthcha Secret",
+      dataIndex: "captcha_secret",
+      key: "captcha_secret",
+
+    },
+
+    {
+      title: "Capthcha Site",
+      dataIndex: "captcha_site",
+      key: "captcha_site",
 
     },
     {
@@ -115,12 +122,12 @@ const BlogList = () => {
   ];
 
   return (
-    <TajiraCard heading="Referral Setting">
+    <TajiraCard heading="Recapthcha Setting">
       <TajiraTable
-        fetchData={fetchReferral}
+        fetchData={fetchRecaptcha}
         dataSource={aboutList}
         columns={columns}
-        title="All Referral Setting"
+        title="All Recaptcha Setting"
         loading={loading}
         pagination={pagination}
         hideSearch={true}

@@ -32,7 +32,7 @@ const { Option } = Select;
 const AddBlog = () => {
   const [form] = Form.useForm();
 
-  const referral = new API.Referral();
+  const recapthca = new API.Recaptcha();
 /*   const tag = new API.Tags();
   const category = new API.Category(); */
 
@@ -120,14 +120,14 @@ const AddBlog = () => {
     });
   };
  */
-  const editReferral = (payload) => {
-    getDataManager(referral?.editReferral, setLoading, payload, id).then((x) => {
+  const editRecaptcha = (payload) => {
+    getDataManager(recapthca?.editRecaptcha, setLoading, payload, id).then((x) => {
       if (x?.status) {
         message.success({
           content: "Information saved",
           duration: 3,
         });
-        navigate("/referral");
+        navigate("/recaptcha");
       } else {
         const error = getErrorMessage(x?.errors) || x?.message;
         message.error({
@@ -152,7 +152,7 @@ const AddBlog = () => {
       payload.append("short_about_img", values?.short_about_img?.file?.originFileObj); */
 
     if (isEdit) {
-        editReferral(values);
+        editRecaptcha(values);
     } else {
       // addBlog(payload);
 
@@ -200,7 +200,7 @@ const AddBlog = () => {
   ]; */
 
   return (
-    <TajiraCard heading={isEdit ? "Edit Referral" : "Add Referral"}>
+    <TajiraCard heading={isEdit ? "Edit Recapthca" : "Add Recaptcha"}>
       {loading && <Spinner />}
       <Form
         onFinish={onFinish}
@@ -209,20 +209,32 @@ const AddBlog = () => {
         scrollToFirstError
       >
         <Form.Item
-          label="Referral Commission Percentage"
-          name="referral_commission_percentage"
+          label="Captcha Site"
+          name="captcha_site"
           rules={[
             {
               required: true,
-              message: "Please enter privacy and policy text",
+              message: "Please enter captcha site",
             },
           ]}
         >
-        <InputNumber placeholder="Enter Percentage Text" />
+        <Input placeholder="Enter captcha Site Text" />
         </Form.Item>
         <Form.Item
-          label="Referral Commission Status"
-          name="referral_commission_status"
+          label="Captcha Secret"
+          name="captcha_secret"
+          rules={[
+            {
+              required: true,
+              message: "Please enter captcha secret text",
+            },
+          ]}
+        >
+        <Input placeholder="Enter captcha secret Text" />
+        </Form.Item>
+        <Form.Item
+          label="Captcha Status"
+          name="captcha_status"
           rules={[
             {
               required: true,

@@ -241,6 +241,12 @@ const SiderBar = ({ toggle, collapsed }) => {
         >
           Referral Setting
         </Menu.Item>
+        <Menu.Item
+          onClick={() => navigate("/recaptcha")}
+          key="48"
+        >
+          Recaptcha Setting
+        </Menu.Item>
         </Menu.SubMenu>
 {/*         <Menu.Item
           icon={<AppstoreOutlined />}

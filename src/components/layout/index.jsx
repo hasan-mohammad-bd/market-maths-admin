@@ -136,6 +136,9 @@ const AddBasicSetting = React.lazy(() => import("../basic-setting/add-basic-sett
 const Referral = React.lazy(() => import("../referral"));
 const AddReferral = React.lazy(() => import("../referral/add-referral"));
 
+const Recaptcha = React.lazy(() => import("../recaptcha"));
+const AddRecaptcha = React.lazy(() => import("../recaptcha/add-recaptcha"));
+
 
 const { Header, Content } = Layout;
 
@@ -373,6 +376,10 @@ const FadoLayout = () => {
               <Route path="/referral" element={<Referral/>} />
               <Route path="/add-referral" element={<AddReferral/>} />
               <Route path="/edit-referral" element={<AddReferral />} />
+
+              <Route path="/recaptcha" element={<Recaptcha/>} />
+              <Route path="/add-recaptcha" element={<AddRecaptcha/>} />
+              <Route path="/edit-recaptcha" element={<AddRecaptcha />} />
 
             </Routes>
           </Suspense>

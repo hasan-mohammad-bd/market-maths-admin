@@ -1,9 +1,9 @@
 import axios from "axios";
 import { API_URL, ACCESS_TOKEN } from "../constants";
 
-export default class Referral {
-    getReferral = (payload = {}) => {
-        const url = `${API_URL}setting/referral?limit=${
+export default class Recapthcha {
+    getRecaptcha = (payload = {}) => {
+        const url = `${API_URL}setting/recaptcha?limit=${
           payload?.limit || 50
         }&offset=${payload?.offset || 0}`;
         return axios
@@ -79,8 +79,8 @@ export default class Referral {
       });
   }; */
 
-  editReferral = (formData) => {
-    const url = `${API_URL}setting/referral`;
+  editRecaptcha = (formData) => {
+    const url = `${API_URL}setting/recaptcha`;
     return axios({
       url,
       method: "PUT",

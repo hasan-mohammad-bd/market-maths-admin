@@ -41,6 +41,8 @@ import Team from "./Team";
 import Terms from "./Terms";
 import Privacy from "./Privacy";
 import BasicSetting from "./BasicSetting";
+import Referral from "./Referral";
+import Recaptcha from "./Recaptcha";
 
 const API = {
   Auth,
@@ -85,7 +87,9 @@ const API = {
   Team,
   Terms,
   Privacy,
-  BasicSetting
+  BasicSetting,
+  Referral,
+  Recaptcha
 };
 
 export default API;
