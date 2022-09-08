@@ -32,7 +32,7 @@ const { Option } = Select;
 const AddBlog = () => {
   const [form] = Form.useForm();
 
-  const subscriber = new API.SubscriberSection();
+  const blog = new API.BlogSection();
 /*   const tag = new API.Tags();
   const category = new API.Category(); */
 
@@ -121,13 +121,13 @@ const AddBlog = () => {
   };
  */
   const editSubscriberSection = (payload) => {
-    getDataManager(subscriber?.editSubscriberSection, setLoading, payload, id).then((x) => {
+    getDataManager(blog?.editBlogSection, setLoading, payload, id).then((x) => {
       if (x?.status) {
         message.success({
           content: "Information saved",
           duration: 3,
         });
-        navigate("/testimonial-section");
+        navigate("/blog-section");
       } else {
         const error = getErrorMessage(x?.errors) || x?.message;
         message.error({
@@ -152,7 +152,7 @@ const AddBlog = () => {
       payload.append("short_about_img", values?.short_about_img?.file?.originFileObj); */
 
     if (isEdit) {
-      editSubscriberSection(values);
+        editSubscriberSection(values);
     } else {
       // addBlog(payload);
 
@@ -200,7 +200,7 @@ const AddBlog = () => {
   ]; */
 
   return (
-    <TajiraCard heading={isEdit ? "Edit Testimonial" : "Add Testimonial"}>
+    <TajiraCard heading={isEdit ? "Edit Subscriber" : "Add Subscriber"}>
       {loading && <Spinner />}
       <Form
         onFinish={onFinish}
@@ -209,8 +209,8 @@ const AddBlog = () => {
         scrollToFirstError
       >
         <Form.Item
-          label="Subscriber Title"
-          name="subscriber_title"
+          label="Blog Title"
+          name="blog_title"
           rules={[
             {
               required: true,
@@ -221,8 +221,8 @@ const AddBlog = () => {
         <Input placeholder="Enter Title" />
         </Form.Item>
         <Form.Item
-          label="Subscriber Description"
-          name="subscriber_description"
+          label="Blog Description"
+          name="blog_description"
           rules={[
             {
               required: true,

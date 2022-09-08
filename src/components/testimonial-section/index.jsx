@@ -13,7 +13,7 @@ import { getDataManager, getErrorMessage } from "../../utils/helper.functions";
 import About from "../../utils/api/About";
 
 const BlogList = () => {
-  const subscriber = new API.SubscriberSection();
+  const testimonial = new API.TestimonialSection();
 
   const navigate = useNavigate();
 
@@ -29,11 +29,11 @@ const BlogList = () => {
   });
 
   useEffect(() => {
-    fetchSubscriber();
+    fetchTestimonial();
   }, []);
 
-  const fetchSubscriber = async (payload) => {
-    return getDataManager(subscriber?.getSubscriberSection, setLoading, payload).then((x) => {
+  const fetchTestimonial = async (payload) => {
+    return getDataManager(testimonial?.getTestimonialSection, setLoading, payload).then((x) => {
 
       if (x?.status) {
         setPagination({
@@ -59,7 +59,7 @@ const BlogList = () => {
   };
  */
   const handleEdit = () => {
-    navigate(`/edit-subscriber-section`);
+    navigate(`/edit-testimonial-section`);
   };
 
 /*   const handleDelete = (id) => {
@@ -82,16 +82,16 @@ const BlogList = () => {
 
 
     {
-      title: "Subscriber Title",
-      dataIndex: "subscriber_title",
-      key: "subscriber_title",
+      title: "Testimonial Title",
+      dataIndex: "testimonial_title",
+      key: "testimonial_title",
 
 
     },
     {
-      title: "Subscriber Description",
-      dataIndex: "subscriber_description",
-      key: "subscriber_description",
+      title: "Testimonial Description",
+      dataIndex: "testimonial_description",
+      key: "testimonial_description",
 
     },
 
@@ -112,12 +112,12 @@ const BlogList = () => {
   ];
 
   return (
-    <TajiraCard heading="Subscriber Section Setting">
+    <TajiraCard heading="Testimonial Section Setting">
       <TajiraTable
-        fetchData={fetchSubscriber}
+        fetchData={fetchTestimonial}
         dataSource={aboutList}
         columns={columns}
-        title="All Subscriber Section Setting"
+        title="All Testimonial Section Setting"
         loading={loading}
         pagination={pagination}
         hideSearch={true}

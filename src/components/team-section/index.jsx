@@ -13,7 +13,7 @@ import { getDataManager, getErrorMessage } from "../../utils/helper.functions";
 import About from "../../utils/api/About";
 
 const BlogList = () => {
-  const subscriber = new API.SubscriberSection();
+  const blog = new API.BlogSection();
 
   const navigate = useNavigate();
 
@@ -29,11 +29,11 @@ const BlogList = () => {
   });
 
   useEffect(() => {
-    fetchSubscriber();
+    fetchBlog();
   }, []);
 
-  const fetchSubscriber = async (payload) => {
-    return getDataManager(subscriber?.getSubscriberSection, setLoading, payload).then((x) => {
+  const fetchBlog = async (payload) => {
+    return getDataManager(blog?.getBlogSection, setLoading, payload).then((x) => {
 
       if (x?.status) {
         setPagination({
@@ -59,7 +59,7 @@ const BlogList = () => {
   };
  */
   const handleEdit = () => {
-    navigate(`/edit-subscriber-section`);
+    navigate(`/edit-blog-section`);
   };
 
 /*   const handleDelete = (id) => {
@@ -82,16 +82,16 @@ const BlogList = () => {
 
 
     {
-      title: "Subscriber Title",
-      dataIndex: "subscriber_title",
-      key: "subscriber_title",
+      title: "Blog Title",
+      dataIndex: "blog_title",
+      key: "blog_title",
 
 
     },
     {
-      title: "Subscriber Description",
-      dataIndex: "subscriber_description",
-      key: "subscriber_description",
+      title: "Blog Description",
+      dataIndex: "blog_description",
+      key: "blog_description",
 
     },
 
@@ -112,12 +112,12 @@ const BlogList = () => {
   ];
 
   return (
-    <TajiraCard heading="Subscriber Section Setting">
+    <TajiraCard heading="Blog Section Setting">
       <TajiraTable
-        fetchData={fetchSubscriber}
+        fetchData={fetchBlog}
         dataSource={aboutList}
         columns={columns}
-        title="All Subscriber Section Setting"
+        title="All Blog Section Setting"
         loading={loading}
         pagination={pagination}
         hideSearch={true}

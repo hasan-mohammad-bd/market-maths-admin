@@ -50,6 +50,12 @@ import Currency from "./Currency";
 import Trading from "./Trading";
 import PlanSection from "./PlanSection";
 import AboutSection from "./AboutSection";
+import Advertise from "./Advertise";
+import TestimonialSection from "./TestimonialSection";
+import SubscriberSection from "./SubscriberSection";
+import BlogSection from "./BlogSection";
+
+
 
 
 const API = {
@@ -104,7 +110,13 @@ const API = {
   Currency,
   Trading,
   PlanSection,
-  AboutSection
+  AboutSection,
+  Advertise,
+  TestimonialSection,
+  SubscriberSection,
+  BlogSection
+
+
 
 };
 

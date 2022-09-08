@@ -127,7 +127,7 @@ const AddBlog = () => {
           content: "Information saved",
           duration: 3,
         });
-        navigate("/testimonial-section");
+        navigate("/subscriber-section");
       } else {
         const error = getErrorMessage(x?.errors) || x?.message;
         message.error({
@@ -152,7 +152,7 @@ const AddBlog = () => {
       payload.append("short_about_img", values?.short_about_img?.file?.originFileObj); */
 
     if (isEdit) {
-      editSubscriberSection(values);
+        editSubscriberSection(values);
     } else {
       // addBlog(payload);
 
@@ -200,7 +200,7 @@ const AddBlog = () => {
   ]; */
 
   return (
-    <TajiraCard heading={isEdit ? "Edit Testimonial" : "Add Testimonial"}>
+    <TajiraCard heading={isEdit ? "Edit Subscriber" : "Add Subscriber"}>
       {loading && <Spinner />}
       <Form
         onFinish={onFinish}

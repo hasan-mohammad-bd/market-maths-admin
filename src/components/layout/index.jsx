@@ -160,6 +160,23 @@ const AddPlanSection = React.lazy(() => import("../plan-section/add-plan-section
 const AboutSection = React.lazy(() => import("../about-section"));
 const AddAboutSection = React.lazy(() => import("../about-section/add-about-section"));
 
+const Advertise = React.lazy(() => import("../advertise"));
+const AddAdvertise = React.lazy(() => import("../advertise/add-advertise"));
+
+const TestimonialSection = React.lazy(() => import("../testimonial-section"));
+const AddTestimonialSection = React.lazy(() => import("../testimonial-section/add-testimonial-section"));
+
+const SubscriberSection = React.lazy(() => import("../subscriber-section"));
+const AddSubscriberSection = React.lazy(() => import("../subscriber-section/add-subscriber-section"));
+
+const BlogSection = React.lazy(() => import("../blog-section"));
+const AddBlogSection = React.lazy(() => import("../blog-section/add-blog-secton"));
+
+const TeamSection = React.lazy(() => import("../team-section"));
+const AddTeamSection = React.lazy(() => import("../team-section/add-team-section"));
+
+
+
 
 const { Header, Content } = Layout;
 
@@ -429,6 +446,28 @@ const FadoLayout = () => {
               <Route path="/about-section" element={<AboutSection/>} />
               <Route path="/add-about-section" element={<AddAboutSection/>} />
               <Route path="/edit-about-section" element={<AddAboutSection />} />
+
+              <Route path="/advertise" element={<Advertise/>} />
+              <Route path="/add-advertise" element={<AddAdvertise/>} />
+              <Route path="/edit-advertise" element={<AddAdvertise />} />
+
+              <Route path="/testimonial-section" element={<TestimonialSection/>} />
+              <Route path="/add-testimonial-section" element={<AddTestimonialSection/>} />
+              <Route path="/edit-testimonial-section" element={<AddTestimonialSection />} />
+
+              <Route path="/subscriber-section" element={<SubscriberSection/>} />
+              <Route path="/add-subscriber-section" element={<AddSubscriberSection/>} />
+              <Route path="/edit-subscriber-section" element={<AddSubscriberSection />} />
+
+              <Route path="/blog-section" element={<BlogSection/>} />
+              <Route path="/add-blog-section" element={<AddBlogSection/>} />
+              <Route path="/edit-blog-section" element={<AddBlogSection />} />
+
+              <Route path="/team-section" element={<TeamSection/>} />
+              <Route path="/add-team-section" element={<AddTeamSection/>} />
+              <Route path="/edit-team-section" element={<AddTeamSection />} />
+
+
 
             </Routes>
           </Suspense>

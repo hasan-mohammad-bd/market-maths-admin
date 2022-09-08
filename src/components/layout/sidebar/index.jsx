@@ -291,6 +291,30 @@ const SiderBar = ({ toggle, collapsed }) => {
         >
           About Section
         </Menu.Item>
+        <Menu.Item
+          onClick={() => navigate("/advertise")}
+          key="56"
+        >
+          Advertise Section
+        </Menu.Item>
+        <Menu.Item
+          onClick={() => navigate("/testimonial-section")}
+          key="57"
+        >
+          Testimonial Section
+        </Menu.Item>
+        <Menu.Item
+          onClick={() => navigate("/subscriber-section")}
+          key="58"
+        >
+          Subscriber Section
+        </Menu.Item>
+        <Menu.Item
+          onClick={() => navigate("/blog-section")}
+          key="59"
+        >
+          Blog Section
+        </Menu.Item>
         </Menu.SubMenu>
 {/*         <Menu.Item
           icon={<AppstoreOutlined />}

@@ -32,7 +32,7 @@ const { Option } = Select;
 const AddBlog = () => {
   const [form] = Form.useForm();
 
-  const subscriber = new API.SubscriberSection();
+  const testimonial = new API.TestimonialSection();
 /*   const tag = new API.Tags();
   const category = new API.Category(); */
 
@@ -120,8 +120,8 @@ const AddBlog = () => {
     });
   };
  */
-  const editSubscriberSection = (payload) => {
-    getDataManager(subscriber?.editSubscriberSection, setLoading, payload, id).then((x) => {
+  const editAdvertise = (payload) => {
+    getDataManager(testimonial?.editTestimonialSection, setLoading, payload, id).then((x) => {
       if (x?.status) {
         message.success({
           content: "Information saved",
@@ -152,7 +152,7 @@ const AddBlog = () => {
       payload.append("short_about_img", values?.short_about_img?.file?.originFileObj); */
 
     if (isEdit) {
-      editSubscriberSection(values);
+        editAdvertise(values);
     } else {
       // addBlog(payload);
 
@@ -209,8 +209,8 @@ const AddBlog = () => {
         scrollToFirstError
       >
         <Form.Item
-          label="Subscriber Title"
-          name="subscriber_title"
+          label="Testimonial Title"
+          name="testimonial_title"
           rules={[
             {
               required: true,
@@ -221,8 +221,8 @@ const AddBlog = () => {
         <Input placeholder="Enter Title" />
         </Form.Item>
         <Form.Item
-          label="Subscriber Description"
-          name="subscriber_description"
+          label="Testimonial Description"
+          name="testimonial_description"
           rules={[
             {
               required: true,
