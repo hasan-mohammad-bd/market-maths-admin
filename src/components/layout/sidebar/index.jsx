@@ -215,6 +215,32 @@ const SiderBar = ({ toggle, collapsed }) => {
         >
           Terms
         </Menu.Item>
+        <Menu.Item
+          onClick={() => navigate("/terms")}
+          key="43"
+        >
+          Terms & Conditions
+        </Menu.Item>
+        <Menu.Item
+          onClick={() => navigate("/privacy")}
+          key="44"
+        >
+          Privacy & Policy
+        </Menu.Item>
+        </Menu.SubMenu>
+        <Menu.SubMenu key="45" icon={<NotificationOutlined />} title="Basic Control">
+        <Menu.Item
+          onClick={() => navigate("/basic-setting")}
+          key="46"
+        >
+          Basic Setting
+        </Menu.Item>
+        <Menu.Item
+          onClick={() => navigate("/referral")}
+          key="47"
+        >
+          Referral Setting
+        </Menu.Item>
         </Menu.SubMenu>
 {/*         <Menu.Item
           icon={<AppstoreOutlined />}

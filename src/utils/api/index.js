@@ -39,6 +39,8 @@ import Slider from "./Slider";
 import Menu from "./Menu";
 import Team from "./Team";
 import Terms from "./Terms";
+import Privacy from "./Privacy";
+import BasicSetting from "./BasicSetting";
 
 const API = {
   Auth,
@@ -81,7 +83,9 @@ const API = {
   Slider,
   Menu,
   Team,
-  Terms
+  Terms,
+  Privacy,
+  BasicSetting
 };
 
 export default API;

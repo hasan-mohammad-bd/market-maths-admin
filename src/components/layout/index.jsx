@@ -127,6 +127,15 @@ const AddTeam = React.lazy(() => import("../team/add-team"));
 const Terms = React.lazy(() => import("../terms"));
 const AddTerms = React.lazy(() => import("../terms/add-terms"));
 
+const Privacy = React.lazy(() => import("../privacy"));
+const AddPrivacy = React.lazy(() => import("../privacy/add-privacy"));
+
+const BasicSetting = React.lazy(() => import("../basic-setting"));
+const AddBasicSetting = React.lazy(() => import("../basic-setting/add-basic-setting"));
+
+const Referral = React.lazy(() => import("../referral"));
+const AddReferral = React.lazy(() => import("../referral/add-referral"));
+
 
 const { Header, Content } = Layout;
 
@@ -352,6 +361,18 @@ const FadoLayout = () => {
               <Route path="/terms" element={<Terms/>} />
               <Route path="/add-terms" element={<AddTerms/>} />
               <Route path="/edit-terms" element={<AddTerms />} />
+
+              <Route path="/privacy" element={<Privacy/>} />
+              <Route path="/add-privacy" element={<AddPrivacy/>} />
+              <Route path="/edit-privacy" element={<AddPrivacy />} />
+
+              <Route path="/basic-setting" element={<BasicSetting/>} />
+              <Route path="/add-basic-setting" element={<AddBasicSetting/>} />
+              <Route path="/edit-basic-setting" element={<AddBasicSetting />} />
+
+              <Route path="/referral" element={<Referral/>} />
+              <Route path="/add-referral" element={<AddReferral/>} />
+              <Route path="/edit-referral" element={<AddReferral />} />
 
             </Routes>
           </Suspense>
