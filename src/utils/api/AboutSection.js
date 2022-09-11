@@ -28,56 +28,6 @@ export default class AboutSection {
           });
       };
 
-/*   getLogoDetails = (id) => {
-    const url = `${API_URL}website/logo/${id}`;
-    return axios
-      .get(url, {
-        headers: {
-          Authorization: `Token ${ACCESS_TOKEN}`,
-        },
-      })
-      .then(function (response) {
-        if (response.status === 200 || response.status === 201) {
-          return response.data;
-        } else {
-          return {
-            data: {
-              results: [],
-            },
-          };
-        }
-      })
-      .catch(function (error) {
-        return error.response?.data;
-      });
-  }; */
-
-/*   addLogo = (payload) => {
-    const url = `${API_URL}website/logo`;
-    return axios({
-      url,
-      method: "POST",
-      data: payload ,
-      headers: {
-        Authorization: `Token ${ACCESS_TOKEN}`,
-        "Content-Type": "multipart/form-data",
-      },
-    })
-      .then(function (response) {
-        if (response.status === 200 || response.status === 201) {
-          return response.data;
-        } else {
-          return {
-            data: {
-              results: [],
-            },
-          };
-        }
-      })
-      .catch(function (error) {
-        return error.response?.data;
-      });
-  }; */
 
   editAboutSection = (formData) => {
     const url = `${API_URL}section/about`;
@@ -105,51 +55,4 @@ export default class AboutSection {
       });
   };
 
-/*   deleteBlog = (id) => {
-    const url = `${API_URL}blog/${id}`;
-    return axios
-      .delete(url, {
-        headers: {
-          Authorization: `Token ${ACCESS_TOKEN}`,
-        },
-      })
-      .then(function (response) {
-        if (response.status === 200 || response.status === 201) {
-          return response.data;
-        } else {
-          return {
-            data: {
-              results: [],
-            },
-          };
-        }
-      })
-      .catch(function (error) {
-        return error.response?.data;
-      });
-  }; */
-/* 
-  deleteComment = (id) => {
-    const url = `${API_URL}blog/comment/${id}`;
-    return axios
-      .delete(url, {
-        headers: {
-          Authorization: `Token ${ACCESS_TOKEN}`,
-        },
-      })
-      .then(function (response) {
-        if (response.status === 200 || response.status === 201) {
-          return response.data;
-        } else {
-          return {
-            data: {
-              results: [],
-            },
-          };
-        }
-      })
-      .catch(function (error) {
-        return error.response?.data;
-      });
-  }; */
 }

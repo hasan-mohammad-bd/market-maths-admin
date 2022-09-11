@@ -1,24 +1,24 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { message, Space, Popconfirm, Image, Tag, Tooltip } from "antd";
-import { FormOutlined, DeleteOutlined, EyeOutlined, CheckOutlined, CloseOutlined } from "@ant-design/icons";
+import { FormOutlined} from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 
 import TajiraTable from "../common/table";
 import TajiraCard from "../common/tajira-card";
-import AddNewButton from "../common/add-button";
+
 
 import API from "../../utils/api";
 import { getDataManager, getErrorMessage } from "../../utils/helper.functions";
-import About from "../../utils/api/About";
 
-const BlogList = () => {
+
+const TradingList = () => {
   const trading = new API.Trading();
 
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
-  const [aboutList, setAboutList] = useState([]);
+  const [tradingList, setTradingList] = useState([]);
   const [pagination, setPagination] = useState({
     current: 1,
     defaultPageSize: 50,
@@ -42,7 +42,7 @@ const BlogList = () => {
           pageSize: payload?.pageSize || pagination?.pageSize,
           total: x?.data?.count,
         });
-        setAboutList([x?.data]);
+        setTradingList([x?.data]);
       } else {
         const error = getErrorMessage(x?.errors) || x?.message;
         message.error({
@@ -120,9 +120,9 @@ const BlogList = () => {
     <TajiraCard heading="Trading Section">
       <TajiraTable
         fetchData={fetchTrading}
-        dataSource={aboutList}
+        dataSource={tradingList}
         columns={columns}
-        title="All Trading Section Setting"
+        title="All Trading Section Text"
         loading={loading}
         pagination={pagination}
         hideSearch={true}
@@ -132,4 +132,4 @@ const BlogList = () => {
   );
 };
 
-export default BlogList;
+export default TradingList;

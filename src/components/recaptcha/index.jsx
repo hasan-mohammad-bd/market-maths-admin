@@ -6,19 +6,19 @@ import { useNavigate } from "react-router-dom";
 
 import TajiraTable from "../common/table";
 import TajiraCard from "../common/tajira-card";
-import AddNewButton from "../common/add-button";
+
 
 import API from "../../utils/api";
 import { getDataManager, getErrorMessage } from "../../utils/helper.functions";
-import About from "../../utils/api/About";
 
-const BlogList = () => {
+
+const RecaptchaList = () => {
   const recaptcha = new API.Recaptcha();
 
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
-  const [aboutList, setAboutList] = useState([]);
+  const [recaptchaList, setRecaptchaList] = useState([]);
   const [pagination, setPagination] = useState({
     current: 1,
     defaultPageSize: 50,
@@ -42,7 +42,7 @@ const BlogList = () => {
           pageSize: payload?.pageSize || pagination?.pageSize,
           total: x?.data?.count,
         });
-        setAboutList([x?.data]);
+        setRecaptchaList([x?.data]);
       } else {
         const error = getErrorMessage(x?.errors) || x?.message;
         message.error({
@@ -54,29 +54,9 @@ const BlogList = () => {
   };
 
 
-/*   const handleAdd = () => {
-    navigate("/add-logo");
-  };
- */
   const handleEdit = () => {
     navigate(`/edit-recaptcha`);
   };
-
-/*   const handleDelete = (id) => {
-    getDataManager(blog?.deleteBlog, setLoading, id).then((x) => {
-      if (x.status) {
-        fetchBlogList();
-        message.success({
-          content: "blog deleted successfully",
-          duration: 2,
-        });
-      } else {
-        message.error({ content: "Process failed", duration: 2 });
-      }
-    });
-  }; */
-
-
 
   const columns = [
 
@@ -125,7 +105,7 @@ const BlogList = () => {
     <TajiraCard heading="Recapthcha Setting">
       <TajiraTable
         fetchData={fetchRecaptcha}
-        dataSource={aboutList}
+        dataSource={setRecaptchaList}
         columns={columns}
         title="All Recaptcha Setting"
         loading={loading}
@@ -137,4 +117,4 @@ const BlogList = () => {
   );
 };
 
-export default BlogList;
+export default RecaptchaList;

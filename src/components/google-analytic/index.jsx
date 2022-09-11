@@ -1,24 +1,24 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { message, Space, Popconfirm, Image, Tag, Tooltip } from "antd";
-import { FormOutlined, DeleteOutlined, EyeOutlined, CheckOutlined, CloseOutlined } from "@ant-design/icons";
+import { FormOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 
 import TajiraTable from "../common/table";
 import TajiraCard from "../common/tajira-card";
-import AddNewButton from "../common/add-button";
+
 
 import API from "../../utils/api";
 import { getDataManager, getErrorMessage } from "../../utils/helper.functions";
-import About from "../../utils/api/About";
 
-const BlogList = () => {
+
+const GoogleAnalyticList = () => {
   const googleAnalytic = new API.GoogleAnalytic();
 
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
-  const [aboutList, setAboutList] = useState([]);
+  const [googleAnalyticList, setGoogleAnalyticList] = useState([]);
   const [pagination, setPagination] = useState({
     current: 1,
     defaultPageSize: 50,
@@ -42,7 +42,7 @@ const BlogList = () => {
           pageSize: payload?.pageSize || pagination?.pageSize,
           total: x?.data?.count,
         });
-        setAboutList([x?.data]);
+        setGoogleAnalyticList([x?.data]);
       } else {
         const error = getErrorMessage(x?.errors) || x?.message;
         message.error({
@@ -54,28 +54,9 @@ const BlogList = () => {
   };
 
 
-/*   const handleAdd = () => {
-    navigate("/add-logo");
-  };
- */
   const handleEdit = () => {
     navigate(`/edit-google-analytic`);
   };
-
-/*   const handleDelete = (id) => {
-    getDataManager(blog?.deleteBlog, setLoading, id).then((x) => {
-      if (x.status) {
-        fetchBlogList();
-        message.success({
-          content: "blog deleted successfully",
-          duration: 2,
-        });
-      } else {
-        message.error({ content: "Process failed", duration: 2 });
-      }
-    });
-  }; */
-
 
 
   const columns = [
@@ -108,7 +89,7 @@ const BlogList = () => {
     <TajiraCard heading="Google Analytic Setting">
       <TajiraTable
         fetchData={fetchGoogleAnalytic}
-        dataSource={aboutList}
+        dataSource={googleAnalyticList}
         columns={columns}
         title="All Google Analytic Setting"
         loading={loading}
@@ -120,4 +101,4 @@ const BlogList = () => {
   );
 };
 
-export default BlogList;
+export default GoogleAnalyticList;
