@@ -105,7 +105,7 @@ const RecaptchaList = () => {
     <TajiraCard heading="Recapthcha Setting">
       <TajiraTable
         fetchData={fetchRecaptcha}
-        dataSource={setRecaptchaList}
+        dataSource={recaptchaList}
         columns={columns}
         title="All Recaptcha Setting"
         loading={loading}

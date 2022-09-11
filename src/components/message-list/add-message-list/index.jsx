@@ -42,7 +42,7 @@ const AddTag = () => {
     showTotal: (total, range) => `${range[0]}-${range[1]} of ${total} items`,
   });
 
-  const message = new API.MessageList();
+  const messages = new API.MessageList();
   const subscriber = new API.SubscriberList();
 
   const navigate = useNavigate();
@@ -111,7 +111,7 @@ const AddTag = () => {
   };
 
   const addMessageList = (payload) => {
-    getDataManager(message?.addMessage, setLoading, payload).then((x) => {
+    getDataManager(messages?.addMessage, setLoading, payload).then((x) => {
       console.log(x);
       if (x?.status) {
         message.success({
@@ -130,7 +130,7 @@ const AddTag = () => {
   };
 
   const editMessageList = (payload) => {
-    getDataManager(message?.editPlan, setLoading, payload, id).then((x) => {
+    getDataManager(messages?.editPlan, setLoading, payload, id).then((x) => {
       if (x?.status) {
         message.success({
           content: "Information saved",
@@ -192,7 +192,7 @@ const AddTag = () => {
           rules={[{ required: true, message: "Please select publish status" }]}
         >
           <Select mode="multiple" placeholder="Select Publish Status">
-            <Option value={emails}>Total email found:{emails.length}</Option>
+            <Option value={emails}>Total Subscriber: {emails.length}</Option>
           </Select>
         </Form.Item>
 

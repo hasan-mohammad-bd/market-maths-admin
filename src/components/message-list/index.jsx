@@ -13,7 +13,7 @@ import { getDataManager, getErrorMessage } from "../../utils/helper.functions";
 import moment from "moment";
 
 const MessageList = () => {
-  const message = new API.MessageList();
+  const messages = new API.MessageList();
 
   const navigate = useNavigate();
 
@@ -43,7 +43,7 @@ const MessageList = () => {
   };
 
   const fetchMessageList = async (payload) => {
-    return getDataManager(message?.getMessageList, setLoading).then((x) => {
+    return getDataManager(messages?.getMessageList, setLoading).then((x) => {
       if (x?.status) {
         const organizedData = getOrganizedData(x?.data);
         setPagination({
@@ -74,7 +74,7 @@ const MessageList = () => {
   }; */
 
   const handleDelete = (id) => {
-    getDataManager(message?.deleteMessage, setLoading, id).then((x) => {
+    getDataManager(messages?.deleteMessage, setLoading, id).then((x) => {
       if (x.status) {
         fetchMessageList();
         message.success({
