@@ -12,13 +12,13 @@ import API from "../../utils/api";
 import { getDataManager, getErrorMessage } from "../../utils/helper.functions";
 import moment from "moment";
 
-const TagsList = () => {
-  const tag = new API.MessageList();
+const MessageList = () => {
+  const message = new API.MessageList();
 
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
-  const [categoryList, setCategoryList] = useState([]);
+  const [messageList, setMessageList] = useState([]);
   const [pagination, setPagination] = useState({
     current: 1,
     defaultPageSize: 50,
@@ -30,7 +30,7 @@ const TagsList = () => {
 
 
   useEffect(() => {
-    fetchCategoryList();
+    fetchMessageList();
   }, []);
 
   const getOrganizedData = (data) => {
@@ -42,8 +42,8 @@ const TagsList = () => {
     });
   };
 
-  const fetchCategoryList = async (payload) => {
-    return getDataManager(tag?.getMessageList, setLoading).then((x) => {
+  const fetchMessageList = async (payload) => {
+    return getDataManager(message?.getMessageList, setLoading).then((x) => {
       if (x?.status) {
         const organizedData = getOrganizedData(x?.data);
         setPagination({
@@ -52,7 +52,7 @@ const TagsList = () => {
           pageSize: payload?.pageSize || pagination?.pageSize,
           total: x?.data?.count,
         });
-        setCategoryList(organizedData);
+        setMessageList(organizedData);
       } else {
         const error = getErrorMessage(x?.errors) || x?.message;
         message.error({
@@ -63,32 +63,20 @@ const TagsList = () => {
     });
   };
 
-/*   const handleActiveStatus = (id) => {
-    getDataManager(tag?.editCategory, setLoading, id).then((x) => {
-      if (x.status) {
-        fetchCategoryList();
-        message.success({
-          content: "Tag status updated successfully",
-          duration: 2,
-        });
-      } else {
-        message.error({ content: "Process failed", duration: 2 });
-      }
-    });
-  }; */
+
 
   const handleAdd = () => {
     navigate("/add-message-list");
   };
 
-  const handleEdit = (id) => {
-    navigate(`/edit-plan/${id}`);
-  };
+/*   const handleEdit = (id) => {
+    navigate(`/edit-message-list/${id}`);
+  }; */
 
   const handleDelete = (id) => {
-    getDataManager(tag?.deleteMessage, setLoading, id).then((x) => {
+    getDataManager(message?.deleteMessage, setLoading, id).then((x) => {
       if (x.status) {
-        fetchCategoryList();
+        fetchMessageList();
         message.success({
           content: "Message deleted successfully",
           duration: 2,
@@ -156,8 +144,8 @@ const TagsList = () => {
   return (
     <TajiraCard heading="Messages" actions={<AddNewButton onAdd={handleAdd} />}>
       <TajiraTable
-        fetchData={fetchCategoryList}
-        dataSource={categoryList}
+        fetchData={fetchMessageList}
+        dataSource={messageList}
         columns={columns}
         title="All Messages"
         loading={loading}
@@ -169,4 +157,4 @@ const TagsList = () => {
   );
 };
 
-export default TagsList;
+export default MessageList;

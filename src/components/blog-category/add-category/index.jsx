@@ -13,12 +13,12 @@ import {
 } from "../../../utils/helper.functions";
 
 const { Title } = Typography;
-const { Option } = Select;
 
-const AddTag = () => {
+
+const AddCategory = () => {
   const [form] = Form.useForm();
 
-  const tag = new API.Category();
+  const category = new API.Category();
 
   const navigate = useNavigate();
   const params = useParams();
@@ -29,12 +29,12 @@ const AddTag = () => {
 
   useEffect(() => {
     if (id) {
-      fetchTagDetails();
+      fetchCategoryDetails();
     }
   }, [id]);
 
-  const fetchTagDetails = () => {
-    getDataManager(tag?.getCategoryDetails, setLoading, id).then((x) => {
+  const fetchCategoryDetails = () => {
+    getDataManager(category?.getCategoryDetails, setLoading, id).then((x) => {
       if (x?.status) {
 
         form.setFieldsValue({
@@ -51,8 +51,8 @@ const AddTag = () => {
     });
   };
 
-  const addTag = (payload) => {
-    getDataManager(tag?.addCategory, setLoading, payload).then((x) => {
+  const addCategory = (payload) => {
+    getDataManager(category?.addCategory, setLoading, payload).then((x) => {
       if (x?.status) {
 
         message.success({
@@ -70,8 +70,8 @@ const AddTag = () => {
     });
   };
 
-  const editTag = (payload) => {
-    getDataManager(tag?.editCategory, setLoading, payload, id).then((x) => {
+  const editCategory = (payload) => {
+    getDataManager(category?.editCategory, setLoading, payload, id).then((x) => {
       if (x?.status) {
         message.success({
           content: "Information saved",
@@ -90,9 +90,9 @@ const AddTag = () => {
 
   const onFinish = (values) => {
     if (isEdit) {
-      editTag(values);
+      editCategory(values);
     } else {
-      addTag(values);
+      addCategory(values);
     }
   };
 
@@ -128,10 +128,9 @@ const AddTag = () => {
             },
           ]}
         >
-                            <Radio.Group>
+    <Radio.Group>
       <Radio value={true}>Active</Radio>
       <Radio value={false}>Deactivate</Radio>
-
     </Radio.Group>
         </Form.Item>
         <Form.Item>
@@ -144,4 +143,4 @@ const AddTag = () => {
   );
 };
 
-export default AddTag;
+export default AddCategory;

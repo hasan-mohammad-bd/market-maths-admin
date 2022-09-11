@@ -15,7 +15,7 @@ import {
 import moment from "moment";
 
 const Comments = () => {
-  const blog = new API.Signal();
+  const signal = new API.Signal();
 
   const params = useParams();
   const id = params?.id;
@@ -30,7 +30,7 @@ const Comments = () => {
   }, [id]);
 
   const fetchCommentsList = async () => {
-    return getDataManager(blog?.getSignalComments, setLoading, id).then((x) => {
+    return getDataManager(signal?.getSignalComments, setLoading, id).then((x) => {
         console.log(x);
       if (x?.status) {
         setCommentsList(x?.data);
@@ -44,8 +44,8 @@ const Comments = () => {
     });
   };
 
-  const handleDelete = (id) => {
-    getDataManager(blog?.deleteComment, setLoading, id).then((x) => {
+/*   const handleDelete = (id) => {
+    getDataManager(signal?.deleteComment, setLoading, id).then((x) => {
       if (x.status) {
         fetchCommentsList();
         message.success({
@@ -56,7 +56,7 @@ const Comments = () => {
         message.error({ content: "Process failed", duration: 2 });
       }
     });
-  };
+  }; */
 
   const columns = [
     {

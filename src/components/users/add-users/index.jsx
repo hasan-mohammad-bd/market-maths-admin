@@ -1,6 +1,17 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
-import { Form, message, Button, Input, Select, Upload, Space, InputNumber, Radio, DatePicker } from "antd";
+import {
+  Form,
+  message,
+  Button,
+  Input,
+  Select,
+  Upload,
+  Space,
+  InputNumber,
+  Radio,
+  DatePicker,
+} from "antd";
 import { FileAddFilled } from "@ant-design/icons";
 import { useParams, useNavigate } from "react-router-dom";
 import TajiraCard from "../../common/tajira-card";
@@ -12,38 +23,32 @@ import {
   getErrorMessage,
 } from "../../../utils/helper.functions";
 
-
-
-const AddTeam = () => {
+const AddUsers = () => {
   const [form] = Form.useForm();
 
-
-  const team = new API.Users();
+  const users = new API.Users();
   const plan = new API.Plan();
 
   const navigate = useNavigate();
   const params = useParams();
   const { id } = params;
   const isEdit = !!id;
-  const [planList, setPlanList] = useState([])
+  const [planList, setPlanList] = useState([]);
   const { Option } = Select;
-
 
   const [loading, setLoading] = useState(false);
 
-
   useEffect(() => {
     if (id) {
-      fetchTeamDetails();
+      fetchUsersDetails();
     }
     fetchPlanList();
-
   }, [id]);
 
   const fetchPlanList = async (payload) => {
     return getDataManager(plan?.getPlanList, setLoading).then((x) => {
       if (x?.status) {
-        setPlanList(x.data)
+        setPlanList(x.data);
       } else {
         const error = getErrorMessage(x?.errors) || x?.message;
         message.error({
@@ -54,9 +59,8 @@ const AddTeam = () => {
     });
   };
 
-
-  const fetchTeamDetails = () => {
-    getDataManager(team?.getUsersDetails, setLoading, id).then((x) => {
+  const fetchUsersDetails = () => {
+    getDataManager(users?.getUsersDetails, setLoading, id).then((x) => {
       if (x?.status) {
         const res = x?.data;
         form.setFieldsValue({
@@ -68,9 +72,8 @@ const AddTeam = () => {
           user_name: res?.user_name,
           payment_status: res?.payment_status,
           plan_expire_date: res?.plan_expire_date,
-          telegram_id: res?.telegram_id
+          telegram_id: res?.telegram_id,
         });
-
       } else {
         const error = getErrorMessage(x?.errors) || x?.message;
         message.error({
@@ -81,29 +84,9 @@ const AddTeam = () => {
     });
   };
 
-  const addTeam = (payload) => {
-    getDataManager(team?.addUsers, setLoading, payload).then((x) => {
-        console.log(x);
-      if (x?.status) {
-
-        
-        message.success({
-          content: "Information saved",
-          duration: 3,
-        });
-        navigate("/users");
-      } else {
-        const error = getErrorMessage(x?.errors) || x?.message;
-        message.error({
-          content: error || "Error ocurred",
-          duration: 3,
-        });
-      }
-    });
-  };
-
-  const editTeam = (payload) => {
-    getDataManager(team?.editUsers, setLoading, payload, id).then((x) => {
+  const addUsers = (payload) => {
+    getDataManager(users?.addUsers, setLoading, payload).then((x) => {
+      console.log(x);
       if (x?.status) {
         message.success({
           content: "Information saved",
@@ -120,17 +103,31 @@ const AddTeam = () => {
     });
   };
 
-  
+  const editUsers = (payload) => {
+    getDataManager(users?.editUsers, setLoading, payload, id).then((x) => {
+      if (x?.status) {
+        message.success({
+          content: "Information saved",
+          duration: 3,
+        });
+        navigate("/users");
+      } else {
+        const error = getErrorMessage(x?.errors) || x?.message;
+        message.error({
+          content: error || "Error ocurred",
+          duration: 3,
+        });
+      }
+    });
+  };
 
- 
-
-    const onFinish = (values) => {
-        if (isEdit) {
-          editTeam(values);
-        } else {
-          addTeam(values);
-        }
-      };
+  const onFinish = (values) => {
+    if (isEdit) {
+      editUsers(values);
+    } else {
+      addUsers(values);
+    }
+  };
 
   return (
     <TajiraCard heading={isEdit ? "Edit Users" : "Add Users"}>
@@ -189,9 +186,8 @@ const AddTeam = () => {
         >
           <Input placeholder="Enter Phone" />
         </Form.Item>
-        {
-            isEdit && 
-            <Form.Item
+        {isEdit && (
+          <Form.Item
             label="Plan Expire Date"
             name="plan_expire_date"
             rules={[
@@ -201,13 +197,12 @@ const AddTeam = () => {
               },
             ]}
           >
-            <DatePicker/>
+            <DatePicker />
           </Form.Item>
-        }
+        )}
 
-{
-            isEdit && 
-            <Form.Item
+        {isEdit && (
+          <Form.Item
             label="Telegram ID"
             name="telegram_id"
             rules={[
@@ -217,12 +212,11 @@ const AddTeam = () => {
               },
             ]}
           >
-            <Input placeholder="Enter Telegram ID"/>
+            <Input placeholder="Enter Telegram ID" />
           </Form.Item>
-        }
-        {
-            !isEdit &&         
-            <Form.Item
+        )}
+        {!isEdit && (
+          <Form.Item
             label="Password"
             name="password"
             rules={[
@@ -234,7 +228,7 @@ const AddTeam = () => {
           >
             <Input placeholder="Enter Phone" />
           </Form.Item>
-        }
+        )}
         <Form.Item
           label="Plan"
           name="plan"
@@ -258,27 +252,11 @@ const AddTeam = () => {
             },
           ]}
         >
-    <Radio.Group>
-      <Radio value={true}>Yes</Radio>
-      <Radio value={false}>No</Radio>
-    </Radio.Group>
+          <Radio.Group>
+            <Radio value={true}>Yes</Radio>
+            <Radio value={false}>No</Radio>
+          </Radio.Group>
         </Form.Item>
-{/*         <Form.Item
-          label="Active Status"
-          name="is_active"
-          rules={[
-            {
-              required: true,
-              message: "Please enter active status",
-            },
-          ]}
-        >
-    <Radio.Group>
-      <Radio value={true}>Yes</Radio>
-      <Radio value={false}>No</Radio>
-    </Radio.Group>
-        </Form.Item> */}
-
 
         <Form.Item>
           <Button type="primary" htmlType="submit">
@@ -290,4 +268,4 @@ const AddTeam = () => {
   );
 };
 
-export default AddTeam;
+export default AddUsers;

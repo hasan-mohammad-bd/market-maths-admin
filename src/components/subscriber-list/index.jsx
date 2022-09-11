@@ -6,19 +6,19 @@ import { useNavigate } from "react-router-dom";
 
 import TajiraTable from "../common/table";
 import TajiraCard from "../common/tajira-card";
-import AddNewButton from "../common/add-button";
+
 
 import API from "../../utils/api";
 import { getDataManager, getErrorMessage } from "../../utils/helper.functions";
 import moment from "moment";
 
-const TagsList = () => {
-  const tag = new API.SubscriberList();
+const SubscriberList = () => {
+  const subscriber = new API.SubscriberList();
 
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
-  const [categoryList, setCategoryList] = useState([]);
+  const [subscriberList, setSubscriberList] = useState([]);
   const [pagination, setPagination] = useState({
     current: 1,
     defaultPageSize: 50,
@@ -30,7 +30,7 @@ const TagsList = () => {
 
 
   useEffect(() => {
-    fetchCategoryList();
+    fetchSubscriberList();
   }, []);
 
   const getOrganizedData = (data) => {
@@ -42,8 +42,8 @@ const TagsList = () => {
     });
   };
 
-  const fetchCategoryList = async (payload) => {
-    return getDataManager(tag?.getSubscriberList, setLoading).then((x) => {
+  const fetchSubscriberList = async (payload) => {
+    return getDataManager(subscriber?.getSubscriberList, setLoading).then((x) => {
         
       if (x?.status) {
         const organizedData = getOrganizedData(x?.data);
@@ -54,7 +54,7 @@ const TagsList = () => {
           pageSize: payload?.pageSize || pagination?.pageSize,
           total: x?.data?.count,
         });
-        setCategoryList(organizedData);
+        setSubscriberList(organizedData);
       } else {
         const error = getErrorMessage(x?.errors) || x?.message;
         message.error({
@@ -80,17 +80,17 @@ const TagsList = () => {
   }; */
 
   const handleAdd = () => {
-    navigate("/add-plan");
+    navigate("/add-subscriber");
   };
 
   const handleEdit = (id) => {
-    navigate(`/edit-plan/${id}`);
+    navigate(`/edit-subscriber/${id}`);
   };
 
   const handleDelete = (id) => {
-    getDataManager(tag?.deleteSubscriber, setLoading, id).then((x) => {
+    getDataManager(subscriber?.deleteSubscriber, setLoading, id).then((x) => {
       if (x.status) {
-        fetchCategoryList();
+        fetchSubscriberList();
         message.success({
           content: "Subscriber deleted successfully",
           duration: 2,
@@ -143,8 +143,8 @@ const TagsList = () => {
   return (
     <TajiraCard heading="Subscriber List" >
       <TajiraTable
-        fetchData={fetchCategoryList}
-        dataSource={categoryList}
+        fetchData={fetchSubscriberList}
+        dataSource={subscriberList}
         columns={columns}
         title="All Subscribers"
         loading={loading}
@@ -156,4 +156,4 @@ const TagsList = () => {
   );
 };
 
-export default TagsList;
+export default SubscriberList;

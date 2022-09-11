@@ -1,7 +1,7 @@
 import axios from "axios";
 import { API_URL, ACCESS_TOKEN } from "../constants";
 
-export default class Staff {
+export default class Users {
   getUserList = (payload = {}) => {
     const url = `${API_URL}users?limit=${
       payload?.limit || 50

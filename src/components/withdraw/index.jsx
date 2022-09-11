@@ -11,13 +11,13 @@ import AddNewButton from "../common/add-button";
 import API from "../../utils/api";
 import { getDataManager, getErrorMessage } from "../../utils/helper.functions";
 
-const BlogList = () => {
-  const blog = new API.Withdraw();
+const WithdrawList = () => {
+  const withdraw = new API.Withdraw();
 
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
-  const [blogList, setBlogList] = useState([]);
+  const [withdrawList, setWithdrawList] = useState([]);
   const [pagination, setPagination] = useState({
     current: 1,
     defaultPageSize: 50,
@@ -28,11 +28,11 @@ const BlogList = () => {
   });
 
   useEffect(() => {
-    fetchBlogList();
+    fetchWithdrawList();
   }, []);
 
-  const fetchBlogList = async (payload) => {
-    return getDataManager(blog?.getWithdrawList, setLoading, payload).then((x) => {
+  const fetchWithdrawList = async (payload) => {
+    return getDataManager(withdraw?.getWithdrawList, setLoading, payload).then((x) => {
       console.log(x);
       if (x?.status) {
         setPagination({
@@ -41,7 +41,7 @@ const BlogList = () => {
           pageSize: payload?.pageSize || pagination?.pageSize,
           total: x?.data?.count,
         });
-        setBlogList(x?.data);
+        setWithdrawList(x?.data);
       } else {
         const error = getErrorMessage(x?.errors) || x?.message;
         message.error({
@@ -60,10 +60,10 @@ const BlogList = () => {
     navigate(`/edit-withdraw/${id}`);
   };
 
-  const handleDelete = (id) => {
-    getDataManager(blog?.deleteWithdraw, setLoading, id).then((x) => {
+/*   const handleDelete = (id) => {
+    getDataManager(withdraw?.deleteWithdraw, setLoading, id).then((x) => {
       if (x.status) {
-        fetchBlogList();
+        fetchWithdrawList();
         message.success({
           content: "withdraw method deleted successfully",
           duration: 2,
@@ -72,7 +72,7 @@ const BlogList = () => {
         message.error({ content: "Process failed", duration: 2 });
       }
     });
-  };
+  }; */
 
 
 
@@ -161,8 +161,8 @@ const BlogList = () => {
   return (
     <TajiraCard heading="Withdraw Method" actions={<AddNewButton onAdd={handleAdd} />}>
       <TajiraTable
-        fetchData={fetchBlogList}
-        dataSource={blogList}
+        fetchData={fetchWithdrawList}
+        dataSource={withdrawList}
         columns={columns}
         title="All Withdraw Method"
         loading={loading}
@@ -174,4 +174,4 @@ const BlogList = () => {
   );
 };
 
-export default BlogList;
+export default WithdrawList;

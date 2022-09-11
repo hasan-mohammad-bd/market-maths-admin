@@ -10,14 +10,15 @@ import AddNewButton from "../common/add-button";
 
 import API from "../../utils/api";
 import { getDataManager, getErrorMessage } from "../../utils/helper.functions";
+import Plan from "../../utils/api/Plan";
 
-const TagsList = () => {
-  const tag = new API.Plan();
+const PlanList = () => {
+  const plan = new API.Plan();
 
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
-  const [categoryList, setCategoryList] = useState([]);
+  const [planList, setPlanList] = useState([]);
   const [pagination, setPagination] = useState({
     current: 1,
     defaultPageSize: 50,
@@ -29,7 +30,7 @@ const TagsList = () => {
 
 
   useEffect(() => {
-    fetchCategoryList();
+    fetchPlanList();
   }, []);
 
   const getOrganizedData = (data) => {
@@ -41,8 +42,8 @@ const TagsList = () => {
     });
   };
 
-  const fetchCategoryList = async (payload) => {
-    return getDataManager(tag?.getPlanList, setLoading).then((x) => {
+  const fetchPlanList = async (payload) => {
+    return getDataManager(plan?.getPlanList, setLoading).then((x) => {
       if (x?.status) {
         const organizedData = getOrganizedData(x?.data);
         setPagination({
@@ -51,7 +52,7 @@ const TagsList = () => {
           pageSize: payload?.pageSize || pagination?.pageSize,
           total: x?.data?.count,
         });
-        setCategoryList(organizedData);
+        setPlanList(organizedData);
       } else {
         const error = getErrorMessage(x?.errors) || x?.message;
         message.error({
@@ -85,9 +86,9 @@ const TagsList = () => {
   };
 
   const handleDelete = (id) => {
-    getDataManager(tag?.deletePlan, setLoading, id).then((x) => {
+    getDataManager(plan?.deletePlan, setLoading, id).then((x) => {
       if (x.status) {
-        fetchCategoryList();
+        fetchPlanList();
         message.success({
           content: "Plan deleted successfully",
           duration: 2,
@@ -230,8 +231,8 @@ const TagsList = () => {
   return (
     <TajiraCard heading="Plan" actions={<AddNewButton onAdd={handleAdd} />}>
       <TajiraTable
-        fetchData={fetchCategoryList}
-        dataSource={categoryList}
+        fetchData={fetchPlanList}
+        dataSource={planList}
         columns={columns}
         title="All Plans"
         loading={loading}
@@ -243,4 +244,4 @@ const TagsList = () => {
   );
 };
 
-export default TagsList;
+export default PlanList;

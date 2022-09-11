@@ -15,12 +15,12 @@ import {
 import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
 
 const { Title } = Typography;
-const { Option } = Select;
 
-const AddTag = () => {
+
+const AddPlan = () => {
   const [form] = Form.useForm();
 
-  const tag = new API.Plan();
+  const plan = new API.Plan();
 
   const navigate = useNavigate();
   const params = useParams();
@@ -31,12 +31,12 @@ const AddTag = () => {
 
   useEffect(() => {
     if (id) {
-      fetchTagDetails();
+      fetchPlanDetails();
     }
   }, [id]);
 
-  const fetchTagDetails = () => {
-    getDataManager(tag?.getPlanDetails, setLoading, id).then((x) => {
+  const fetchPlanDetails = () => {
+    getDataManager(plan?.getPlanDetails, setLoading, id).then((x) => {
       if (x?.status) {
 
         form.setFieldsValue({
@@ -62,8 +62,8 @@ const AddTag = () => {
     });
   };
 
-  const addTag = (payload) => {
-    getDataManager(tag?.addPlan, setLoading, payload).then((x) => {
+  const addPlan = (payload) => {
+    getDataManager(plan?.addPlan, setLoading, payload).then((x) => {
       if (x?.status) {
 
         message.success({
@@ -81,8 +81,8 @@ const AddTag = () => {
     });
   };
 
-  const editTag = (payload) => {
-    getDataManager(tag?.editPlan, setLoading, payload, id).then((x) => {
+  const editPlan = (payload) => {
+    getDataManager(plan?.editPlan, setLoading, payload, id).then((x) => {
       if (x?.status) {
         message.success({
           content: "Information saved",
@@ -101,9 +101,9 @@ const AddTag = () => {
 
   const onFinish = (values) => {
     if (isEdit) {
-      editTag(values);
+      editPlan(values);
     } else {
-      addTag(values);
+      addPlan(values);
     }
   };
 
@@ -299,4 +299,4 @@ const AddTag = () => {
   );
 };
 
-export default AddTag;
+export default AddPlan;

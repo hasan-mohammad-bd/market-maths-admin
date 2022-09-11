@@ -11,13 +11,13 @@ import AddNewButton from "../common/add-button";
 import API from "../../utils/api";
 import { getDataManager, getErrorMessage } from "../../utils/helper.functions";
 
-const TeamList = () => {
-  const team = new API.Staff();
+const StaffList = () => {
+  const staff = new API.Staff();
 
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
-  const [teamList, setTeamList] = useState([]);
+  const [staffList, setStaffList] = useState([]);
 
   const [pagination, setPagination] = useState({
     current: 1,
@@ -29,11 +29,11 @@ const TeamList = () => {
   });
 
   useEffect(() => {
-    fetchTeamList();
+    fetchStaffList();
   }, []);
 
-  const fetchTeamList = async (payload) => {
-    return getDataManager(team?.getStaffList, setLoading, payload).then(
+  const fetchStaffList = async (payload) => {
+    return getDataManager(staff?.getStaffList, setLoading, payload).then(
       (x) => {
         if (x?.status) {
           setPagination({
@@ -42,7 +42,7 @@ const TeamList = () => {
             pageSize: payload?.pageSize || pagination?.pageSize,
             total: x?.data?.count,
           });
-          setTeamList(x?.data);
+          setStaffList(x?.data);
 
         } else {
           const error = getErrorMessage(x?.errors) || x?.message;
@@ -63,8 +63,8 @@ const TeamList = () => {
     navigate(`/edit-staff/${id}`);
   };
 
-  const handleDelete = (id) => {
-    getDataManager(team?.deleteTeam, setLoading, id).then((x) => {
+/*   const handleDelete = (id) => {
+    getDataManager(staff?.deleteStaff, setLoading, id).then((x) => {
       if (x.status) {
         fetchTeamList();
         message.success({
@@ -75,7 +75,7 @@ const TeamList = () => {
         message.error({ content: x?.message || "Process failed", duration: 2 });
       }
     });
-  };
+  }; */
 
   const columns = [
 
@@ -140,8 +140,8 @@ const TeamList = () => {
   return (
     <TajiraCard heading="Staff Members" actions={<AddNewButton onAdd={handleAdd} />}>
       <TajiraTable
-        fetchData={fetchTeamList}
-        dataSource={teamList}
+        fetchData={fetchStaffList}
+        dataSource={staffList}
         columns={columns}
         title="All Staff Members"
         loading={loading}
@@ -153,4 +153,4 @@ const TeamList = () => {
   );
 };
 
-export default TeamList;
+export default StaffList;

@@ -14,14 +14,14 @@ import {
 } from "../../../utils/helper.functions";
 import moment from "moment";
 
-const Comments = () => {
+const Review = () => {
   const review = new API.Signal();
 
   const params = useParams();
   const id = params?.id;
 
   const [loading, setLoading] = useState(false);
-  const [commentsList, setCommentsList] = useState([]);
+  const [reviewList, setReviewList] = useState([]);
 
   useEffect(() => {
     if (id) {
@@ -33,7 +33,7 @@ const Comments = () => {
     return getDataManager(review?.getSignalReview, setLoading, id).then((x) => {
         console.log(x);
       if (x?.status) {
-        setCommentsList(x?.data);
+        setReviewList(x?.data);
       } else {
         const error = getErrorMessage(x?.errors) || x?.message;
         message.error({
@@ -102,7 +102,7 @@ const Comments = () => {
     <TajiraCard heading="Reviews">
       <TajiraTable
         fetchData={fetchReviewList}
-        dataSource={commentsList}
+        dataSource={reviewList}
         columns={columns}
         title="All Reviews"
         loading={loading}
@@ -112,4 +112,4 @@ const Comments = () => {
   );
 };
 
-export default Comments;
+export default Review;

@@ -16,7 +16,7 @@ import {
 const { TextArea } = Input;
 const { Option } = Select;
 
-const AddService = () => {
+const AddSpeciality = () => {
   const [form] = Form.useForm();
 
   const service = new API.Speciality();
@@ -27,7 +27,7 @@ const AddService = () => {
   const isEdit = !!id;
 
   const [loading, setLoading] = useState(false);
-  const [serviceDetails, setServiceDetails] = useState({});
+  const [specialityDetails, setSpecialityDetails] = useState({});
 
   const [icon, setIcon] = useState([]);
 
@@ -40,8 +40,8 @@ const AddService = () => {
 
   useEffect(() => {
     form.setFieldsValue({
-      name: serviceDetails?.name,
-      description: serviceDetails.description,
+      name: specialityDetails?.name,
+      description: specialityDetails.description,
 
     });
 
@@ -50,17 +50,17 @@ const AddService = () => {
         uid: "1",
         name: "icon.png",
         status: "done",
-        url: serviceDetails.icon,
+        url: specialityDetails.icon,
       },
     ]);
 
-  }, [serviceDetails]);
+  }, [specialityDetails]);
 
   const fetchSpecialityDetails = () => {
     getDataManager(service?.getSpecialityeDetails, setLoading, id).then((x) => {
       if (x?.status) {
         const res = x?.data;
-        setServiceDetails(res);
+        setSpecialityDetails(res);
       } else {
         const error = getErrorMessage(x?.errors) || x?.message;
         message.error({
@@ -108,9 +108,7 @@ const AddService = () => {
   };
 
   const onFinish = (values) => {
-    const imageFileChanged = values?.image !== serviceDetails?.image;
-    const pdfFileChanged = values?.pdf !== serviceDetails?.pdf;
-    const iconFileChanged = values?.icon !== serviceDetails?.icon;
+    const iconFileChanged = values?.icon !== specialityDetails?.icon;
 
     var payload = new FormData();
     payload.append("name", values?.name);
@@ -205,4 +203,4 @@ const AddService = () => {
   );
 };
 
-export default AddService;
+export default AddSpeciality;

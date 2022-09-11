@@ -104,8 +104,8 @@ export default class Staff {
       });
   };
 
-  deleteTeam = (id) => {
-    const url = `${API_URL}api/v1/team/delete/${id}/`;
+  deleteStaff = (id) => {
+    const url = `${API_URL}staff/${id}`;
     return axios
       .delete(url, {
         headers: {

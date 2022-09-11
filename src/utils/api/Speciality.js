@@ -28,36 +28,8 @@ export default class Speciality {
       });
   };
 
-/*   getSubServicesList = (payload = {}) => {
-    const url = `${API_URL}api/v1/service/list?limit=${
-      payload?.limit || 50
-    }&name=${payload?.name || ""}&offset=${payload?.offset || 0}&type=${
-      payload?.type || ""
-    }&parent=${payload?.parent || ""}`;
-    return axios
-      .get(url, {
-        headers: {
-          Authorization: `Token ${ACCESS_TOKEN}`,
-        },
-      })
-      .then(function (response) {
-        if (response.status === 200 || response.status === 201) {
-          return response.data;
-        } else {
-          return {
-            data: {
-              results: [],
-            },
-          };
-        }
-      })
-      .catch(function (error) {
-        return error.response?.data;
-      });
-  }; */
 
 
-  //done
   getSpecialityeDetails = (id) => {
     const url = `${API_URL}website/speciality/${id}`;
     return axios
@@ -82,7 +54,7 @@ export default class Speciality {
       });
   };
 
-  //done
+
   addSpeciality = (payload) => {
     const url = `${API_URL}website/speciality`;
     return axios({
@@ -137,7 +109,7 @@ export default class Speciality {
       });
   };
 
-  //done
+
 
   deleteSpeciality = (id) => {
     const url = `${API_URL}website/speciality/${id}`;

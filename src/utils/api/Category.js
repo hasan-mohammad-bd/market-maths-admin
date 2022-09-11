@@ -3,7 +3,7 @@ import { API_URL, ACCESS_TOKEN } from "../constants";
 
 export default class Category {
 
-    // done
+
   getCategoryList = () => {
     const url = `${API_URL}blog/category`;
     return axios
@@ -28,7 +28,7 @@ export default class Category {
       });
   };
 
-//   done
+
 
 
   getCategoryDetails = (id) => {
@@ -55,7 +55,7 @@ export default class Category {
       });
   };
 
-  //done
+
 
   addCategory = (payload) => {
     const url = `${API_URL}blog/category`;
@@ -109,7 +109,7 @@ export default class Category {
       });
   };
 
-//   done
+
 
   deleteCategory = (id) => {
     const url = `${API_URL}blog/category/${id}`;

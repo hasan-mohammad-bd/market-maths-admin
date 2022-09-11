@@ -12,12 +12,11 @@ import {
   Popconfirm,
   InputNumber,
 } from "antd";
-import { FileAddFilled, DeleteOutlined } from "@ant-design/icons";
+
 import { useParams, useNavigate } from "react-router-dom";
 
 import TajiraCard from "../../common/tajira-card";
 import Spinner from "../../common/spinner";
-import Editor from "../../common/rich-editor";
 
 import API from "../../../utils/api";
 import {
@@ -27,11 +26,10 @@ import {
 
 const { Option } = Select;
 
-const AddBlog = () => {
+const AddWithdraw = () => {
   const [form] = Form.useForm();
 
-  const blog = new API.Withdraw();
-
+  const withdraw = new API.Withdraw();
 
   const navigate = useNavigate();
   const params = useParams();
@@ -39,37 +37,15 @@ const AddBlog = () => {
   const isEdit = !!id;
 
   const [loading, setLoading] = useState(false);
-  const [blogDetails, setBlogDetails] = useState({});
-  const [description, setDescription] = useState("");
-  // const [tags, setTags] = useState([]);
-  const [categories, setCategory] = useState([])
-  const [imageList, setImageList] = useState([]);
-  const [comments, setComments] = useState([]);
-
-
-  //demo 
-  const tagsList = [
-    {_id:1, name:"finance", },
-    {_id:2, name:"math", },
-    {_id:3, name:"market", },
-    {_id:4, name:"economy", },
-    {_id:5, name:"freelance", },
-    {_id:6, name:"income", },
-  ]
 
   useEffect(() => {
     if (id) {
-      fetchBlogDetails();
+      fetchWithdrawDetails();
     }
-
   }, [id]);
 
-
-
-  const fetchBlogDetails = () => {
-
-    getDataManager(blog?.getWithdrawDetails, setLoading, id).then((x) => {
-
+  const fetchWithdrawDetails = () => {
+    getDataManager(withdraw?.getWithdrawDetails, setLoading, id).then((x) => {
       if (x?.status) {
         const res = x?.data;
         form.setFieldsValue({
@@ -78,10 +54,8 @@ const AddBlog = () => {
           withdraw_min: res.withdraw_min,
           withdraw_max: res.withdraw_max,
           duration: res.duration,
-          status: res.status
-          
+          status: res.status,
         });
-        
       } else {
         const error = getErrorMessage(x?.errors) || x?.message;
         message.error({
@@ -92,8 +66,8 @@ const AddBlog = () => {
     });
   };
 
-  const addBlog = (payload) => {
-    getDataManager(blog?.addWithdraw, setLoading, payload).then((x) => {
+  const addWithdraw = (payload) => {
+    getDataManager(withdraw?.addWithdraw, setLoading, payload).then((x) => {
       console.log(x);
       if (x?.status) {
         message.success({
@@ -111,29 +85,28 @@ const AddBlog = () => {
     });
   };
 
-  const editBlog = (payload) => {
-    getDataManager(blog?.editWithdraw, setLoading, payload, id).then((x) => {
-      if (x?.status) {
-        message.success({
-          content: "Information saved",
-          duration: 3,
-        });
-        navigate("/withdraw");
-      } else {
-        const error = getErrorMessage(x?.errors) || x?.message;
-        message.error({
-          content: error || "Error ocurred",
-          duration: 3,
-        });
+  const editWithdraw = (payload) => {
+    getDataManager(withdraw?.editWithdraw, setLoading, payload, id).then(
+      (x) => {
+        if (x?.status) {
+          message.success({
+            content: "Information saved",
+            duration: 3,
+          });
+          navigate("/withdraw");
+        } else {
+          const error = getErrorMessage(x?.errors) || x?.message;
+          message.error({
+            content: error || "Error ocurred",
+            duration: 3,
+          });
+        }
       }
-    });
+    );
   };
 
   const onFinish = (values) => {
-
     console.log(values);
-
-    const imageFileChanged = values.image !== blogDetails?.image;
 
     var payload = new FormData();
     payload.append("name", values.name);
@@ -143,24 +116,17 @@ const AddBlog = () => {
     payload.append("duration", values.duration);
     payload.append("status", values.status);
 
-    !!values?.image &&
-      imageFileChanged &&
-      payload.append("image", values?.image?.file?.originFileObj);
-
     if (isEdit) {
-      editBlog(payload);
+      editWithdraw(payload);
     } else {
-      addBlog(payload);
-
+      addWithdraw(payload);
     }
   };
 
-
-
-
-
   return (
-    <TajiraCard heading={isEdit ? "Edit Withdraw Method" : "Add Withdraw Method"}>
+    <TajiraCard
+      heading={isEdit ? "Edit Withdraw Method" : "Add Withdraw Method"}
+    >
       {loading && <Spinner />}
       <Form
         onFinish={onFinish}
@@ -228,9 +194,6 @@ const AddBlog = () => {
         >
           <InputNumber placeholder="Enter min duration" />
         </Form.Item>
-{/*         <Form.Item label="Introduction" name="introduction">
-          <Input placeholder="Enter introduction" />
-        </Form.Item> */}
 
         <Form.Item
           label="Status"
@@ -253,4 +216,4 @@ const AddBlog = () => {
   );
 };
 
-export default AddBlog;
+export default AddWithdraw;

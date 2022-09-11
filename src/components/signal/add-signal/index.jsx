@@ -27,10 +27,10 @@ import {
 
 const { Option } = Select;
 
-const AddBlog = () => {
+const AddSignal = () => {
   const [form] = Form.useForm();
 
-  const blog = new API.Signal();
+  const signal = new API.Signal();
   const plan = new API.Plan();
   const assets = new API.Assets();
   const symbol = new API.Symbol();
@@ -56,22 +56,11 @@ const AddBlog = () => {
   const [statusList, setStatusList] = useState([]);
 
 
-  //demo 
-  const tags = [
-    {_id:1, name:"finance", },
-    {_id:2, name:"math", },
-    {_id:3, name:"market", },
-    {_id:4, name:"economy", },
-    {_id:5, name:"freelance", },
-    {_id:6, name:"income", },
-  ]
 
   useEffect(() => {
     if (id) {
-      fetchBlogDetails();
+      fetchSignalDetails();
     }
-    // fetchTagsList();
-    // fetchCategoryList();
     fetchPlanList();
     fetchAssetsList();
     fetchSymbolList();
@@ -170,9 +159,9 @@ const AddBlog = () => {
 
 
 
-  const fetchBlogDetails = () => {
+  const fetchSignalDetails = () => {
 
-    getDataManager(blog?.getSignalDetails, setLoading, id).then((x) => {
+    getDataManager(signal?.getSignalDetails, setLoading, id).then((x) => {
 
       if (x?.status) {
         const res = x?.data;
@@ -212,8 +201,8 @@ const AddBlog = () => {
     });
   };
 
-  const addBlog = (payload) => {
-    getDataManager(blog?.addSignal, setLoading, payload).then((x) => {
+  const addSignal = (payload) => {
+    getDataManager(signal?.addSignal, setLoading, payload).then((x) => {
       console.log(x);
       if (x?.status) {
         message.success({
@@ -231,8 +220,8 @@ const AddBlog = () => {
     });
   };
 
-  const editBlog = (payload) => {
-    getDataManager(blog?.editSignal, setLoading, payload, id).then((x) => {
+  const editSignal = (payload) => {
+    getDataManager(signal?.editSignal, setLoading, payload, id).then((x) => {
       if (x?.status) {
         message.success({
           content: "Information saved",
@@ -273,17 +262,17 @@ const AddBlog = () => {
       payload.append("image", values?.image?.file?.originFileObj);
 
     if (isEdit) {
-      editBlog(payload);
+      editSignal(payload);
     } else {
-      addBlog(payload);
+      addSignal(payload);
 
     }
   };
 
   const handleDelete = (id) => {
-    getDataManager(blog?.deleteBlog, setLoading, id).then((x) => {
+    getDataManager(signal?.deleteBlog, setLoading, id).then((x) => {
       if (x.status) {
-        fetchBlogDetails();
+        fetchSignalDetails();
         message.success({
           content: "comment deleted successfully",
           duration: 2,
@@ -520,4 +509,4 @@ const AddBlog = () => {
   );
 };
 
-export default AddBlog;
+export default AddSignal;

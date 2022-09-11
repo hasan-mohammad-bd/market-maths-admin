@@ -1,7 +1,17 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
-import { Form, message, Button, Input, Select, Upload, Space, InputNumber, Radio } from "antd";
-import { FileAddFilled } from "@ant-design/icons";
+import {
+  Form,
+  message,
+  Button,
+  Input,
+  Select,
+  Upload,
+  Space,
+  InputNumber,
+  Radio,
+} from "antd";
+
 import { useParams, useNavigate } from "react-router-dom";
 import TajiraCard from "../../common/tajira-card";
 import Spinner from "../../common/spinner";
@@ -12,33 +22,26 @@ import {
   getErrorMessage,
 } from "../../../utils/helper.functions";
 
-
-
-const AddTeam = () => {
+const StaffTeam = () => {
   const [form] = Form.useForm();
 
-
-  const team = new API.Staff();
+  const staff = new API.Staff();
 
   const navigate = useNavigate();
   const params = useParams();
   const { id } = params;
   const isEdit = !!id;
 
-
   const [loading, setLoading] = useState(false);
-
 
   useEffect(() => {
     if (id) {
-      // fetchTeamDetails();
+      // fetchStaffDetails();
     }
-
   }, [id]);
 
-
-  const fetchTeamDetails = () => {
-    getDataManager(team?.getStaffDetails, setLoading, id).then((x) => {
+  /*   const fetchStaffDetails = () => {
+    getDataManager(staff?.getStaffDetails, setLoading, id).then((x) => {
       if (x?.status) {
         const res = x?.data;
         form.setFieldsValue({
@@ -56,14 +59,12 @@ const AddTeam = () => {
         });
       }
     });
-  };
+  }; */
 
-  const addTeam = (payload) => {
-    getDataManager(team?.addStaff, setLoading, payload).then((x) => {
-        console.log(x);
+  const addStaff = (payload) => {
+    getDataManager(staff?.addStaff, setLoading, payload).then((x) => {
+      console.log(x);
       if (x?.status) {
-
-        
         message.success({
           content: "Information saved",
           duration: 3,
@@ -79,8 +80,8 @@ const AddTeam = () => {
     });
   };
 
-  const editTeam = (payload) => {
-    getDataManager(team?.editStaff, setLoading, payload, id).then((x) => {
+  const editStaff = (payload) => {
+    getDataManager(staff?.editStaff, setLoading, payload, id).then((x) => {
       if (x?.status) {
         message.success({
           content: "Information saved",
@@ -97,17 +98,13 @@ const AddTeam = () => {
     });
   };
 
-  
-
- 
-
-    const onFinish = (values) => {
-        if (isEdit) {
-          editTeam(values);
-        } else {
-          addTeam(values);
-        }
-      };
+  const onFinish = (values) => {
+    if (isEdit) {
+      editStaff(values);
+    } else {
+      addStaff(values);
+    }
+  };
 
   return (
     <TajiraCard heading={isEdit ? "Edit Staff" : "Add Staff Member"}>
@@ -176,12 +173,11 @@ const AddTeam = () => {
             },
           ]}
         >
-    <Radio.Group>
-      <Radio value={true}>Active</Radio>
-      <Radio value={false}>Deactivate</Radio>
-    </Radio.Group>
+          <Radio.Group>
+            <Radio value={true}>Active</Radio>
+            <Radio value={false}>Deactivate</Radio>
+          </Radio.Group>
         </Form.Item>
-
 
         <Form.Item>
           <Button type="primary" htmlType="submit">
@@ -193,4 +189,4 @@ const AddTeam = () => {
   );
 };
 
-export default AddTeam;
+export default StaffTeam;

@@ -1,8 +1,17 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
-import { Form, message, Button, Input, Typography, Select,RadioChangeEvent, InputNumber } from "antd";
+import {
+  Form,
+  message,
+  Button,
+  Input,
+  Typography,
+  Select,
+  RadioChangeEvent,
+  InputNumber,
+} from "antd";
 import { useParams, useNavigate } from "react-router-dom";
-import { Radio } from 'antd';
+import { Radio } from "antd";
 
 import TajiraCard from "../../common/tajira-card";
 import Spinner from "../../common/spinner";
@@ -33,15 +42,13 @@ const AddTag = () => {
     showTotal: (total, range) => `${range[0]}-${range[1]} of ${total} items`,
   });
 
-  const tag = new API.MessageList();
+  const message = new API.MessageList();
   const subscriber = new API.SubscriberList();
 
   const navigate = useNavigate();
   const params = useParams();
   const { id } = params;
   const isEdit = !!id;
-
-
 
   useEffect(() => {
     fetchSubscriberList();
@@ -56,7 +63,7 @@ const AddTag = () => {
     });
   };
 
-/*   const fetchTagDetails = () => {
+  /*   const fetchMessageDetails = () => {
     getDataManager(tag?.getPlanDetails, setLoading, id).then((x) => {
       if (x?.status) {
 
@@ -84,26 +91,28 @@ const AddTag = () => {
   }; */
 
   const fetchSubscriberList = async () => {
-    return getDataManager(subscriber?.getSubscriberList, setLoading).then((x) => {
+    return getDataManager(subscriber?.getSubscriberList, setLoading).then(
+      (x) => {
         console.log(x);
-      if (x?.status) {
-        const emailList = x?.data?.map(m => m?.email)
-        setEmail(emailList)
+        if (x?.status) {
+          const emailList = x?.data?.map((m) => m?.email);
+          setEmail(emailList);
 
-        console.log(emailList);
-      } else {
-        const error = getErrorMessage(x?.errors) || x?.message;
-        message.error({
-          content: error || "Error ocurred",
-          duration: 3,
-        });
+          console.log(emailList);
+        } else {
+          const error = getErrorMessage(x?.errors) || x?.message;
+          message.error({
+            content: error || "Error ocurred",
+            duration: 3,
+          });
+        }
       }
-    });
+    );
   };
 
   const addMessageList = (payload) => {
-    getDataManager(tag?.addMessage, setLoading, payload).then((x) => {
-        console.log(x);
+    getDataManager(message?.addMessage, setLoading, payload).then((x) => {
+      console.log(x);
       if (x?.status) {
         message.success({
           content: "Information saved",
@@ -121,7 +130,7 @@ const AddTag = () => {
   };
 
   const editMessageList = (payload) => {
-    getDataManager(tag?.editPlan, setLoading, payload, id).then((x) => {
+    getDataManager(message?.editPlan, setLoading, payload, id).then((x) => {
       if (x?.status) {
         message.success({
           content: "Information saved",
@@ -138,21 +147,13 @@ const AddTag = () => {
     });
   };
 
-
-
-
-
-
-    const onFinish = (values) => {
-
-        if(isEdit){
-            editMessageList(values);
-        }
-        else{
-            addMessageList(values);
-        }        
+  const onFinish = (values) => {
+    if (isEdit) {
+      editMessageList(values);
+    } else {
+      addMessageList(values);
     }
-  
+  };
 
   return (
     <TajiraCard heading={isEdit ? "Edit Message" : "Add Message"}>
@@ -182,7 +183,7 @@ const AddTag = () => {
           name="message"
           rules={[{ required: true, message: "Please add Message" }]}
         >
-            <TextArea placeholder="Write message" />
+          <TextArea placeholder="Write message" />
         </Form.Item>
 
         <Form.Item
@@ -191,7 +192,7 @@ const AddTag = () => {
           rules={[{ required: true, message: "Please select publish status" }]}
         >
           <Select mode="multiple" placeholder="Select Publish Status">
-            <Option value={emails}>Select all email</Option>
+            <Option value={emails}>Total email found:{emails.length}</Option>
           </Select>
         </Form.Item>
 

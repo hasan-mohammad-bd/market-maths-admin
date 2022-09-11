@@ -12,13 +12,13 @@ import API from "../../utils/api";
 import { getDataManager, getErrorMessage } from "../../utils/helper.functions";
 import moment from "moment";
 
-const BlogList = () => {
-  const blog = new API.Signal();
+const SignalList = () => {
+  const signal = new API.Signal();
 
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
-  const [blogList, setBlogList] = useState([]);
+  const [signalList, setSignalList] = useState([]);
   const [pagination, setPagination] = useState({
     current: 1,
     defaultPageSize: 50,
@@ -29,11 +29,11 @@ const BlogList = () => {
   });
 
   useEffect(() => {
-    fetchBlogList();
+    fetchSignalList();
   }, []);
 
-  const fetchBlogList = async (payload) => {
-    return getDataManager(blog?.getSignalList, setLoading, payload).then((x) => {
+  const fetchSignalList = async (payload) => {
+    return getDataManager(signal?.getSignalList, setLoading, payload).then((x) => {
       console.log(x);
       if (x?.status) {
         setPagination({
@@ -42,7 +42,7 @@ const BlogList = () => {
           pageSize: payload?.pageSize || pagination?.pageSize,
           total: x?.data?.count,
         });
-        setBlogList(x?.data);
+        setSignalList(x?.data);
       } else {
         const error = getErrorMessage(x?.errors) || x?.message;
         message.error({
@@ -62,9 +62,9 @@ const BlogList = () => {
   };
 
   const handleDelete = (id) => {
-    getDataManager(blog?.deleteSignal, setLoading, id).then((x) => {
+    getDataManager(signal?.deleteSignal, setLoading, id).then((x) => {
       if (x.status) {
-        fetchBlogList();
+        fetchSignalList();
         message.success({
           content: "Signal deleted successfully",
           duration: 2,
@@ -165,8 +165,8 @@ const BlogList = () => {
   return (
     <TajiraCard heading="Signal" actions={<AddNewButton onAdd={handleAdd} />}>
       <TajiraTable
-        fetchData={fetchBlogList}
-        dataSource={blogList}
+        fetchData={fetchSignalList}
+        dataSource={signalList}
         columns={columns}
         title="All Signals"
         loading={loading}
@@ -178,4 +178,4 @@ const BlogList = () => {
   );
 };
 
-export default BlogList;
+export default SignalList;

@@ -31,8 +31,8 @@ export default class SubscriberList {
   };
 
 //done
-/*   getPlanDetails = (id) => {
-    const url = `${API_URL}plan/${id}`;
+/*   getSubscriberDetails = (id) => {
+    const url = `${API_URL}subscriber/${id}`;
     return axios
       .get(url, {
         headers: {
@@ -57,8 +57,8 @@ export default class SubscriberList {
 
 
 
-/*   addPlan = (payload) => {
-    const url = `${API_URL}plan`;
+/*   addSubscriber = (payload) => {
+    const url = `${API_URL}subscriber`;
     return axios({
       url,
       method: "POST",
@@ -83,8 +83,8 @@ export default class SubscriberList {
       });
   }; */
 
-/*   editPlan = (payload, id) => {
-    const url = `${API_URL}plan/${id}`;
+/*   editSubscriber = (payload, id) => {
+    const url = `${API_URL}subscriber/${id}`;
     return axios({
       url,
       method: "PUT",
@@ -109,7 +109,7 @@ export default class SubscriberList {
       });
   }; */
 
-//done
+
   deleteSubscriber = (id) => {
     const url = `${API_URL}subscriber/${id}`;
     return axios

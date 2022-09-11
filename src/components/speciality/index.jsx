@@ -17,12 +17,12 @@ import API from "../../utils/api";
 import { getDataManager, getErrorMessage } from "../../utils/helper.functions";
 
 const SpecialityList = () => {
-  const services = new API.Speciality();
+  const speciality = new API.Speciality();
 
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
-  const [servicesList, setServicesList] = useState([]);
+  const [specialityList, setSpecialityList] = useState([]);
   const [pagination, setPagination] = useState({
     current: 1,
     defaultPageSize: 50,
@@ -46,7 +46,7 @@ const SpecialityList = () => {
   };
 
   const fetchSpecialityList = async (payload) => {
-    return getDataManager(services?.getSpecialityList, setLoading, payload).then(
+    return getDataManager(speciality?.getSpecialityList, setLoading, payload).then(
       (x) => {
         if (x?.status) {
 
@@ -57,7 +57,7 @@ const SpecialityList = () => {
             pageSize: payload?.pageSize || pagination?.pageSize,
             total: x?.data?.count,
           });
-          setServicesList(organizedData);
+          setSpecialityList(organizedData);
         } else {
           const error = getErrorMessage(x?.errors) || x?.message;
           message.error({
@@ -78,7 +78,7 @@ const SpecialityList = () => {
   };
 
   const handleDelete = (id) => {
-    getDataManager(services?.deleteSpeciality, setLoading, id).then((x) => {
+    getDataManager(speciality?.deleteSpeciality, setLoading, id).then((x) => {
       if (x.status) {
         fetchSpecialityList();
         message.success({
@@ -91,9 +91,6 @@ const SpecialityList = () => {
     });
   };
 
-/*   const handleSubService = (id) => {
-    navigate(`/sub-service/${id}`);
-  }; */
 
   const columns = [
 
@@ -139,7 +136,7 @@ const SpecialityList = () => {
     <TajiraCard heading="Specialty" actions={<AddNewButton onAdd={handleAdd} />}>
       <TajiraTable
         fetchData={fetchSpecialityList}
-        dataSource={servicesList}
+        dataSource={specialityList}
         columns={columns}
         title="All Specialty"
         loading={loading}

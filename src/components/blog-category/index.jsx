@@ -11,8 +11,8 @@ import AddNewButton from "../common/add-button";
 import API from "../../utils/api";
 import { getDataManager, getErrorMessage } from "../../utils/helper.functions";
 
-const TagsList = () => {
-  const tag = new API.Category();
+const CategoryList = () => {
+  const category = new API.Category();
 
   const navigate = useNavigate();
 
@@ -42,7 +42,7 @@ const TagsList = () => {
   };
 
   const fetchCategoryList = async () => {
-    return getDataManager(tag?.getCategoryList, setLoading).then((x) => {
+    return getDataManager(category?.getCategoryList, setLoading).then((x) => {
       if (x?.status) {
 
         const organizedData = getOrganizedData(x?.data);
@@ -75,7 +75,7 @@ const TagsList = () => {
   };
 
   const handleDelete = (id) => {
-    getDataManager(tag?.deleteCategory, setLoading, id).then((x) => {
+    getDataManager(category?.deleteCategory, setLoading, id).then((x) => {
       if (x.status) {
         fetchCategoryList();
         message.success({
@@ -141,4 +141,4 @@ const TagsList = () => {
   );
 };
 
-export default TagsList;
+export default CategoryList;

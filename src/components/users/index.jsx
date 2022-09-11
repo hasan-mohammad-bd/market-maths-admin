@@ -12,13 +12,13 @@ import API from "../../utils/api";
 import { getDataManager, getErrorMessage } from "../../utils/helper.functions";
 
 
-const TeamList = () => {
-  const team = new API.Users();
+const UsersList = () => {
+  const users = new API.Users();
 
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
-  const [teamList, setTeamList] = useState([]);
+  const [usersList, setTeamList] = useState([]);
 
   const [pagination, setPagination] = useState({
     current: 1,
@@ -30,11 +30,11 @@ const TeamList = () => {
   });
 
   useEffect(() => {
-    fetchTeamList();
+    fetchUsersList();
   }, []);
 
-  const fetchTeamList = async (payload) => {
-    return getDataManager(team?.getUserList, setLoading, payload).then(
+  const fetchUsersList = async (payload) => {
+    return getDataManager(users?.getUserList, setLoading, payload).then(
       (x) => {
         if (x?.status) {
           setPagination({
@@ -67,9 +67,9 @@ const TeamList = () => {
 
 
   const handleDelete = (id) => {
-    getDataManager(team?.deleteUsers, setLoading, id).then((x) => {
+    getDataManager(users?.deleteUsers, setLoading, id).then((x) => {
       if (x.status) {
-        fetchTeamList();
+        fetchUsersList();
         message.success({
           content: "Team member deleted successfully",
           duration: 2,
@@ -81,9 +81,9 @@ const TeamList = () => {
   };
 
   const fetchUsersVerify = (id) => {
-    getDataManager(team?.getUsersActivate, setLoading, id).then((x) => {
+    getDataManager(users?.getUsersActivate, setLoading, id).then((x) => {
       if (x?.status) {
-        fetchTeamList();
+        fetchUsersList();
         message.success({
           content: "User activated successfully",
           duration: 2,
@@ -100,11 +100,11 @@ const TeamList = () => {
     });
   };
   const fetchUsersPhoneVerify = (id) => {
-    getDataManager(team?.getUsersVerify, setLoading, id).then((x) => {
+    getDataManager(users?.getUsersVerify, setLoading, id).then((x) => {
       if (x?.status) {
-        fetchTeamList();
+        fetchUsersList();
         message.success({
-          content: "{Phone verified successfully",
+          content: "Phone verified successfully",
           duration: 2,
         });
 
@@ -227,8 +227,8 @@ const TeamList = () => {
   return (
     <TajiraCard heading="Users" actions={<AddNewButton onAdd={handleAdd} />}>
       <TajiraTable
-        fetchData={fetchTeamList}
-        dataSource={teamList}
+        fetchData={fetchUsersList}
+        dataSource={usersList}
         columns={columns}
         title="All Users"
         loading={loading}
@@ -240,4 +240,4 @@ const TeamList = () => {
   );
 };
 
-export default TeamList;
+export default UsersList;
