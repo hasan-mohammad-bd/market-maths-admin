@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
-import { message, Space, Popconfirm, Image, Tag, Tooltip } from "antd";
-import { FormOutlined, DeleteOutlined, EyeOutlined } from "@ant-design/icons";
+import { message, Space } from "antd";
+import { FormOutlined} from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 
 import TajiraTable from "../common/table";
@@ -12,13 +12,13 @@ import API from "../../utils/api";
 import { getDataManager, getErrorMessage } from "../../utils/helper.functions";
 import About from "../../utils/api/About";
 
-const BlogList = () => {
+const TermsList = () => {
   const terms = new API.Terms();
 
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
-  const [aboutList, setAboutList] = useState([]);
+  const [termsList, setTermsList] = useState([]);
   const [pagination, setPagination] = useState({
     current: 1,
     defaultPageSize: 50,
@@ -42,7 +42,7 @@ const BlogList = () => {
           pageSize: payload?.pageSize || pagination?.pageSize,
           total: x?.data?.count,
         });
-        setAboutList([x?.data]);
+        setTermsList([x?.data]);
       } else {
         const error = getErrorMessage(x?.errors) || x?.message;
         message.error({
@@ -54,35 +54,17 @@ const BlogList = () => {
   };
 
 
-/*   const handleAdd = () => {
-    navigate("/add-logo");
-  };
- */
+
   const handleEdit = () => {
     navigate(`/edit-terms`);
   };
-
-/*   const handleDelete = (id) => {
-    getDataManager(blog?.deleteBlog, setLoading, id).then((x) => {
-      if (x.status) {
-        fetchBlogList();
-        message.success({
-          content: "blog deleted successfully",
-          duration: 2,
-        });
-      } else {
-        message.error({ content: "Process failed", duration: 2 });
-      }
-    });
-  }; */
-
 
 
   const columns = [
 
 
     {
-      title: "Terms & condition Text",
+      title: "Terms & Condition Text",
       dataIndex: "terms",
       key: "terms",
 
@@ -107,7 +89,7 @@ const BlogList = () => {
     <TajiraCard heading="Terms & Condition">
       <TajiraTable
         fetchData={fetchTerms}
-        dataSource={aboutList}
+        dataSource={termsList}
         columns={columns}
         title="Terms & Condition Text"
         loading={loading}
@@ -119,4 +101,4 @@ const BlogList = () => {
   );
 };
 
-export default BlogList;
+export default TermsList;

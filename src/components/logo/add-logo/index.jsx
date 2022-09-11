@@ -26,12 +26,11 @@ import {
 
 const { Option } = Select;
 
-const AddBlog = () => {
+const AddLogo = () => {
   const [form] = Form.useForm();
 
   const logo = new API.TheLogo();
-/*   const tag = new API.Tags();
-  const category = new API.Category(); */
+
 
   const navigate = useNavigate();
   const params = useParams();
@@ -40,84 +39,15 @@ const AddBlog = () => {
 
   const [loading, setLoading] = useState(false);
   const [blogDetails, setBlogDetails] = useState({});
-  const [description, setDescription] = useState("");
-  // const [tags, setTags] = useState([]);
-  const [categories, setCategory] = useState([])
+
   const [logo1List, setLogo1List] = useState([]);
   const [logo2List, setLogo2List] = useState([]);
-  const [comments, setComments] = useState([]);
 
 
 
 
-  useEffect(() => {
-    if (id) {
-      // fetchBlogDetails();
-    }
-    // fetchTagsList();
-    // fetchCategoryList()
-  }, [id]);
 
-
-  
-
-
-/*   const fetchBlogDetails = () => {
-
-    getDataManager(blog?.getBlogDetails, setLoading, id).then((x) => {
-
-      if (x?.status) {
-        const res = x?.data;
-        form.setFieldsValue({
-          title: res.title,
-          description: res.description,
-          tags: (res.tags || []).map((t) => t?._id),
-          status: res.status,
-          image: res.image,
-          category: res.category,
-          featured: res.featured
-        });
-        setImageList([
-          {
-            uid: "1",
-            name: "image.png",
-            status: "done",
-            url: res.image,
-          },
-        ]);
-        setComments(x?.data?.comments);
-        setDescription(res?.description);
-        setBlogDetails(res);
-      } else {
-        const error = getErrorMessage(x?.errors) || x?.message;
-        message.error({
-          content: error || "Error ocurred",
-          duration: 3,
-        });
-      }
-    });
-  }; */
-
-/*   const addBlog = (payload) => {
-    getDataManager(blog?.addBlog, setLoading, payload).then((x) => {
-      console.log(x);
-      if (x?.status) {
-        message.success({
-          content: "Information saved",
-          duration: 3,
-        });
-        navigate("/blog");
-      } else {
-        const error = getErrorMessage(x?.errors) || x?.message;
-        message.error({
-          content: error || "Error ocurred",
-          duration: 3,
-        });
-      }
-    });
-  };
- */
-  const editBlog = (payload) => {
+  const editLogo = (payload) => {
     getDataManager(logo?.editTheLogo, setLoading, payload, id).then((x) => {
       if (x?.status) {
         message.success({
@@ -143,12 +73,6 @@ const AddBlog = () => {
     const logo2FileChanged = values.logo2 !== blogDetails?.logo2;
 
     var payload = new FormData();
-/*     payload.append("title", values.title);
-    payload.append("description", values.description);
-    payload.append("featured", values.featured);
-    payload.append("tags", JSON.stringify(values.tags));
-    values?.tags.forEach((tag) => payload.append("tags", tag));
-    payload.append("category", values.category) */
 
     !!values?.logo &&
     logoFileChanged &&
@@ -158,52 +82,14 @@ const AddBlog = () => {
       payload.append("logo2", values?.logo2?.file?.originFileObj);
 
     if (isEdit) {
-      editBlog(payload);
+      editLogo(payload);
     } else {
       // addBlog(payload);
 
     }
   };
 
-/*   const handleDelete = (id) => {
-    getDataManager(blog?.deleteBlog, setLoading, id).then((x) => {
-      if (x.status) {
-        fetchBlogDetails();
-        message.success({
-          content: "comment deleted successfully",
-          duration: 2,
-        });
-      } else {
-        message.error({ content: "Process failed", duration: 2 });
-      }
-    });
-  }; */
 
-/*   const columns = [
-    {
-      title: "Email",
-      dataIndex: "email",
-      key: "email",
-    },
-    {
-      title: "Text",
-      dataIndex: "text",
-      key: "text",
-    },
-    {
-      title: "Action",
-      dataIndex: "action",
-      key: "action",
-      render: (text, record) => (
-        <Popconfirm
-          title="Are you sure to delete?"
-          onConfirm={() => handleDelete(record?._id)}
-        >
-          <DeleteOutlined className="delete-icon" />
-        </Popconfirm>
-      ),
-    },
-  ]; */
 
   return (
     <TajiraCard heading={isEdit ? "Edit logo" : "Add logo"}>
@@ -214,70 +100,7 @@ const AddBlog = () => {
         form={form}
         scrollToFirstError
       >
-{/*         <Form.Item
-          label="Title"
-          name="title"
-          rules={[
-            {
-              required: true,
-              message: "Please enter title",
-            },
-          ]}
-        >
-          <Input placeholder="Enter title" />
-        </Form.Item> */}
-{/*         <Form.Item label="Introduction" name="introduction">
-          <Input placeholder="Enter introduction" />
-        </Form.Item> */}
-{/*         <Form.Item
-          label="Description"
-          name="description"
-          rules={[{ required: true, message: "Please add description" }]}
-        >
-          <Editor
-            content={description}
-            handleContent={(content) => {
-              form.setFieldsValue({ description: content });
-              setDescription(content);
-            }}
-          />
-        </Form.Item> */}
-{/*         <Form.Item
-          label="Tags"
-          name="tags"
-          rules={[{ required: true, message: "Please select tags" }]}
-        >
-          <Select mode="multiple" placeholder="Select tags">
-            {tagsList?.map((t) => (
-              <Option key={t?._id} value={t?._id}>
-                {t?.name}
-              </Option>
-            ))}
-          </Select>
-        </Form.Item> */}
-{/*         <Form.Item
-          label="Category"
-          name="category"
-          rules={[{ required: true, message: "Please select category" }]}
-        >
-          <Select placeholder="Select category">
-            {categories?.map((t) => (
-              <Option key={t?._id} value={t?._id}>
-                {t?.name}
-              </Option>
-            ))}
-          </Select>
-        </Form.Item>
-        <Form.Item
-          label="Publish"
-          name="featured"
-          rules={[{ required: true, message: "Please select publish status" }]}
-        >
-          <Select placeholder="Select Publish Status">
-            <Option value={true}>Yes</Option>
-            <Option value={false}>No</Option>
-          </Select>
-        </Form.Item> */}
+
         <Form.Item
           label="Logo 1 (845*563) "
           name="logo1"
@@ -350,4 +173,4 @@ const AddBlog = () => {
   );
 };
 
-export default AddBlog;
+export default AddLogo;

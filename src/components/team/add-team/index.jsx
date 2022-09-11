@@ -25,9 +25,8 @@ import {
   getErrorMessage,
 } from "../../../utils/helper.functions";
 
-const { Option } = Select;
 
-const AddBlog = () => {
+const AddTeam = () => {
   const [form] = Form.useForm();
 
   const team = new API.Team();
@@ -39,12 +38,9 @@ const AddBlog = () => {
   const isEdit = !!id;
 
   const [loading, setLoading] = useState(false);
-  const [blogDetails, setBlogDetails] = useState({});
-  const [description, setDescription] = useState("");
-  // const [tags, setTags] = useState([]);
-  const [categories, setCategory] = useState([])
+  const [teamDetails, setTeamDetails] = useState({});
   const [imageList, setImageList] = useState([]);
-  const [comments, setComments] = useState([]);
+
 
 
 
@@ -122,7 +118,7 @@ const AddBlog = () => {
 
 
 
-    const imageFileChanged = values.image !== blogDetails?.image;
+    const imageFileChanged = values.image !== teamDetails?.image;
 
     var payload = new FormData();
     payload.append("name", values.name);
@@ -285,4 +281,4 @@ const AddBlog = () => {
   );
 };
 
-export default AddBlog;
+export default AddTeam;

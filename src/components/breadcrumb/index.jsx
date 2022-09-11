@@ -10,15 +10,15 @@ import AddNewButton from "../common/add-button";
 
 import API from "../../utils/api";
 import { getDataManager, getErrorMessage } from "../../utils/helper.functions";
-import About from "../../utils/api/About";
 
-const BlogList = () => {
+
+const BreadcrumbList = () => {
   const breadcrumb = new API.Breadcrumb();
 
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
-  const [aboutList, setAboutList] = useState([]);
+  const [breadcrumbList, setBreadcrumbList] = useState([]);
   const [pagination, setPagination] = useState({
     current: 1,
     defaultPageSize: 50,
@@ -42,7 +42,7 @@ const BlogList = () => {
           pageSize: payload?.pageSize || pagination?.pageSize,
           total: x?.data?.count,
         });
-        setAboutList([x?.data]);
+        setBreadcrumbList([x?.data]);
       } else {
         const error = getErrorMessage(x?.errors) || x?.message;
         message.error({
@@ -54,27 +54,12 @@ const BlogList = () => {
   };
 
 
-/*   const handleAdd = () => {
-    navigate("/add-logo");
-  };
- */
+
   const handleEdit = () => {
     navigate(`/edit-breadcrumb`);
   };
 
-/*   const handleDelete = (id) => {
-    getDataManager(blog?.deleteBlog, setLoading, id).then((x) => {
-      if (x.status) {
-        fetchBlogList();
-        message.success({
-          content: "blog deleted successfully",
-          duration: 2,
-        });
-      } else {
-        message.error({ content: "Process failed", duration: 2 });
-      }
-    });
-  }; */
+
 
 
 
@@ -107,7 +92,7 @@ const BlogList = () => {
     <TajiraCard heading="Breadcrumb">
       <TajiraTable
         fetchData={fetchBreadcrumbList}
-        dataSource={aboutList}
+        dataSource={breadcrumbList}
         columns={columns}
         title="All Breadcrumb Info"
         loading={loading}
@@ -119,4 +104,4 @@ const BlogList = () => {
   );
 };
 
-export default BlogList;
+export default BreadcrumbList;

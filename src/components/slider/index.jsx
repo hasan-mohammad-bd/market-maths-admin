@@ -11,13 +11,13 @@ import AddNewButton from "../common/add-button";
 import API from "../../utils/api";
 import { getDataManager, getErrorMessage } from "../../utils/helper.functions";
 
-const BlogList = () => {
+const SliderList = () => {
   const slider = new API.Slider();
 
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
-  const [blogList, setBlogList] = useState([]);
+  const [sliderList, setSliderList] = useState([]);
   const [pagination, setPagination] = useState({
     current: 1,
     defaultPageSize: 50,
@@ -41,7 +41,7 @@ const BlogList = () => {
           pageSize: payload?.pageSize || pagination?.pageSize,
           total: x?.data?.count,
         });
-        setBlogList(x?.data);
+        setSliderList(x?.data);
       } else {
         const error = getErrorMessage(x?.errors) || x?.message;
         message.error({
@@ -134,7 +134,7 @@ const BlogList = () => {
     <TajiraCard heading="Slider" actions={<AddNewButton onAdd={handleAdd} />}>
       <TajiraTable
         fetchData={fetchSliderList}
-        dataSource={blogList}
+        dataSource={sliderList}
         columns={columns}
         title="All Sliders"
         loading={loading}
@@ -146,4 +146,4 @@ const BlogList = () => {
   );
 };
 
-export default BlogList;
+export default SliderList;

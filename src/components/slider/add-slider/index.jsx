@@ -27,7 +27,7 @@ import {
 
 const { Option } = Select;
 
-const AddBlog = () => {
+const AddSlider = () => {
   const [form] = Form.useForm();
 
   const slider = new API.Slider();
@@ -39,12 +39,9 @@ const AddBlog = () => {
   const isEdit = !!id;
 
   const [loading, setLoading] = useState(false);
-  const [blogDetails, setBlogDetails] = useState({});
-  const [description, setDescription] = useState("");
-  // const [tags, setTags] = useState([]);
-  const [categories, setCategory] = useState([])
+  const [sliderDetails, setSliderDetails] = useState({});
   const [imageList, setImageList] = useState([]);
-  const [comments, setComments] = useState([]);
+
 
 
 
@@ -122,7 +119,7 @@ const AddBlog = () => {
 
     console.log(values);
 
-    const imageFileChanged = values.image !== blogDetails?.image;
+    const imageFileChanged = values.image !== sliderDetails?.image;
 
     var payload = new FormData();
     payload.append("main_title", values.main_title);
@@ -259,4 +256,4 @@ const AddBlog = () => {
   );
 };
 
-export default AddBlog;
+export default AddSlider;

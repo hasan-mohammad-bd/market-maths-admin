@@ -214,12 +214,7 @@ const SiderBar = ({ toggle, collapsed }) => {
         >
           Testimonials
         </Menu.Item>
-        <Menu.Item
-          onClick={() => navigate("/terms")}
-          key="42"
-        >
-          Terms
-        </Menu.Item>
+
         <Menu.Item
           onClick={() => navigate("/terms")}
           key="43"

@@ -115,7 +115,7 @@ const AddTag = () => {
       console.log(x);
       if (x?.status) {
         message.success({
-          content: "Information saved",
+          content: "Message has been sent",
           duration: 3,
         });
         navigate("/message-list");

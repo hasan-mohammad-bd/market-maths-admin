@@ -11,13 +11,13 @@ import AddNewButton from "../common/add-button";
 import API from "../../utils/api";
 import { getDataManager, getErrorMessage } from "../../utils/helper.functions";
 
-const BlogList = () => {
+const LogoList = () => {
   const logo = new API.TheLogo();
 
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
-  const [blogList, setBlogList] = useState([]);
+  const [logoList, setLogoList] = useState([]);
   const [pagination, setPagination] = useState({
     current: 1,
     defaultPageSize: 50,
@@ -28,10 +28,10 @@ const BlogList = () => {
   });
 
   useEffect(() => {
-    fetchBlogList();
+    fetchLogoList();
   }, []);
 
-  const fetchBlogList = async (payload) => {
+  const fetchLogoList = async (payload) => {
     return getDataManager(logo?.getTheLogo, setLoading, payload).then((x) => {
       console.log(x);
       if (x?.status) {
@@ -41,7 +41,7 @@ const BlogList = () => {
           pageSize: payload?.pageSize || pagination?.pageSize,
           total: x?.data?.count,
         });
-        setBlogList([x?.data]);
+        setLogoList([x?.data]);
       } else {
         const error = getErrorMessage(x?.errors) || x?.message;
         message.error({
@@ -109,8 +109,8 @@ const BlogList = () => {
   return (
     <TajiraCard heading="Logo">
       <TajiraTable
-        fetchData={fetchBlogList}
-        dataSource={blogList}
+        fetchData={fetchLogoList}
+        dataSource={logoList}
         columns={columns}
         title="All Logos"
         loading={loading}
@@ -122,4 +122,4 @@ const BlogList = () => {
   );
 };
 
-export default BlogList;
+export default LogoList;

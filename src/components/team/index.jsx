@@ -11,13 +11,13 @@ import AddNewButton from "../common/add-button";
 import API from "../../utils/api";
 import { getDataManager, getErrorMessage } from "../../utils/helper.functions";
 
-const BlogList = () => {
+const TeamList = () => {
   const team = new API.Team();
 
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
-  const [blogList, setBlogList] = useState([]);
+  const [teamList, setTeamList] = useState([]);
   const [pagination, setPagination] = useState({
     current: 1,
     defaultPageSize: 50,
@@ -28,12 +28,11 @@ const BlogList = () => {
   });
 
   useEffect(() => {
-    fetchSliderList();
+    fetchTeamList();
   }, []);
 
-  const fetchSliderList = async (payload) => {
+  const fetchTeamList = async (payload) => {
     return getDataManager(team?.getTeamList, setLoading, payload).then((x) => {
-
       if (x?.status) {
         setPagination({
           ...pagination,
@@ -41,7 +40,7 @@ const BlogList = () => {
           pageSize: payload?.pageSize || pagination?.pageSize,
           total: x?.data?.count,
         });
-        setBlogList(x?.data);
+        setTeamList(x?.data);
       } else {
         const error = getErrorMessage(x?.errors) || x?.message;
         message.error({
@@ -63,7 +62,7 @@ const BlogList = () => {
   const handleDelete = (id) => {
     getDataManager(team?.deleteTeam, setLoading, id).then((x) => {
       if (x.status) {
-        fetchSliderList();
+        fetchTeamList();
         message.success({
           content: "Team member deleted successfully",
           duration: 2,
@@ -74,10 +73,7 @@ const BlogList = () => {
     });
   };
 
-
-
   const columns = [
-
     {
       title: "Image",
       dataIndex: "image",
@@ -128,8 +124,6 @@ const BlogList = () => {
       key: "action",
       render: (text, record) => (
         <Space>
-
-
           <FormOutlined
             className="edit-icon"
             onClick={() => handleEdit(record?._id)}
@@ -146,10 +140,13 @@ const BlogList = () => {
   ];
 
   return (
-    <TajiraCard heading="Team Member" actions={<AddNewButton onAdd={handleAdd} />}>
+    <TajiraCard
+      heading="Team Member"
+      actions={<AddNewButton onAdd={handleAdd} />}
+    >
       <TajiraTable
-        fetchData={fetchSliderList}
-        dataSource={blogList}
+        fetchData={fetchTeamList}
+        dataSource={teamList}
         columns={columns}
         title="All Team Members"
         loading={loading}
@@ -161,4 +158,4 @@ const BlogList = () => {
   );
 };
 
-export default BlogList;
+export default TeamList;

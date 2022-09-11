@@ -27,24 +27,16 @@ import {
 
 const { Option } = Select;
 
-const AddBlog = () => {
+const AddMenu = () => {
   const [form] = Form.useForm();
-
   const menu = new API.Menu();
-
-
   const navigate = useNavigate();
   const params = useParams();
   const { id } = params;
   const isEdit = !!id;
 
   const [loading, setLoading] = useState(false);
-  const [blogDetails, setBlogDetails] = useState({});
-  const [description, setDescription] = useState("");
-  // const [tags, setTags] = useState([]);
-  const [categories, setCategory] = useState([])
-  const [imageList, setImageList] = useState([]);
-  const [comments, setComments] = useState([]);
+
 
 
 
@@ -119,22 +111,7 @@ const AddBlog = () => {
   };
 
   const onFinish = (values) => {
-/* 
-    console.log(values);
 
-    const imageFileChanged = values.image !== blogDetails?.image;
-
-    var payload = new FormData();
-    payload.append("name", values.name);
-    payload.append("charge", values.charge);
-    payload.append("withdraw_min", values.withdraw_min);
-    payload.append("withdraw_max", values.withdraw_max);
-    payload.append("duration", values.duration);
-    payload.append("status", values.status);
-
-    !!values?.image &&
-      imageFileChanged &&
-      payload.append("image", values?.image?.file?.originFileObj); */
 
     if (isEdit) {
       editMenu(values);
@@ -143,9 +120,6 @@ const AddBlog = () => {
 
     }
   };
-
-
-
 
 
   return (
@@ -193,4 +167,4 @@ const AddBlog = () => {
   );
 };
 
-export default AddBlog;
+export default AddMenu;

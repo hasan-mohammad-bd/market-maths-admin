@@ -1,24 +1,27 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { message, Space, Popconfirm, Image, Tag, Tooltip } from "antd";
-import { FormOutlined, DeleteOutlined, EyeOutlined, CheckOutlined, CloseOutlined } from "@ant-design/icons";
+import {
+  FormOutlined,
+  DeleteOutlined,
+  EyeOutlined,
+  CheckOutlined,
+  CloseOutlined,
+} from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 
 import TajiraTable from "../common/table";
 import TajiraCard from "../common/tajira-card";
-import AddNewButton from "../common/add-button";
-
 import API from "../../utils/api";
 import { getDataManager, getErrorMessage } from "../../utils/helper.functions";
-import About from "../../utils/api/About";
 
-const BlogList = () => {
+const BasicSettingList = () => {
   const basicSetting = new API.BasicSetting();
 
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
-  const [aboutList, setAboutList] = useState([]);
+  const [basicSettingList, setBasicSettingList] = useState([]);
   const [pagination, setPagination] = useState({
     current: 1,
     defaultPageSize: 50,
@@ -33,8 +36,11 @@ const BlogList = () => {
   }, []);
 
   const fetchBasicSetting = async (payload) => {
-    return getDataManager(basicSetting?.getBasicSetting, setLoading, payload).then((x) => {
-
+    return getDataManager(
+      basicSetting?.getBasicSetting,
+      setLoading,
+      payload
+    ).then((x) => {
       if (x?.status) {
         setPagination({
           ...pagination,
@@ -42,7 +48,7 @@ const BlogList = () => {
           pageSize: payload?.pageSize || pagination?.pageSize,
           total: x?.data?.count,
         });
-        setAboutList([x?.data]);
+        setBasicSettingList([x?.data]);
       } else {
         const error = getErrorMessage(x?.errors) || x?.message;
         message.error({
@@ -54,68 +60,42 @@ const BlogList = () => {
   };
 
 
-/*   const handleAdd = () => {
-    navigate("/add-logo");
-  };
- */
   const handleEdit = () => {
     navigate(`/edit-basic-setting`);
   };
 
-/*   const handleDelete = (id) => {
-    getDataManager(blog?.deleteBlog, setLoading, id).then((x) => {
-      if (x.status) {
-        fetchBlogList();
-        message.success({
-          content: "blog deleted successfully",
-          duration: 2,
-        });
-      } else {
-        message.error({ content: "Process failed", duration: 2 });
-      }
-    });
-  }; */
-
 
 
   const columns = [
-
-
     {
       title: "Title",
       dataIndex: "title",
       key: "title",
-
     },
     {
       title: "Color",
       dataIndex: "color",
       key: "color",
-
     },
     {
       title: "Address",
       dataIndex: "address",
       key: "address",
-
     },
     {
       title: "Currency",
       dataIndex: "currency",
       key: "currency",
-
     },
     {
       title: "Symbol",
       dataIndex: "symbol",
       key: "symbol",
-
     },
     {
       title: "Email",
       dataIndex: "email",
       key: "email",
-
     },
     {
       title: "Telegram Status",
@@ -123,11 +103,13 @@ const BlogList = () => {
       key: "telegram_status",
       render: (text, record) => (
         <span>
-          {record?.telegram_status === true ? <CheckOutlined /> : <CloseOutlined />}
+          {record?.telegram_status === true ? (
+            <CheckOutlined />
+          ) : (
+            <CloseOutlined />
+          )}
         </span>
       ),
-      
-
     },
     {
       title: "Email Alert",
@@ -138,7 +120,6 @@ const BlogList = () => {
           {record?.email_alert === true ? <CheckOutlined /> : <CloseOutlined />}
         </span>
       ),
-
     },
     {
       title: "Phone Alert",
@@ -149,29 +130,24 @@ const BlogList = () => {
           {record?.phone_alert === true ? <CheckOutlined /> : <CloseOutlined />}
         </span>
       ),
-
     },
     {
-        title: "Action",
-        dataIndex: "action",
-        key: "action",
-        render: (text, record) => (
-          <Space>
-            <FormOutlined
-              className="edit-icon"
-              onClick={() => handleEdit()}
-            />
-          </Space>
-        ),
-      },
-
+      title: "Action",
+      dataIndex: "action",
+      key: "action",
+      render: (text, record) => (
+        <Space>
+          <FormOutlined className="edit-icon" onClick={() => handleEdit()} />
+        </Space>
+      ),
+    },
   ];
 
   return (
     <TajiraCard heading="Basic Setting">
       <TajiraTable
         fetchData={fetchBasicSetting}
-        dataSource={aboutList}
+        dataSource={basicSettingList}
         columns={columns}
         title="All Basic Setting Items"
         loading={loading}
@@ -183,4 +159,4 @@ const BlogList = () => {
   );
 };
 
-export default BlogList;
+export default BasicSettingList;

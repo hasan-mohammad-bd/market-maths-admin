@@ -24,99 +24,23 @@ import {
   getErrorMessage,
 } from "../../../utils/helper.functions";
 
-const { Option } = Select;
 
-const AddBlog = () => {
+const AddBreadcrumb = () => {
   const [form] = Form.useForm();
 
   const breadcrumb = new API.Breadcrumb();
-/*   const tag = new API.Tags();
-  const category = new API.Category(); */
-
   const navigate = useNavigate();
   const params = useParams();
   const { id } = params;
   const isEdit = 1;
 
   const [loading, setLoading] = useState(false);
-  const [blogDetails, setBlogDetails] = useState({});
-  const [description, setDescription] = useState("");
-  // const [tags, setTags] = useState([]);
-  const [categories, setCategory] = useState([])
+  const [breadcrumbDetails, setBreadcrumbDetails] = useState({});
   const [imageList, setImageList] = useState([]);
-  const [logo2List, setLogo2List] = useState([]);
-  const [comments, setComments] = useState([]);
 
 
 
 
-  useEffect(() => {
-    if (id) {
-      // fetchBlogDetails();
-    }
-    // fetchTagsList();
-    // fetchCategoryList()
-  }, [id]);
-
-
-  
-
-
-/*   const fetchBlogDetails = () => {
-
-    getDataManager(blog?.getBlogDetails, setLoading, id).then((x) => {
-
-      if (x?.status) {
-        const res = x?.data;
-        form.setFieldsValue({
-          title: res.title,
-          description: res.description,
-          tags: (res.tags || []).map((t) => t?._id),
-          status: res.status,
-          image: res.image,
-          category: res.category,
-          featured: res.featured
-        });
-        setImageList([
-          {
-            uid: "1",
-            name: "image.png",
-            status: "done",
-            url: res.image,
-          },
-        ]);
-        setComments(x?.data?.comments);
-        setDescription(res?.description);
-        setBlogDetails(res);
-      } else {
-        const error = getErrorMessage(x?.errors) || x?.message;
-        message.error({
-          content: error || "Error ocurred",
-          duration: 3,
-        });
-      }
-    });
-  }; */
-
-/*   const addBlog = (payload) => {
-    getDataManager(blog?.addBlog, setLoading, payload).then((x) => {
-      console.log(x);
-      if (x?.status) {
-        message.success({
-          content: "Information saved",
-          duration: 3,
-        });
-        navigate("/blog");
-      } else {
-        const error = getErrorMessage(x?.errors) || x?.message;
-        message.error({
-          content: error || "Error ocurred",
-          duration: 3,
-        });
-      }
-    });
-  };
- */
   const editBreadcrumb = (payload) => {
     getDataManager(breadcrumb?.editBreadcrumb, setLoading, payload, id).then((x) => {
       if (x?.status) {
@@ -139,7 +63,7 @@ const AddBlog = () => {
 
     console.log(values);
 
-    const imageFileChanged = values.image !== blogDetails?.image;
+    const imageFileChanged = values.image !== breadcrumbDetails?.image;
 
     var payload = new FormData();
 
@@ -209,4 +133,4 @@ const AddBlog = () => {
   );
 };
 
-export default AddBlog;
+export default AddBreadcrumb;
