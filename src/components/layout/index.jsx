@@ -10,51 +10,18 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import Spinner from "../common/spinner";
 import SiderBar from "./sidebar";
-
 import { setUserData } from "../../utils/redux/actions";
-
 import "./styles.scss";
 
 
-const WebsiteSettings = React.lazy(() => import("../website-settings"));
-const ServiceList = React.lazy(() => import("../services"));
-const AddService = React.lazy(() => import("../services/add-services"));
-const SubServiceList = React.lazy(() => import("../sub-services"));
-const AddSubService = React.lazy(() =>
-  import("../sub-services/add-sub-services")
-);
 const Testimonials = React.lazy(() => import("../testimonials"));
 const AddTestimonial = React.lazy(() =>
   import("../testimonials/add-testimonials")
 );
-const OffersList = React.lazy(() => import("../offers"));
-const AddOffer = React.lazy(() => import("../offers/add-offers"));
-const DirectoryList = React.lazy(() => import("../directory"));
-const AddDirectory = React.lazy(() => import("../directory/add-directory"));
 
-const FaqList = React.lazy(() => import("../faq"));
-const AddFaq = React.lazy(() => import("../faq/add-faq"));
 const BlogList = React.lazy(() => import("../blog"));
 const AddBlog = React.lazy(() => import("../blog/add-blog"));
 const CommentsList = React.lazy(() => import("../blog/comments"));
-const TagList = React.lazy(() => import("../tags"));
-const Questionarrie = React.lazy(() => import("../questionarrie"));
-const QuestionareDetails = React.lazy(() =>
-  import("../questionarrie/questionair-detail")
-);
-const AddTag = React.lazy(() => import("../tags/add-tags"));
-const Contactus = React.lazy(() => import("../contact"));
-const PortfolioList = React.lazy(() => import("../portfolio"));
-const AddPortfolio = React.lazy(() => import("../portfolio/add-portfolio"));
-const AddContact = React.lazy(() => import("../contact/add-contact"));
-const UniversitiesList = React.lazy(() => import("../universities"));
-const AddUniversity = React.lazy(() =>
-  import("../universities/add-universities")
-);
-const WebsiteList = React.lazy(() => import("../website"));
-const AddWebsite = React.lazy(() => import("../website/add-website"));
-const ClientList = React.lazy(() => import("../clients"));
-const AddClient = React.lazy(() => import("../clients/add-client"));
 
 const BlogCategoryList = React.lazy(() => import("../blog-category"));
 const AddCategory = React.lazy(() => import("../blog-category/add-category"));
@@ -236,32 +203,6 @@ const FadoLayout = () => {
         <Content className="site-layout-background content-main-section">
           <Suspense fallback={<Spinner />}>
             <Routes>
-              <Route
-                path="/settings/website-settings"
-                element={<WebsiteSettings />}
-              />
-
-              <Route path="/services" element={<ServiceList />} />
-              <Route path="/add-service" element={<AddService />} />
-              <Route path="/edit-service/:id" element={<AddService />} />
-
-              <Route path="/sub-service/:id" element={<SubServiceList />} />
-              <Route
-                path="/add-subservice/:parent/:type"
-                element={<AddSubService />}
-              />
-              <Route
-                path="/edit-subservice/:parent/:id"
-                element={<AddSubService />}
-              />
-
-              <Route path="/offers" element={<OffersList />} />
-              <Route path="/add-offer" element={<AddOffer />} />
-              <Route path="/edit-offer/:id" element={<AddOffer />} />
-
-              <Route path="/directory" element={<DirectoryList />} />
-              <Route path="/add-directory" element={<AddDirectory />} />
-              <Route path="/edit-directory/:id" element={<AddDirectory />} />
 
               <Route path="/testimonials" element={<Testimonials />} />
               <Route path="/add-testimonial" element={<AddTestimonial />} />
@@ -270,45 +211,10 @@ const FadoLayout = () => {
                 element={<AddTestimonial />}
               />
 
-              <Route path="/faq" element={<FaqList />} />
-              <Route path="/add-faq" element={<AddFaq />} />
-              <Route path="/edit-faq/:id" element={<AddFaq />} />
-
               <Route path="/blog" element={<BlogList />} />
               <Route path="/add-blog" element={<AddBlog />} />
               <Route path="/edit-blog/:id" element={<AddBlog />} />
               <Route path="/comments/:id" element={<CommentsList />} />
-
-              <Route path="/tags" element={<TagList />} />
-              <Route path="/add-tag" element={<AddTag />} />
-              <Route path="/edit-tag/:id" element={<AddTag />} />
-
-              <Route path="/questionarrie" element={<Questionarrie />} />
-              <Route
-                path="/questionarrie-details/:id"
-                element={<QuestionareDetails />}
-              />
-
-              <Route path="/contact-us" element={<Contactus />} />
-              <Route path="/edit-contact/:id" element={<AddContact />} />
-
-              <Route path="/portfolio" element={<PortfolioList />} />
-              <Route path="/add-portfolio" element={<AddPortfolio />} />
-              <Route path="/edit-portfolio/:id" element={<AddPortfolio />} />
-
-              <Route path="/universities" element={<UniversitiesList />} />
-              <Route path="/add-university" element={<AddUniversity />} />
-              <Route path="/edit-university/:id" element={<AddUniversity />} />
-
-              <Route path="/website" element={<WebsiteList />} />
-              <Route path="/add-website" element={<AddWebsite />} />
-              <Route path="/edit-website/:id" element={<AddWebsite />} />
-
-              <Route path="/client" element={<ClientList />} />
-              <Route path="/add-client" element={<AddClient />} />
-              <Route path="/edit-client/:id" element={<AddClient />} />
-
-              {/* new */}
 
               <Route path="/category" element={<BlogCategoryList/>} />
               <Route path="/add-category" element={<AddCategory />} />

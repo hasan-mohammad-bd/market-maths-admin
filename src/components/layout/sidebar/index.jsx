@@ -49,46 +49,46 @@ const SiderBar = ({ toggle, collapsed }) => {
       <div className="tajira-logo">
         <img src={collapsed ? Logo : TajiraLogo} alt="" />
       </div>
-      <Menu theme="dark" defaultSelectedKeys={["15"]} mode="inline">
+      <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
         <Menu.Item
           icon={<AppstoreOutlined />}
           onClick={() => navigate("/category")}
-          key="15"
+          key="1"
         >
           Category
         </Menu.Item>
         <Menu.Item
           icon={<RadarChartOutlined />}
           onClick={() => navigate("/speciality")}
-          key="16"
+          key="2"
         >
           Specialty
         </Menu.Item>
         <Menu.Item
           icon={<CodepenOutlined />}
           onClick={() => navigate("/plan")}
-          key="17"
+          key="3"
         >
           Plan
         </Menu.Item>
         <Menu.Item
           icon={<TeamOutlined />}
           onClick={() => navigate("/staff")}
-          key="18"
+          key="4"
         >
           Staff
         </Menu.Item>
         <Menu.Item
           icon={<UsergroupAddOutlined />}
           onClick={() => navigate("/subscriber-list")}
-          key="19"
+          key="5"
         >
           Subscriber List
         </Menu.Item>
         <Menu.Item
           icon={<MessageOutlined />}
           onClick={() => navigate("/message-list")}
-          key="20"
+          key="6"
         >
           Message List
         </Menu.Item>
@@ -98,322 +98,237 @@ const SiderBar = ({ toggle, collapsed }) => {
         <Menu.Item
           icon={<ProjectOutlined />}
           onClick={() => navigate("/blog")}
-          key="22"
+          key="7"
         >
           Blog
         </Menu.Item>
         <Menu.Item
           icon={<UserOutlined />}
           onClick={() => navigate("/users")}
-          key="30"
+          key="8"
         >
           Users
         </Menu.Item>
-        <Menu.SubMenu key="31" icon={<GroupOutlined />} title="Withdraw">
+        <Menu.SubMenu key="9" icon={<GroupOutlined />} title="Withdraw">
         <Menu.Item
           onClick={() => navigate("/withdraw")}
-          key="32"
+          key="10"
         >
           Withdraw Method
         </Menu.Item>
         </Menu.SubMenu>
 
-        <Menu.SubMenu key="23" icon={<FireOutlined />} title="Signal">
+        <Menu.SubMenu key="11" icon={<FireOutlined />} title="Signal">
         <Menu.Item
           onClick={() => navigate("/signal")}
-          key="29"
+          key="12"
         >
           Signal
         </Menu.Item>
         <Menu.Item
           onClick={() => navigate("/assets")}
-          key="24"
+          key="13"
         >
           Assets
         </Menu.Item>
         <Menu.Item
           onClick={() => navigate("/symbol")}
-          key="25"
+          key="14"
         >
           Symbol
         </Menu.Item>
         <Menu.Item
           onClick={() => navigate("/type")}
-          key="26"
+          key="15"
         >
           Type
         </Menu.Item>
         <Menu.Item
           onClick={() => navigate("/frame")}
-          key="27"
+          key="16"
         >
           Frame
         </Menu.Item>
         <Menu.Item
           onClick={() => navigate("/status")}
-          key="28"
+          key="17"
         >
           Status
         </Menu.Item>
 
         </Menu.SubMenu>
-        <Menu.SubMenu key="33" icon={<GlobalOutlined />} title="Manage Website">
+        <Menu.SubMenu key="18" icon={<GlobalOutlined />} title="Manage Website">
 
         <Menu.Item
           onClick={() => navigate("/logo")}
-          key="34"
+          key="19"
         >
           Logo
         </Menu.Item>
         <Menu.Item
           onClick={() => navigate("/about")}
-          key="35"
+          key="20"
         >
           About
         </Menu.Item>
         <Menu.Item
           onClick={() => navigate("/footer")}
-          key="36"
+          key="21"
         >
           Footer
         </Menu.Item>
         <Menu.Item
           onClick={() => navigate("/social")}
-          key="37"
+          key="22"
         >
           Social
         </Menu.Item>
         <Menu.Item
           onClick={() => navigate("/Breadcrumb")}
-          key="38"
+          key="23"
         >
           Breadcrumb
         </Menu.Item>
         <Menu.Item
           onClick={() => navigate("/slider")}
-          key="39"
+          key="24"
         >
           Slider
         </Menu.Item>
         <Menu.Item
           onClick={() => navigate("/menu")}
-          key="40"
+          key="25"
         >
           Menu
         </Menu.Item>
         <Menu.Item
           onClick={() => navigate("/team")}
-          key="41"
+          key="26"
         >
           Team
         </Menu.Item>
         
         <Menu.Item
           onClick={() => navigate("/testimonials")}
-          key="21"
+          key="27"
         >
           Testimonials
         </Menu.Item>
 
         <Menu.Item
           onClick={() => navigate("/terms")}
-          key="43"
+          key="28"
         >
           Terms & Conditions
         </Menu.Item>
         <Menu.Item
           onClick={() => navigate("/privacy")}
-          key="44"
+          key="29"
         >
           Privacy & Policy
         </Menu.Item>
         </Menu.SubMenu>
-        <Menu.SubMenu key="45" icon={<SettingOutlined />} title="Basic Control">
+        <Menu.SubMenu key="30" icon={<SettingOutlined />} title="Basic Control">
         <Menu.Item
           onClick={() => navigate("/basic-setting")}
-          key="46"
+          key="31"
         >
           Basic Setting
         </Menu.Item>
         <Menu.Item
           onClick={() => navigate("/referral")}
-          key="47"
+          key="32"
         >
           Referral Setting
         </Menu.Item>
         <Menu.Item
           onClick={() => navigate("/recaptcha")}
-          key="48"
+          key="33"
         >
           Recaptcha Setting
         </Menu.Item>
         <Menu.Item
           onClick={() => navigate("/telegram")}
-          key="49"
+          key="34"
         >
           Telegram Setting
         </Menu.Item>
         <Menu.Item
           onClick={() => navigate("/google-analytic")}
-          key="50"
+          key="35"
         >
           Google Analytic
         </Menu.Item>
         </Menu.SubMenu>
-        <Menu.SubMenu key="51" icon={<SelectOutlined />} title="Manage Section">
+        <Menu.SubMenu key="36" icon={<SelectOutlined />} title="Manage Section">
         <Menu.Item
           onClick={() => navigate("/speciality-section")}
-          key="51"
+          key="37"
         >
           Specialty Section 
         </Menu.Item>
         <Menu.Item
           onClick={() => navigate("/currency")}
-          key="52"
+          key="38"
         >
           Currency Section 
         </Menu.Item>
         <Menu.Item
           onClick={() => navigate("/trading")}
-          key="53"
+          key="39"
         >
           Trading Section 
         </Menu.Item>
         <Menu.Item
           onClick={() => navigate("/plan-section")}
-          key="54"
+          key="40"
         >
           Plan Section
         </Menu.Item>
         <Menu.Item
           onClick={() => navigate("/about-section")}
-          key="55"
+          key="41"
         >
           About Section
         </Menu.Item>
         <Menu.Item
           onClick={() => navigate("/advertise")}
-          key="56"
+          key="42"
         >
           Advertise Section
         </Menu.Item>
         <Menu.Item
           onClick={() => navigate("/testimonial-section")}
-          key="57"
+          key="43"
         >
           Testimonial Section
         </Menu.Item>
         <Menu.Item
           onClick={() => navigate("/subscriber-section")}
-          key="58"
+          key="44"
         >
           Subscriber Section
         </Menu.Item>
         <Menu.Item
           onClick={() => navigate("/blog-section")}
-          key="59"
+          key="45"
         >
           Blog Section
         </Menu.Item>
         <Menu.Item
           onClick={() => navigate("/team-section")}
-          key="60"
+          key="46"
         >
           Team Section
         </Menu.Item>
         <Menu.Item
           onClick={() => navigate("/counter-section")}
-          key="61"
+          key="47"
         >
           Counter Section
         </Menu.Item>
         </Menu.SubMenu>
-{/*         <Menu.Item
-          icon={<AppstoreOutlined />}
-          onClick={() => navigate("/services")}
-          key="1"
-        >
-          Services
-        </Menu.Item>
-        <Menu.Item
-          icon={<NotificationOutlined />}
-          onClick={() => navigate("/offers")}
-          key="2"
-        >
-          Offers
-        </Menu.Item>
-        <Menu.Item
-          icon={<MacCommandOutlined />}
-          onClick={() => navigate("/portfolio")}
-          key="3"
-        >
-          Portfolio
-        </Menu.Item>
-        <Menu.Item
-          icon={<UserOutlined />}
-          onClick={() => navigate("/client")}
-          key="4"
-        >
-          Client
-        </Menu.Item>
-        <Menu.Item
-          icon={<ReadOutlined />}
-          onClick={() => navigate("/universities")}
-          key="5"
-        >
-          Universities
-        </Menu.Item>
-        <Menu.Item
-          icon={<DeploymentUnitOutlined />}
-          onClick={() => navigate("/Website")}
-          key="6"
-        >
-          Immigration Websites
-        </Menu.Item>
 
-        <Menu.Item
-          icon={<FileOutlined />}
-          onClick={() => navigate("/directory")}
-          key="8"
-        >
-          Directory
-        </Menu.Item>
-        <Menu.Item
-          icon={<InsuranceOutlined />}
-          onClick={() => navigate("/tags")}
-          key="9"
-        >
-          Tags
-        </Menu.Item>
-
-        <Menu.Item
-          icon={<QuestionCircleOutlined />}
-          onClick={() => navigate("/faq")}
-          key="11"
-        >
-          FAQs
-        </Menu.Item>
-        <Menu.Item
-          icon={<FileDoneOutlined />}
-          onClick={() => navigate("/questionarrie")}
-          key="12"
-        >
-          Questionnarie
-        </Menu.Item>
-        <Menu.Item
-          key="13"
-          icon={<SoundOutlined />}
-          onClick={() => navigate("/contact-us")}
-        >
-          Contact Us Requests
-        </Menu.Item>
-        <Menu.Item
-          key="14"
-          icon={<SettingFilled />}
-          onClick={() => navigate("/settings/website-settings")}
-        >
-          Website Settings
-        </Menu.Item> */}
       </Menu>
     </Sider>
   );
