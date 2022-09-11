@@ -11,8 +11,8 @@ import AddNewButton from "../common/add-button";
 import API from "../../utils/api";
 import { getDataManager, getErrorMessage } from "../../utils/helper.functions";
 
-const TagsList = () => {
-  const tag = new API.Frame();
+const FrameList = () => {
+  const frame = new API.Frame();
 
   const navigate = useNavigate();
 
@@ -29,7 +29,7 @@ const TagsList = () => {
 
 
   useEffect(() => {
-    fetchCategoryList();
+    fetchFrameList();
   }, []);
 
   const getOrganizedData = (data) => {
@@ -41,8 +41,8 @@ const TagsList = () => {
     });
   };
 
-  const fetchCategoryList = async (payload) => {
-    return getDataManager(tag?.getFrameList, setLoading).then((x) => {
+  const fetchFrameList = async (payload) => {
+    return getDataManager(frame?.getFrameList, setLoading).then((x) => {
       if (x?.status) {
         const organizedData = getOrganizedData(x?.data);
         setPagination({
@@ -85,9 +85,9 @@ const TagsList = () => {
   };
 
   const handleDelete = (id) => {
-    getDataManager(tag?.deleteFrame, setLoading, id).then((x) => {
+    getDataManager(frame?.deleteFrame, setLoading, id).then((x) => {
       if (x.status) {
-        fetchCategoryList();
+        fetchFrameList();
         message.success({
           content: "Frame deleted successfully",
           duration: 2,
@@ -142,7 +142,7 @@ const TagsList = () => {
   return (
     <TajiraCard heading="Frame" actions={<AddNewButton onAdd={handleAdd} />}>
       <TajiraTable
-        fetchData={fetchCategoryList}
+        fetchData={fetchFrameList}
         dataSource={categoryList}
         columns={columns}
         title="All Frames"
@@ -155,4 +155,4 @@ const TagsList = () => {
   );
 };
 
-export default TagsList;
+export default FrameList;

@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
-import { Form, message, Button, Input, Typography, Select,RadioChangeEvent, InputNumber } from "antd";
+import { Form, message, Button, Input, Typography } from "antd";
 import { useParams, useNavigate } from "react-router-dom";
 import { Radio } from 'antd';
 
@@ -15,12 +15,12 @@ import {
 import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
 
 const { Title } = Typography;
-const { Option } = Select;
 
-const AddTag = () => {
+
+const AddAssets = () => {
   const [form] = Form.useForm();
 
-  const tag = new API.Assets();
+  const assets = new API.Assets();
 
   const navigate = useNavigate();
   const params = useParams();
@@ -31,12 +31,12 @@ const AddTag = () => {
 
   useEffect(() => {
     if (id) {
-      fetchTagDetails();
+      fetchAssetsDetails();
     }
   }, [id]);
 
-  const fetchTagDetails = () => {
-    getDataManager(tag?.getAssetsDetails, setLoading, id).then((x) => {
+  const fetchAssetsDetails = () => {
+    getDataManager(assets?.getAssetsDetails, setLoading, id).then((x) => {
       if (x?.status) {
 
         form.setFieldsValue({
@@ -53,8 +53,8 @@ const AddTag = () => {
     });
   };
 
-  const addTag = (payload) => {
-    getDataManager(tag?.addAssets, setLoading, payload).then((x) => {
+  const addAssets = (payload) => {
+    getDataManager(assets?.addAssets, setLoading, payload).then((x) => {
       if (x?.status) {
 
         message.success({
@@ -72,8 +72,8 @@ const AddTag = () => {
     });
   };
 
-  const editTag = (payload) => {
-    getDataManager(tag?.editAssets, setLoading, payload, id).then((x) => {
+  const editAssets = (payload) => {
+    getDataManager(assets?.editAssets, setLoading, payload, id).then((x) => {
       if (x?.status) {
         message.success({
           content: "Information saved",
@@ -92,9 +92,9 @@ const AddTag = () => {
 
   const onFinish = (values) => {
     if (isEdit) {
-      editTag(values);
+      editAssets(values);
     } else {
-      addTag(values);
+      addAssets(values);
     }
   };
 
@@ -107,7 +107,6 @@ const AddTag = () => {
         form={form}
         scrollToFirstError
       >
-        <Title level={5}>Plan</Title>
         <Form.Item
           label="Name"
           name="name"
@@ -147,4 +146,4 @@ const AddTag = () => {
   );
 };
 
-export default AddTag;
+export default AddAssets;

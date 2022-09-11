@@ -1,7 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { message, Space, Popconfirm, Button } from "antd";
-import { FormOutlined, DeleteOutlined, CheckOutlined, CloseOutlined } from "@ant-design/icons";
+import {
+  FormOutlined,
+  DeleteOutlined,
+  CheckOutlined,
+  CloseOutlined,
+} from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 
 import TajiraTable from "../common/table";
@@ -11,13 +16,13 @@ import AddNewButton from "../common/add-button";
 import API from "../../utils/api";
 import { getDataManager, getErrorMessage } from "../../utils/helper.functions";
 
-const TagsList = () => {
-  const tag = new API.Status();
+const StatusList = () => {
+  const status = new API.Status();
 
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
-  const [categoryList, setCategoryList] = useState([]);
+  const [statusList, setStatusList] = useState([]);
   const [pagination, setPagination] = useState({
     current: 1,
     defaultPageSize: 50,
@@ -26,7 +31,6 @@ const TagsList = () => {
     showSizeChanger: true,
     showTotal: (total, range) => `${range[0]}-${range[1]} of ${total} items`,
   });
-
 
   useEffect(() => {
     fetchCategoryList();
@@ -42,7 +46,7 @@ const TagsList = () => {
   };
 
   const fetchCategoryList = async (payload) => {
-    return getDataManager(tag?.getStatusList, setLoading).then((x) => {
+    return getDataManager(status?.getStatusList, setLoading).then((x) => {
       if (x?.status) {
         const organizedData = getOrganizedData(x?.data);
         setPagination({
@@ -51,7 +55,7 @@ const TagsList = () => {
           pageSize: payload?.pageSize || pagination?.pageSize,
           total: x?.data?.count,
         });
-        setCategoryList(organizedData);
+        setStatusList(organizedData);
       } else {
         const error = getErrorMessage(x?.errors) || x?.message;
         message.error({
@@ -62,20 +66,6 @@ const TagsList = () => {
     });
   };
 
-/*   const handleActiveStatus = (id) => {
-    getDataManager(tag?.editCategory, setLoading, id).then((x) => {
-      if (x.status) {
-        fetchCategoryList();
-        message.success({
-          content: "Tag status updated successfully",
-          duration: 2,
-        });
-      } else {
-        message.error({ content: "Process failed", duration: 2 });
-      }
-    });
-  }; */
-
   const handleAdd = () => {
     navigate("/add-status");
   };
@@ -85,7 +75,7 @@ const TagsList = () => {
   };
 
   const handleDelete = (id) => {
-    getDataManager(tag?.deleteStatus, setLoading, id).then((x) => {
+    getDataManager(status?.deleteStatus, setLoading, id).then((x) => {
       if (x.status) {
         fetchCategoryList();
         message.success({
@@ -104,8 +94,6 @@ const TagsList = () => {
       dataIndex: "name",
       key: "name",
     },
-
-
 
     {
       title: "Status",
@@ -143,7 +131,7 @@ const TagsList = () => {
     <TajiraCard heading="Status" actions={<AddNewButton onAdd={handleAdd} />}>
       <TajiraTable
         fetchData={fetchCategoryList}
-        dataSource={categoryList}
+        dataSource={statusList}
         columns={columns}
         title="All Status"
         loading={loading}
@@ -155,4 +143,4 @@ const TagsList = () => {
   );
 };
 
-export default TagsList;
+export default StatusList;

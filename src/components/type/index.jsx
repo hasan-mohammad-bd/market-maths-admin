@@ -11,13 +11,13 @@ import AddNewButton from "../common/add-button";
 import API from "../../utils/api";
 import { getDataManager, getErrorMessage } from "../../utils/helper.functions";
 
-const TagsList = () => {
-  const tag = new API.Type();
+const TypeList = () => {
+  const type = new API.Type();
 
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
-  const [categoryList, setCategoryList] = useState([]);
+  const [typeList, setTypeList] = useState([]);
   const [pagination, setPagination] = useState({
     current: 1,
     defaultPageSize: 50,
@@ -29,7 +29,7 @@ const TagsList = () => {
 
 
   useEffect(() => {
-    fetchCategoryList();
+    fetchTypeList();
   }, []);
 
   const getOrganizedData = (data) => {
@@ -41,8 +41,8 @@ const TagsList = () => {
     });
   };
 
-  const fetchCategoryList = async (payload) => {
-    return getDataManager(tag?.getTypeList, setLoading).then((x) => {
+  const fetchTypeList = async (payload) => {
+    return getDataManager(type?.getTypeList, setLoading).then((x) => {
       if (x?.status) {
         const organizedData = getOrganizedData(x?.data);
         setPagination({
@@ -51,7 +51,7 @@ const TagsList = () => {
           pageSize: payload?.pageSize || pagination?.pageSize,
           total: x?.data?.count,
         });
-        setCategoryList(organizedData);
+        setTypeList(organizedData);
       } else {
         const error = getErrorMessage(x?.errors) || x?.message;
         message.error({
@@ -85,9 +85,9 @@ const TagsList = () => {
   };
 
   const handleDelete = (id) => {
-    getDataManager(tag?.deleteType, setLoading, id).then((x) => {
+    getDataManager(type?.deleteType, setLoading, id).then((x) => {
       if (x.status) {
-        fetchCategoryList();
+        fetchTypeList();
         message.success({
           content: "Type deleted successfully",
           duration: 2,
@@ -142,8 +142,8 @@ const TagsList = () => {
   return (
     <TajiraCard heading="Type" actions={<AddNewButton onAdd={handleAdd} />}>
       <TajiraTable
-        fetchData={fetchCategoryList}
-        dataSource={categoryList}
+        fetchData={fetchTypeList}
+        dataSource={typeList}
         columns={columns}
         title="All Types"
         loading={loading}
@@ -155,4 +155,4 @@ const TagsList = () => {
   );
 };
 
-export default TagsList;
+export default TypeList;

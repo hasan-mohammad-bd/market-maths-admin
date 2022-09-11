@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
-import { Form, message, Button, Input, Typography, Select,RadioChangeEvent, InputNumber } from "antd";
+import { Form, message, Button, Input, Typography } from "antd";
 import { useParams, useNavigate } from "react-router-dom";
-import { Radio } from 'antd';
+import { Radio } from "antd";
 
 import TajiraCard from "../../common/tajira-card";
 import Spinner from "../../common/spinner";
@@ -15,13 +15,10 @@ import {
 import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
 
 const { Title } = Typography;
-const { Option } = Select;
 
-const AddTag = () => {
+const AddSymbol = () => {
   const [form] = Form.useForm();
-
-  const tag = new API.Symbol();
-
+  const symbol = new API.Symbol();
   const navigate = useNavigate();
   const params = useParams();
   const { id } = params;
@@ -36,11 +33,11 @@ const AddTag = () => {
   }, [id]);
 
   const fetchTagDetails = () => {
-    getDataManager(tag?.getSymbolDetails, setLoading, id).then((x) => {
+    getDataManager(symbol?.getSymbolDetails, setLoading, id).then((x) => {
       if (x?.status) {
         form.setFieldsValue({
           name: x?.data?.name,
-          status: x?.data?.status
+          status: x?.data?.status,
         });
       } else {
         const error = getErrorMessage(x?.errors) || x?.message;
@@ -53,9 +50,8 @@ const AddTag = () => {
   };
 
   const addTag = (payload) => {
-    getDataManager(tag?.addSymbol, setLoading, payload).then((x) => {
+    getDataManager(symbol?.addSymbol, setLoading, payload).then((x) => {
       if (x?.status) {
-
         message.success({
           content: "Information saved",
           duration: 3,
@@ -72,7 +68,7 @@ const AddTag = () => {
   };
 
   const editTag = (payload) => {
-    getDataManager(tag?.editSymbol, setLoading, payload, id).then((x) => {
+    getDataManager(symbol?.editSymbol, setLoading, payload, id).then((x) => {
       if (x?.status) {
         message.success({
           content: "Information saved",
@@ -106,7 +102,7 @@ const AddTag = () => {
         form={form}
         scrollToFirstError
       >
-        <Title level={5}>Plan</Title>
+        
         <Form.Item
           label="Name"
           name="name"
@@ -130,11 +126,14 @@ const AddTag = () => {
             },
           ]}
         >
-    <Radio.Group>
-      <Radio value={true}><CheckOutlined /></Radio>
-      <Radio value={false}><CloseOutlined /></Radio>
-
-    </Radio.Group>
+          <Radio.Group>
+            <Radio value={true}>
+              <CheckOutlined />
+            </Radio>
+            <Radio value={false}>
+              <CloseOutlined />
+            </Radio>
+          </Radio.Group>
         </Form.Item>
         <Form.Item>
           <Button type="primary" htmlType="submit">
@@ -146,4 +145,4 @@ const AddTag = () => {
   );
 };
 
-export default AddTag;
+export default AddSymbol;

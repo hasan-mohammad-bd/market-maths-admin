@@ -11,13 +11,13 @@ import AddNewButton from "../common/add-button";
 import API from "../../utils/api";
 import { getDataManager, getErrorMessage } from "../../utils/helper.functions";
 
-const TagsList = () => {
-  const tag = new API.Symbol();
+const SymbolList = () => {
+  const symbol = new API.Symbol();
 
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
-  const [categoryList, setCategoryList] = useState([]);
+  const [symbolList, setSymbolList] = useState([]);
   const [pagination, setPagination] = useState({
     current: 1,
     defaultPageSize: 50,
@@ -29,7 +29,7 @@ const TagsList = () => {
 
 
   useEffect(() => {
-    fetchCategoryList();
+    fetchSymbolList();
   }, []);
 
   const getOrganizedData = (data) => {
@@ -41,8 +41,8 @@ const TagsList = () => {
     });
   };
 
-  const fetchCategoryList = async (payload) => {
-    return getDataManager(tag?.getSymbolList, setLoading).then((x) => {
+  const fetchSymbolList = async (payload) => {
+    return getDataManager(symbol?.getSymbolList, setLoading).then((x) => {
       if (x?.status) {
         const organizedData = getOrganizedData(x?.data);
         setPagination({
@@ -51,7 +51,7 @@ const TagsList = () => {
           pageSize: payload?.pageSize || pagination?.pageSize,
           total: x?.data?.count,
         });
-        setCategoryList(organizedData);
+        setSymbolList(organizedData);
       } else {
         const error = getErrorMessage(x?.errors) || x?.message;
         message.error({
@@ -85,9 +85,9 @@ const TagsList = () => {
   };
 
   const handleDelete = (id) => {
-    getDataManager(tag?.deleteSymbol, setLoading, id).then((x) => {
+    getDataManager(symbol?.deleteSymbol, setLoading, id).then((x) => {
       if (x.status) {
-        fetchCategoryList();
+        fetchSymbolList();
         message.success({
           content: "Symbol deleted successfully",
           duration: 2,
@@ -104,8 +104,6 @@ const TagsList = () => {
       dataIndex: "name",
       key: "name",
     },
-
-
 
     {
       title: "Status",
@@ -142,8 +140,8 @@ const TagsList = () => {
   return (
     <TajiraCard heading="Symbol" actions={<AddNewButton onAdd={handleAdd} />}>
       <TajiraTable
-        fetchData={fetchCategoryList}
-        dataSource={categoryList}
+        fetchData={fetchSymbolList}
+        dataSource={symbolList}
         columns={columns}
         title="All Symbols"
         loading={loading}
@@ -155,4 +153,4 @@ const TagsList = () => {
   );
 };
 
-export default TagsList;
+export default SymbolList;

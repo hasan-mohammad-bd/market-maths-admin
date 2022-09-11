@@ -14,14 +14,11 @@ import {
 } from "../../../utils/helper.functions";
 import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
 
-const { Title } = Typography;
-const { Option } = Select;
 
-const AddTag = () => {
+
+const AddStatus = () => {
   const [form] = Form.useForm();
-
-  const tag = new API.Status();
-
+  const status = new API.Status();
   const navigate = useNavigate();
   const params = useParams();
   const { id } = params;
@@ -31,12 +28,12 @@ const AddTag = () => {
 
   useEffect(() => {
     if (id) {
-      fetchTagDetails();
+      fetchStatusDetails();
     }
   }, [id]);
 
-  const fetchTagDetails = () => {
-    getDataManager(tag?.getStatusDetails, setLoading, id).then((x) => {
+  const fetchStatusDetails = () => {
+    getDataManager(status?.getStatusDetails, setLoading, id).then((x) => {
       if (x?.status) {
         form.setFieldsValue({
           name: x?.data?.name,
@@ -52,8 +49,8 @@ const AddTag = () => {
     });
   };
 
-  const addTag = (payload) => {
-    getDataManager(tag?.addStatus, setLoading, payload).then((x) => {
+  const addStatus = (payload) => {
+    getDataManager(status?.addStatus, setLoading, payload).then((x) => {
       if (x?.status) {
 
         message.success({
@@ -71,8 +68,8 @@ const AddTag = () => {
     });
   };
 
-  const editTag = (payload) => {
-    getDataManager(tag?.editStatus, setLoading, payload, id).then((x) => {
+  const editStatus = (payload) => {
+    getDataManager(status?.editStatus, setLoading, payload, id).then((x) => {
       if (x?.status) {
         message.success({
           content: "Information saved",
@@ -91,9 +88,9 @@ const AddTag = () => {
 
   const onFinish = (values) => {
     if (isEdit) {
-      editTag(values);
+      editStatus(values);
     } else {
-      addTag(values);
+      addStatus(values);
     }
   };
 
@@ -106,7 +103,7 @@ const AddTag = () => {
         form={form}
         scrollToFirstError
       >
-        <Title level={5}>Plan</Title>
+        
         <Form.Item
           label="Name"
           name="name"
@@ -133,7 +130,6 @@ const AddTag = () => {
     <Radio.Group>
       <Radio value={true}><CheckOutlined /></Radio>
       <Radio value={false}><CloseOutlined /></Radio>
-
     </Radio.Group>
         </Form.Item>
         <Form.Item>
@@ -146,4 +142,4 @@ const AddTag = () => {
   );
 };
 
-export default AddTag;
+export default AddStatus;

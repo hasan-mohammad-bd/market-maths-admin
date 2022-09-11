@@ -17,11 +17,9 @@ import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
 const { Title } = Typography;
 const { Option } = Select;
 
-const AddTag = () => {
+const AddFrame = () => {
   const [form] = Form.useForm();
-
-  const tag = new API.Frame();
-
+  const frame = new API.Frame();
   const navigate = useNavigate();
   const params = useParams();
   const { id } = params;
@@ -31,12 +29,12 @@ const AddTag = () => {
 
   useEffect(() => {
     if (id) {
-      fetchTagDetails();
+      fetchFrameDetails();
     }
   }, [id]);
 
-  const fetchTagDetails = () => {
-    getDataManager(tag?.getFrameDetails, setLoading, id).then((x) => {
+  const fetchFrameDetails = () => {
+    getDataManager(frame?.getFrameDetails, setLoading, id).then((x) => {
       if (x?.status) {
         form.setFieldsValue({
           name: x?.data?.name,
@@ -52,8 +50,8 @@ const AddTag = () => {
     });
   };
 
-  const addTag = (payload) => {
-    getDataManager(tag?.addFrame, setLoading, payload).then((x) => {
+  const addFrame = (payload) => {
+    getDataManager(frame?.addFrame, setLoading, payload).then((x) => {
       if (x?.status) {
 
         message.success({
@@ -71,8 +69,8 @@ const AddTag = () => {
     });
   };
 
-  const editTag = (payload) => {
-    getDataManager(tag?.editFrame, setLoading, payload, id).then((x) => {
+  const editFrame = (payload) => {
+    getDataManager(frame?.editFrame, setLoading, payload, id).then((x) => {
       if (x?.status) {
         message.success({
           content: "Information saved",
@@ -91,9 +89,9 @@ const AddTag = () => {
 
   const onFinish = (values) => {
     if (isEdit) {
-      editTag(values);
+      editFrame(values);
     } else {
-      addTag(values);
+      addFrame(values);
     }
   };
 
@@ -106,7 +104,7 @@ const AddTag = () => {
         form={form}
         scrollToFirstError
       >
-        <Title level={5}>Plan</Title>
+
         <Form.Item
           label="Name"
           name="name"
@@ -146,4 +144,4 @@ const AddTag = () => {
   );
 };
 
-export default AddTag;
+export default AddFrame;

@@ -11,13 +11,13 @@ import AddNewButton from "../common/add-button";
 import API from "../../utils/api";
 import { getDataManager, getErrorMessage } from "../../utils/helper.functions";
 
-const TagsList = () => {
-  const tag = new API.Assets();
+const AssetsList = () => {
+  const assets = new API.Assets();
 
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
-  const [categoryList, setCategoryList] = useState([]);
+  const [assetsList, setAssetsList] = useState([]);
   const [pagination, setPagination] = useState({
     current: 1,
     defaultPageSize: 50,
@@ -29,7 +29,7 @@ const TagsList = () => {
 
 
   useEffect(() => {
-    fetchCategoryList();
+    fetchAssetsList();
   }, []);
 
   const getOrganizedData = (data) => {
@@ -41,8 +41,8 @@ const TagsList = () => {
     });
   };
 
-  const fetchCategoryList = async (payload) => {
-    return getDataManager(tag?.getAssetsList, setLoading).then((x) => {
+  const fetchAssetsList = async (payload) => {
+    return getDataManager(assets?.getAssetsList, setLoading).then((x) => {
       if (x?.status) {
         const organizedData = getOrganizedData(x?.data);
         setPagination({
@@ -51,7 +51,7 @@ const TagsList = () => {
           pageSize: payload?.pageSize || pagination?.pageSize,
           total: x?.data?.count,
         });
-        setCategoryList(organizedData);
+        setAssetsList(organizedData);
       } else {
         const error = getErrorMessage(x?.errors) || x?.message;
         message.error({
@@ -62,19 +62,6 @@ const TagsList = () => {
     });
   };
 
-/*   const handleActiveStatus = (id) => {
-    getDataManager(tag?.editCategory, setLoading, id).then((x) => {
-      if (x.status) {
-        fetchCategoryList();
-        message.success({
-          content: "Tag status updated successfully",
-          duration: 2,
-        });
-      } else {
-        message.error({ content: "Process failed", duration: 2 });
-      }
-    });
-  }; */
 
   const handleAdd = () => {
     navigate("/add-assets");
@@ -85,9 +72,9 @@ const TagsList = () => {
   };
 
   const handleDelete = (id) => {
-    getDataManager(tag?.deleteAssets, setLoading, id).then((x) => {
+    getDataManager(assets?.deleteAssets, setLoading, id).then((x) => {
       if (x.status) {
-        fetchCategoryList();
+        fetchAssetsList();
         message.success({
           content: "Assets deleted successfully",
           duration: 2,
@@ -140,8 +127,8 @@ const TagsList = () => {
   return (
     <TajiraCard heading="Assets" actions={<AddNewButton onAdd={handleAdd} />}>
       <TajiraTable
-        fetchData={fetchCategoryList}
-        dataSource={categoryList}
+        fetchData={fetchAssetsList}
+        dataSource={assetsList}
         columns={columns}
         title="All Assets"
         loading={loading}
@@ -153,4 +140,4 @@ const TagsList = () => {
   );
 };
 
-export default TagsList;
+export default AssetsList;
