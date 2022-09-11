@@ -151,7 +151,7 @@ const BlogList = () => {
         fetchData={fetchSliderList}
         dataSource={blogList}
         columns={columns}
-        title="All Team Member"
+        title="All Team Members"
         loading={loading}
         pagination={pagination}
         hideSearch={true}

@@ -89,7 +89,7 @@ const TagsList = () => {
       if (x.status) {
         fetchCategoryList();
         message.success({
-          content: "Tag deleted successfully",
+          content: "Status deleted successfully",
           duration: 2,
         });
       } else {

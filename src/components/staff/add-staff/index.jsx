@@ -31,7 +31,7 @@ const AddTeam = () => {
 
   useEffect(() => {
     if (id) {
-      fetchTeamDetails();
+      // fetchTeamDetails();
     }
 
   }, [id]);

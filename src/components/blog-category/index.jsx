@@ -64,19 +64,7 @@ const TagsList = () => {
     });
   };
 
-/*   const handleActiveStatus = (id) => {
-    getDataManager(tag?.editCategory, setLoading, id).then((x) => {
-      if (x.status) {
-        fetchCategoryList();
-        message.success({
-          content: "Tag status updated successfully",
-          duration: 2,
-        });
-      } else {
-        message.error({ content: "Process failed", duration: 2 });
-      }
-    });
-  }; */
+
 
   const handleAdd = () => {
     navigate("/add-category");
@@ -91,7 +79,7 @@ const TagsList = () => {
       if (x.status) {
         fetchCategoryList();
         message.success({
-          content: "Tag deleted successfully",
+          content: "Category deleted successfully",
           duration: 2,
         });
       } else {
@@ -138,7 +126,7 @@ const TagsList = () => {
   ];
 
   return (
-    <TajiraCard heading="Blog Category" actions={<AddNewButton onAdd={handleAdd} />}>
+    <TajiraCard heading="Category" actions={<AddNewButton onAdd={handleAdd} />}>
       <TajiraTable
         fetchData={fetchCategoryList}
         dataSource={categoryList}

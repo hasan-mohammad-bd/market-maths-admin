@@ -117,7 +117,7 @@ const BlogList = () => {
   ];
 
   return (
-    <TajiraCard heading="Trading Section Setting">
+    <TajiraCard heading="Trading Section">
       <TajiraTable
         fetchData={fetchTrading}
         dataSource={aboutList}

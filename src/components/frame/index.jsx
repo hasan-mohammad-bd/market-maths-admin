@@ -89,7 +89,7 @@ const TagsList = () => {
       if (x.status) {
         fetchCategoryList();
         message.success({
-          content: "Tag deleted successfully",
+          content: "Frame deleted successfully",
           duration: 2,
         });
       } else {
@@ -145,7 +145,7 @@ const TagsList = () => {
         fetchData={fetchCategoryList}
         dataSource={categoryList}
         columns={columns}
-        title="All Frame"
+        title="All Frames"
         loading={loading}
         pagination={pagination}
         hideSearch={true}

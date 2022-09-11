@@ -20,6 +20,11 @@ import {
   TeamOutlined,
   UsergroupAddOutlined,
   MessageOutlined,
+  GroupOutlined,
+  FireOutlined,
+  GlobalOutlined,
+  SettingOutlined,
+  SelectOutlined,
 } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 
@@ -98,13 +103,13 @@ const SiderBar = ({ toggle, collapsed }) => {
           Blog
         </Menu.Item>
         <Menu.Item
-          icon={<ProjectOutlined />}
+          icon={<UserOutlined />}
           onClick={() => navigate("/users")}
           key="30"
         >
           Users
         </Menu.Item>
-        <Menu.SubMenu key="31" icon={<NotificationOutlined />} title="Withdraw">
+        <Menu.SubMenu key="31" icon={<GroupOutlined />} title="Withdraw">
         <Menu.Item
           onClick={() => navigate("/withdraw")}
           key="32"
@@ -113,7 +118,7 @@ const SiderBar = ({ toggle, collapsed }) => {
         </Menu.Item>
         </Menu.SubMenu>
 
-        <Menu.SubMenu key="23" icon={<NotificationOutlined />} title="Signal">
+        <Menu.SubMenu key="23" icon={<FireOutlined />} title="Signal">
         <Menu.Item
           onClick={() => navigate("/signal")}
           key="29"
@@ -152,7 +157,7 @@ const SiderBar = ({ toggle, collapsed }) => {
         </Menu.Item>
 
         </Menu.SubMenu>
-        <Menu.SubMenu key="33" icon={<NotificationOutlined />} title="Manage Website">
+        <Menu.SubMenu key="33" icon={<GlobalOutlined />} title="Manage Website">
 
         <Menu.Item
           onClick={() => navigate("/logo")}
@@ -228,7 +233,7 @@ const SiderBar = ({ toggle, collapsed }) => {
           Privacy & Policy
         </Menu.Item>
         </Menu.SubMenu>
-        <Menu.SubMenu key="45" icon={<NotificationOutlined />} title="Basic Control">
+        <Menu.SubMenu key="45" icon={<SettingOutlined />} title="Basic Control">
         <Menu.Item
           onClick={() => navigate("/basic-setting")}
           key="46"
@@ -260,7 +265,7 @@ const SiderBar = ({ toggle, collapsed }) => {
           Google Analytic
         </Menu.Item>
         </Menu.SubMenu>
-        <Menu.SubMenu key="51" icon={<NotificationOutlined />} title="Manage Section">
+        <Menu.SubMenu key="51" icon={<SelectOutlined />} title="Manage Section">
         <Menu.Item
           onClick={() => navigate("/speciality-section")}
           key="51"
@@ -314,6 +319,18 @@ const SiderBar = ({ toggle, collapsed }) => {
           key="59"
         >
           Blog Section
+        </Menu.Item>
+        <Menu.Item
+          onClick={() => navigate("/team-section")}
+          key="60"
+        >
+          Team Section
+        </Menu.Item>
+        <Menu.Item
+          onClick={() => navigate("/counter-section")}
+          key="61"
+        >
+          Counter Section
         </Menu.Item>
         </Menu.SubMenu>
 {/*         <Menu.Item

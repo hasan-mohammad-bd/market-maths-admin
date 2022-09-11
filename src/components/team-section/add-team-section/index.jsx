@@ -32,7 +32,7 @@ const { Option } = Select;
 const AddBlog = () => {
   const [form] = Form.useForm();
 
-  const blog = new API.BlogSection();
+  const team = new API.TeamSection();
 /*   const tag = new API.Tags();
   const category = new API.Category(); */
 
@@ -121,13 +121,13 @@ const AddBlog = () => {
   };
  */
   const editSubscriberSection = (payload) => {
-    getDataManager(blog?.editBlogSection, setLoading, payload, id).then((x) => {
+    getDataManager(team?.editTeamSection, setLoading, payload, id).then((x) => {
       if (x?.status) {
         message.success({
           content: "Information saved",
           duration: 3,
         });
-        navigate("/blog-section");
+        navigate("/team-section");
       } else {
         const error = getErrorMessage(x?.errors) || x?.message;
         message.error({
@@ -200,7 +200,7 @@ const AddBlog = () => {
   ]; */
 
   return (
-    <TajiraCard heading={isEdit ? "Edit Subscriber" : "Add Subscriber"}>
+    <TajiraCard heading={isEdit ? "Edit Team Section" : "Add Team Section"}>
       {loading && <Spinner />}
       <Form
         onFinish={onFinish}
@@ -209,8 +209,8 @@ const AddBlog = () => {
         scrollToFirstError
       >
         <Form.Item
-          label="Blog Title"
-          name="blog_title"
+          label="Team Title"
+          name="team_title"
           rules={[
             {
               required: true,
@@ -221,8 +221,8 @@ const AddBlog = () => {
         <Input placeholder="Enter Title" />
         </Form.Item>
         <Form.Item
-          label="Blog Description"
-          name="blog_description"
+          label="Team Description"
+          name="team_description"
           rules={[
             {
               required: true,

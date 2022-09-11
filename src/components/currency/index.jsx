@@ -123,7 +123,7 @@ const BlogList = () => {
   ];
 
   return (
-    <TajiraCard heading="Currency Setting">
+    <TajiraCard heading="Currency Section">
       <TajiraTable
         fetchData={fetchCurrency}
         dataSource={aboutList}

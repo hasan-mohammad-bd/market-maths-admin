@@ -200,7 +200,7 @@ const AddBlog = () => {
   ]; */
 
   return (
-    <TajiraCard heading={isEdit ? "Edit Telegram" : "Add Telegram"}>
+    <TajiraCard heading={isEdit ? "Edit Specialty Section" : "Add Specialty Section"}>
       {loading && <Spinner />}
       <Form
         onFinish={onFinish}

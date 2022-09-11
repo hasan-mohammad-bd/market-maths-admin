@@ -200,7 +200,7 @@ const AddBlog = () => {
   ]; */
 
   return (
-    <TajiraCard heading={isEdit ? "Edit Recapthca" : "Add Recaptcha"}>
+    <TajiraCard heading={isEdit ? "Edit Recapthca Setting" : "Add Recaptcha Setting"}>
       {loading && <Spinner />}
       <Form
         onFinish={onFinish}

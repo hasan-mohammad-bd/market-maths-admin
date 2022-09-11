@@ -13,7 +13,7 @@ import { getDataManager, getErrorMessage } from "../../utils/helper.functions";
 import About from "../../utils/api/About";
 
 const BlogList = () => {
-  const blog = new API.BlogSection();
+  const team = new API.TeamSection();
 
   const navigate = useNavigate();
 
@@ -29,11 +29,11 @@ const BlogList = () => {
   });
 
   useEffect(() => {
-    fetchBlog();
+    fetchTeam();
   }, []);
 
-  const fetchBlog = async (payload) => {
-    return getDataManager(blog?.getBlogSection, setLoading, payload).then((x) => {
+  const fetchTeam = async (payload) => {
+    return getDataManager(team?.getTeamSection, setLoading, payload).then((x) => {
 
       if (x?.status) {
         setPagination({
@@ -59,7 +59,7 @@ const BlogList = () => {
   };
  */
   const handleEdit = () => {
-    navigate(`/edit-blog-section`);
+    navigate(`/edit-team-section`);
   };
 
 /*   const handleDelete = (id) => {
@@ -83,15 +83,15 @@ const BlogList = () => {
 
     {
       title: "Blog Title",
-      dataIndex: "blog_title",
-      key: "blog_title",
+      dataIndex: "team_title",
+      key: "team_title",
 
 
     },
     {
-      title: "Blog Description",
-      dataIndex: "blog_description",
-      key: "blog_description",
+      title: "Team Description",
+      dataIndex: "team_description",
+      key: "team_description",
 
     },
 
@@ -112,12 +112,12 @@ const BlogList = () => {
   ];
 
   return (
-    <TajiraCard heading="Blog Section Setting">
+    <TajiraCard heading="Team Section ">
       <TajiraTable
-        fetchData={fetchBlog}
+        fetchData={fetchTeam}
         dataSource={aboutList}
         columns={columns}
-        title="All Blog Section Setting"
+        title="All Team Section Text"
         loading={loading}
         pagination={pagination}
         hideSearch={true}

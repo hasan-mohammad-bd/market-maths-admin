@@ -129,7 +129,7 @@ const AddService = () => {
   };
 
   return (
-    <TajiraCard heading={isEdit ? "Edit Service" : "Add Service"}>
+    <TajiraCard heading={isEdit ? "Edit Speciality" : "Add Speciality"}>
       {loading && <Spinner />}
       <Form
         onFinish={onFinish}

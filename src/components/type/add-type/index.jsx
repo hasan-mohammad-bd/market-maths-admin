@@ -98,7 +98,7 @@ const AddTag = () => {
   };
 
   return (
-    <TajiraCard heading={isEdit ? "Edit Tag" : "Add Tag"}>
+    <TajiraCard heading={isEdit ? "Edit Type" : "Add Type"}>
       {loading && <Spinner />}
       <Form
         onFinish={onFinish}

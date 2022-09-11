@@ -89,7 +89,7 @@ const TagsList = () => {
       if (x.status) {
         fetchCategoryList();
         message.success({
-          content: "Tag deleted successfully",
+          content: "Type deleted successfully",
           duration: 2,
         });
       } else {
@@ -140,12 +140,12 @@ const TagsList = () => {
   ];
 
   return (
-    <TajiraCard heading="Blog Category" actions={<AddNewButton onAdd={handleAdd} />}>
+    <TajiraCard heading="Type" actions={<AddNewButton onAdd={handleAdd} />}>
       <TajiraTable
         fetchData={fetchCategoryList}
         dataSource={categoryList}
         columns={columns}
-        title="All Category"
+        title="All Types"
         loading={loading}
         pagination={pagination}
         hideSearch={true}

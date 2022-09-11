@@ -112,12 +112,12 @@ const BlogList = () => {
   ];
 
   return (
-    <TajiraCard heading="Subscriber Section Setting">
+    <TajiraCard heading="Subscriber Section">
       <TajiraTable
         fetchData={fetchSubscriber}
         dataSource={aboutList}
         columns={columns}
-        title="All Subscriber Section Setting"
+        title="All Subscriber Section Text"
         loading={loading}
         pagination={pagination}
         hideSearch={true}

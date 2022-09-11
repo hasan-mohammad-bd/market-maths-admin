@@ -124,7 +124,7 @@ const TestimonialList = () => {
 
   return (
     <TajiraCard
-      heading="Testimonials"
+      heading="Testimonial"
       actions={<AddNewButton onAdd={handleAdd} />}
     >
       <TajiraTable

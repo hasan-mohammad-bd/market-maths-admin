@@ -138,12 +138,12 @@ const TagsList = () => {
   ];
 
   return (
-    <TajiraCard heading="Blog Category" actions={<AddNewButton onAdd={handleAdd} />}>
+    <TajiraCard heading="Assets" actions={<AddNewButton onAdd={handleAdd} />}>
       <TajiraTable
         fetchData={fetchCategoryList}
         dataSource={categoryList}
         columns={columns}
-        title="All Category"
+        title="All Assets"
         loading={loading}
         pagination={pagination}
         hideSearch={true}

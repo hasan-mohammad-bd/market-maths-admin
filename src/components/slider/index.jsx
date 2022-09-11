@@ -131,12 +131,12 @@ const BlogList = () => {
   ];
 
   return (
-    <TajiraCard heading="Social Network List" actions={<AddNewButton onAdd={handleAdd} />}>
+    <TajiraCard heading="Slider" actions={<AddNewButton onAdd={handleAdd} />}>
       <TajiraTable
         fetchData={fetchSliderList}
         dataSource={blogList}
         columns={columns}
-        title="All Social Network List"
+        title="All Sliders"
         loading={loading}
         pagination={pagination}
         hideSearch={true}

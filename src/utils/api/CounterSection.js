@@ -2,8 +2,8 @@ import axios from "axios";
 import { API_URL, ACCESS_TOKEN } from "../constants";
 
 export default class BlogSection {
-    getBlogSection = (payload = {}) => {
-        const url = `${API_URL}section/blog?limit=${
+    getCounterSection = (payload = {}) => {
+        const url = `${API_URL}section/counter?limit=${
           payload?.limit || 50
         }&offset=${payload?.offset || 0}`;
         return axios
@@ -79,8 +79,8 @@ export default class BlogSection {
       });
   }; */
 
-  editBlogSection = (formData) => {
-    const url = `${API_URL}section/blog`;
+  editCounterSection = (formData) => {
+    const url = `${API_URL}section/counter`;
     return axios({
       url,
       method: "PUT",

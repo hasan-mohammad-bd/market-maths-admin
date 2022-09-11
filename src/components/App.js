@@ -36,23 +36,25 @@ const App = () => {
   const isLoggedIn = !!savedUserData?.token || !!userData?.token;
 
   const validateToken = () => {
-    return getDataManager(auth?.validateToken, setLoading, {
+    navigate("/category");
+/*     return getDataManager(auth?.validateToken, setLoading, {
       token: savedUserData?.token,
     }).then((x) => {
       if (x?.status) {
         dispatch(setUserData(savedUserData));
-        navigate("/category");
+
+
       } else {
         const error = x?.message || getErrorMessage(x?.errors);
         message.error({
           content: error || "Error ocurred",
           duration: 3,
         });
-/*         localStorage.removeItem("fado-admin-panel-user-data");
+        localStorage.removeItem("fado-admin-panel-user-data");
         dispatch(setUserData({}));
-        navigate("/login"); */
+        navigate("/login");
       }
-    });
+    }); */
   };
 
   useEffect(() => {

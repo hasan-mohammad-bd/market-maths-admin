@@ -1,9 +1,9 @@
 import axios from "axios";
 import { API_URL, ACCESS_TOKEN } from "../constants";
 
-export default class BlogSection {
-    getBlogSection = (payload = {}) => {
-        const url = `${API_URL}section/blog?limit=${
+export default class TeamSection {
+    getTeamSection = (payload = {}) => {
+        const url = `${API_URL}section/team?limit=${
           payload?.limit || 50
         }&offset=${payload?.offset || 0}`;
         return axios
@@ -79,8 +79,8 @@ export default class BlogSection {
       });
   }; */
 
-  editBlogSection = (formData) => {
-    const url = `${API_URL}section/blog`;
+  editTeamSection = (formData) => {
+    const url = `${API_URL}section/team`;
     return axios({
       url,
       method: "PUT",

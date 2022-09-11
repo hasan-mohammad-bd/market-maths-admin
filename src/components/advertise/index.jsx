@@ -112,12 +112,12 @@ const BlogList = () => {
   ];
 
   return (
-    <TajiraCard heading="Advertise Section Setting">
+    <TajiraCard heading="Advertise Section ">
       <TajiraTable
         fetchData={fetchAdvertise}
         dataSource={aboutList}
         columns={columns}
-        title="All Advertise Section Setting"
+        title="All Advertise Section "
         loading={loading}
         pagination={pagination}
         hideSearch={true}

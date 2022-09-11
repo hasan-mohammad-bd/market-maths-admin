@@ -82,7 +82,7 @@ const SpecialityList = () => {
       if (x.status) {
         fetchSpecialityList();
         message.success({
-          content: "Service deleted successfully",
+          content: "Speciality deleted successfully",
           duration: 2,
         });
       } else {

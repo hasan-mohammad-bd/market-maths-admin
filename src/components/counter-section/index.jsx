@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { message, Space, Popconfirm, Image, Tag, Tooltip } from "antd";
-import { FormOutlined, DeleteOutlined, EyeOutlined } from "@ant-design/icons";
+import { FormOutlined, DeleteOutlined, EyeOutlined, CheckOutlined, CloseOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 
 import TajiraTable from "../common/table";
@@ -10,14 +10,15 @@ import AddNewButton from "../common/add-button";
 
 import API from "../../utils/api";
 import { getDataManager, getErrorMessage } from "../../utils/helper.functions";
+import About from "../../utils/api/About";
 
 const BlogList = () => {
-  const menu = new API.Menu();
+  const counter = new API.CounterSection();
 
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
-  const [blogList, setBlogList] = useState([]);
+  const [aboutList, setAboutList] = useState([]);
   const [pagination, setPagination] = useState({
     current: 1,
     defaultPageSize: 50,
@@ -28,12 +29,12 @@ const BlogList = () => {
   });
 
   useEffect(() => {
-    fetchMenuList();
+    fetchCounter();
   }, []);
 
-  const fetchMenuList = async (payload) => {
-    return getDataManager(menu?.getMenuList, setLoading, payload).then((x) => {
-      console.log(x);
+  const fetchCounter = async (payload) => {
+    return getDataManager(counter?.getCounterSection, setLoading, payload).then((x) => {
+
       if (x?.status) {
         setPagination({
           ...pagination,
@@ -41,7 +42,7 @@ const BlogList = () => {
           pageSize: payload?.pageSize || pagination?.pageSize,
           total: x?.data?.count,
         });
-        setBlogList(x?.data);
+        setAboutList([x?.data]);
       } else {
         const error = getErrorMessage(x?.errors) || x?.message;
         message.error({
@@ -52,80 +53,67 @@ const BlogList = () => {
     });
   };
 
-  const handleAdd = () => {
-    navigate("/add-menu");
+
+/*   const handleAdd = () => {
+    navigate("/add-logo");
+  };
+ */
+  const handleEdit = () => {
+    navigate(`/edit-counter-section`);
   };
 
-  const handleEdit = (id) => {
-    navigate(`/edit-menu/${id}`);
-  };
-
-  const handleDelete = (id) => {
-    getDataManager(menu?.deleteMenu, setLoading, id).then((x) => {
+/*   const handleDelete = (id) => {
+    getDataManager(blog?.deleteBlog, setLoading, id).then((x) => {
       if (x.status) {
-        fetchMenuList();
+        fetchBlogList();
         message.success({
-          content: "Menu item deleted successfully",
+          content: "blog deleted successfully",
           duration: 2,
         });
       } else {
         message.error({ content: "Process failed", duration: 2 });
       }
     });
-  };
+  }; */
 
 
 
   const columns = [
 
-    {
-      title: "Name",
-      dataIndex: "name",
-      key: "name",
-    },
 
     {
-      title: "Description",
-      dataIndex: "description",
-      key: "description",
+      title: "Counter Image",
+      dataIndex: "counter_image",
+      key: "counter_image",
+      render: (_, record) => <Image width={50} src={record?.counter_image} />,
+
+
     },
+
 
     {
-      title: "Slug",
-      dataIndex: "slug",
-      key: "slug",
-    },
+        title: "Action",
+        dataIndex: "action",
+        key: "action",
+        render: (text, record) => (
+          <Space>
+            <FormOutlined
+              className="edit-icon"
+              onClick={() => handleEdit()}
+            />
+          </Space>
+        ),
+      },
 
-    {
-      title: "Action",
-      dataIndex: "action",
-      key: "action",
-      render: (text, record) => (
-        <Space>
-
-
-          <FormOutlined
-            className="edit-icon"
-            onClick={() => handleEdit(record?._id)}
-          />
-          <Popconfirm
-            title="Are you sure to delete?"
-            onConfirm={() => handleDelete(record?._id)}
-          >
-            <DeleteOutlined className="delete-icon" />
-          </Popconfirm>
-        </Space>
-      ),
-    },
   ];
 
   return (
-    <TajiraCard heading="Menu List" actions={<AddNewButton onAdd={handleAdd} />}>
+    <TajiraCard heading="Counter Section ">
       <TajiraTable
-        fetchData={fetchMenuList}
-        dataSource={blogList}
+        fetchData={fetchCounter}
+        dataSource={aboutList}
         columns={columns}
-        title="All Menu Items"
+        title="All Counter Section Text"
         loading={loading}
         pagination={pagination}
         hideSearch={true}

@@ -175,6 +175,9 @@ const AddBlogSection = React.lazy(() => import("../blog-section/add-blog-secton"
 const TeamSection = React.lazy(() => import("../team-section"));
 const AddTeamSection = React.lazy(() => import("../team-section/add-team-section"));
 
+const CounterSection = React.lazy(() => import("../counter-section"));
+const AddCounterSection = React.lazy(() => import("../counter-section/add-counter-section"));
+
 
 
 
@@ -466,6 +469,10 @@ const FadoLayout = () => {
               <Route path="/team-section" element={<TeamSection/>} />
               <Route path="/add-team-section" element={<AddTeamSection/>} />
               <Route path="/edit-team-section" element={<AddTeamSection />} />
+
+              <Route path="/counter-section" element={<CounterSection/>} />
+              <Route path="/add-counter-section" element={<AddCounterSection/>} />
+              <Route path="/edit-counter-section" element={<AddCounterSection />} />
 
 
 

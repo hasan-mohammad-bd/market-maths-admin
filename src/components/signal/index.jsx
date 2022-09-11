@@ -168,7 +168,7 @@ const BlogList = () => {
         fetchData={fetchBlogList}
         dataSource={blogList}
         columns={columns}
-        title="All Signal"
+        title="All Signals"
         loading={loading}
         pagination={pagination}
         hideSearch={true}

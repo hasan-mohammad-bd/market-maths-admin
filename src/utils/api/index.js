@@ -54,6 +54,8 @@ import Advertise from "./Advertise";
 import TestimonialSection from "./TestimonialSection";
 import SubscriberSection from "./SubscriberSection";
 import BlogSection from "./BlogSection";
+import TeamSection from "./TeamSection";
+import CounterSection from "./CounterSection";
 
 
 
@@ -114,7 +116,9 @@ const API = {
   Advertise,
   TestimonialSection,
   SubscriberSection,
-  BlogSection
+  BlogSection,
+  TeamSection,
+  CounterSection
 
 
 

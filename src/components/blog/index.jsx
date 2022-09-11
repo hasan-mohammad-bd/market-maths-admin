@@ -112,12 +112,12 @@ const BlogList = () => {
       key: "action",
       render: (text, record) => (
         <Space>
-          <Tooltip title="View comments" placement="top">
+{/*           <Tooltip title="View comments" placement="top">
             <EyeOutlined
               className="view-icon"
               onClick={() => handleViewComments(record?._id)}
             />
-          </Tooltip>
+          </Tooltip> */}
 
           <FormOutlined
             className="edit-icon"
@@ -140,7 +140,7 @@ const BlogList = () => {
         fetchData={fetchBlogList}
         dataSource={blogList}
         columns={columns}
-        title="All Blog"
+        title="All Blogs"
         loading={loading}
         pagination={pagination}
         hideSearch={true}

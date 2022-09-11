@@ -112,12 +112,12 @@ const BlogList = () => {
   ];
 
   return (
-    <TajiraCard heading="Plan Section Setting">
+    <TajiraCard heading="Plan Section">
       <TajiraTable
         fetchData={fetchPlanSection}
         dataSource={aboutList}
         columns={columns}
-        title="All Plan Section Setting"
+        title="All Plan Section Text"
         loading={loading}
         pagination={pagination}
         hideSearch={true}

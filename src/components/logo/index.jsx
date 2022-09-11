@@ -107,12 +107,12 @@ const BlogList = () => {
   ];
 
   return (
-    <TajiraCard heading="Blogs">
+    <TajiraCard heading="Logo">
       <TajiraTable
         fetchData={fetchBlogList}
         dataSource={blogList}
         columns={columns}
-        title="All Blog"
+        title="All Logos"
         loading={loading}
         pagination={pagination}
         hideSearch={true}

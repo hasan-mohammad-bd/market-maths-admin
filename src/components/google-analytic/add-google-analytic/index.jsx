@@ -200,7 +200,7 @@ const AddBlog = () => {
   ]; */
 
   return (
-    <TajiraCard heading={isEdit ? "Edit Google Analytic" : "Add Google Analytic"}>
+    <TajiraCard heading={isEdit ? "Edit Google Analytic Setting" : "Add Google Analytic Setting"}>
       {loading && <Spinner />}
       <Form
         onFinish={onFinish}

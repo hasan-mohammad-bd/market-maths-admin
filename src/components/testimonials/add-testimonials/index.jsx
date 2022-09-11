@@ -34,7 +34,7 @@ const AddTestimonial = () => {
 
   useEffect(() => {
     if (id) {
-      fetchTestimonialDetails();
+      // fetchTestimonialDetails();
     }
   }, [id]);
 

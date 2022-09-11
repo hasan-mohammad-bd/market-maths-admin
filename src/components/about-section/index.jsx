@@ -13,7 +13,7 @@ import { getDataManager, getErrorMessage } from "../../utils/helper.functions";
 import About from "../../utils/api/About";
 
 const BlogList = () => {
-  const subscriber = new API.SubscriberSection();
+  const about = new API.AboutSection();
 
   const navigate = useNavigate();
 
@@ -33,7 +33,7 @@ const BlogList = () => {
   }, []);
 
   const fetchSubscriber = async (payload) => {
-    return getDataManager(subscriber?.getSubscriberSection, setLoading, payload).then((x) => {
+    return getDataManager(about?.getAboutSection, setLoading, payload).then((x) => {
 
       if (x?.status) {
         setPagination({
@@ -59,7 +59,7 @@ const BlogList = () => {
   };
  */
   const handleEdit = () => {
-    navigate(`/edit-subscriber-section`);
+    navigate(`/edit-about-section`);
   };
 
 /*   const handleDelete = (id) => {
@@ -80,20 +80,28 @@ const BlogList = () => {
 
   const columns = [
 
+    {
+      title: "About Image",
+      dataIndex: "about_image",
+      key: "about_image",
+      render: (_, record) => <Image width={50} src={record?.about_image} />,
+    },
 
     {
-      title: "Subscriber Title",
-      dataIndex: "subscriber_title",
-      key: "subscriber_title",
+      title: "About Title",
+      dataIndex: "about_title",
+      key: "about_title",
 
 
     },
     {
-      title: "Subscriber Description",
-      dataIndex: "subscriber_description",
-      key: "subscriber_description",
+      title: "About Description",
+      dataIndex: "about_description",
+      key: "about_description",
 
     },
+
+
 
     {
         title: "Action",
@@ -112,12 +120,12 @@ const BlogList = () => {
   ];
 
   return (
-    <TajiraCard heading="Subscriber Section Setting">
+    <TajiraCard heading="About Section">
       <TajiraTable
         fetchData={fetchSubscriber}
         dataSource={aboutList}
         columns={columns}
-        title="All Subscriber Section Setting"
+        title="About Section Text"
         loading={loading}
         pagination={pagination}
         hideSearch={true}

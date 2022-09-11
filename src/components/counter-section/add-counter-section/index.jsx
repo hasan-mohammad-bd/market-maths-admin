@@ -10,8 +10,10 @@ import {
   Space,
   Table,
   Popconfirm,
+  InputNumber,
+  Radio,
 } from "antd";
-import { FileAddFilled, DeleteOutlined } from "@ant-design/icons";
+import { FileAddFilled, DeleteOutlined, CheckOutlined, CloseOutlined } from "@ant-design/icons";
 import { useParams, useNavigate } from "react-router-dom";
 
 import TajiraCard from "../../common/tajira-card";
@@ -23,13 +25,14 @@ import {
   getDataManager,
   getErrorMessage,
 } from "../../../utils/helper.functions";
+import TextArea from "antd/lib/input/TextArea";
 
 const { Option } = Select;
 
 const AddBlog = () => {
   const [form] = Form.useForm();
 
-  const footer = new API.Footer();
+  const counter = new API.CounterSection();
 /*   const tag = new API.Tags();
   const category = new API.Category(); */
 
@@ -117,14 +120,14 @@ const AddBlog = () => {
     });
   };
  */
-  const editFooter = (payload) => {
-    getDataManager(footer?.editFooter, setLoading, payload, id).then((x) => {
+  const editCounterSection = (payload) => {
+    getDataManager(counter?.editCounterSection, setLoading, payload, id).then((x) => {
       if (x?.status) {
         message.success({
           content: "Information saved",
           duration: 3,
         });
-        navigate("/footer");
+        navigate("/counter-section");
       } else {
         const error = getErrorMessage(x?.errors) || x?.message;
         message.error({
@@ -137,19 +140,19 @@ const AddBlog = () => {
 
   const onFinish = (values) => {
 
-/*     console.log(values);
+    console.log(values);
 
-    const imageFileChanged = values.short_about_img !== blogDetails?.short_about_img;
+    const imageFileChanged = values.counter_image !== blogDetails?.counter_image;
 
     var payload = new FormData();
-    payload.append("about", values.about);
-    payload.append("short_about", values.short_about);
-    !!values?.short_about_img &&
+/*     payload.append("about", values.about);
+    payload.append("short_about", values.short_about); */
+    !!values?.counter_image &&
     imageFileChanged &&
-      payload.append("short_about_img", values?.short_about_img?.file?.originFileObj); */
+      payload.append("counter_image", values?.counter_image?.file?.originFileObj);
 
     if (isEdit) {
-      editFooter(values);
+        editCounterSection(payload);
     } else {
       // addBlog(payload);
 
@@ -197,7 +200,7 @@ const AddBlog = () => {
   ]; */
 
   return (
-    <TajiraCard heading={isEdit ? "Edit Footer" : "Add Footer"}>
+    <TajiraCard heading={isEdit ? "Edit Counter Section" : "Add Counter section"}>
       {loading && <Spinner />}
       <Form
         onFinish={onFinish}
@@ -206,41 +209,38 @@ const AddBlog = () => {
         scrollToFirstError
       >
         <Form.Item
-          label="Google Map"
-          name="google_map"
+          label="image (845*563) "
+          name="counter_image"
           rules={[
             {
               required: true,
-              message: "Please enter map",
+              message: "Please attach image",
             },
           ]}
         >
-          <Input placeholder="Enter map" />
+          <Upload
+            multiple={false}
+            accept="image/*"
+            listType="picture-card"
+            action={null}
+            fileList={imageList}
+            maxCount={1}
+            onChange={({ fileList }) =>
+            setImageList(fileList.map((f) => ({ ...f, status: "done" })))
+            }
+            showUploadList={{
+              showPreviewIcon: false,
+              showDownloadIcon: false,
+              showRemoveIcon: false,
+            }}
+          >
+            <Space>
+              <FileAddFilled /> Upload
+            </Space>
+          </Upload>
         </Form.Item>
-        <Form.Item
-          label="Footer Text"
-          name="footer_text"
-          rules={[
-            {
-              required: true,
-              message: "Please enter about",
-            },
-          ]}
-        >
-          <Input placeholder="Enter About" />
-        </Form.Item>
-        <Form.Item
-          label="Copy Right Text"
-          name="copy_text"
-          rules={[
-            {
-              required: true,
-              message: "Please enter about",
-            },
-          ]}
-        >
-          <Input placeholder="Enter About" />
-        </Form.Item>
+
+
 {/*         <Form.Item label="Introduction" name="introduction">
           <Input placeholder="Enter introduction" />
         </Form.Item> */}
