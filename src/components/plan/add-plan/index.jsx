@@ -168,13 +168,7 @@ const AddPlan = () => {
             },
           ]}
         >
-    <Radio.Group>
-      <Radio value={"none"}>None</Radio>
-      <Radio value={"basic"}>Basic</Radio>
-      <Radio value={"standard"}>Standard</Radio>
-      <Radio value={"24x7"}>24x7</Radio>
-
-    </Radio.Group>
+        <Input placeholder="Enter Support Type " />
         </Form.Item>
         <Form.Item
           label="Plan Type"
