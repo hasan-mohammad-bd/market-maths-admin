@@ -30,7 +30,7 @@ const AddBlog = () => {
   const [form] = Form.useForm();
 
   const blog = new API.Blog();
-  const tag = new API.Tags();
+  // const tag = new API.Tags();
   const category = new API.Category();
 
   const navigate = useNavigate();
@@ -80,12 +80,12 @@ const AddBlog = () => {
     });
   };
 
-  
+  g
 
-  const fetchTagsList = () => {
+/*   const fetchTagsList = () => {
     getDataManager(tag?.getTagsList, setLoading, id).then((x) => {
       if (x?.status) {
-        /* setTags(x?.data?.tags); */
+        setTags(x?.data?.tags);
       } else {
         const error = getErrorMessage(x?.errors) || x?.message;
         message.error({
@@ -94,7 +94,7 @@ const AddBlog = () => {
         });
       }
     });
-  };
+  }; */
 
   const fetchBlogDetails = () => {
 
