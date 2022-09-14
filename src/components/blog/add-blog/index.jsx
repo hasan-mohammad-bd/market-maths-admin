@@ -80,7 +80,7 @@ const AddBlog = () => {
     });
   };
 
-  g
+  
 
 /*   const fetchTagsList = () => {
     getDataManager(tag?.getTagsList, setLoading, id).then((x) => {
